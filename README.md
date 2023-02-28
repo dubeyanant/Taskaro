@@ -26,3 +26,5 @@ Taskaro requires the following permissions:
 * Notification
 * SMS
 
+# License 
+Taskaro is under BSD(3 Clause). 
