@@ -27,4 +27,4 @@ Taskaro requires the following permissions:
 * SMS
 
 # License 
-This application is released under BSD(3 Clause).
+This application is under BSD(3 Clause).
