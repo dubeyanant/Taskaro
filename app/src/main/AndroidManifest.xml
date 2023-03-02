@@ -20,6 +20,9 @@
             android:name=".activities.forgot_password"
             android:exported="false" />
         <activity
+            android:name=".activities.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LoginScreen"
             android:exported="false" />
 
