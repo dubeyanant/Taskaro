@@ -50,25 +50,25 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
-            android:orientation="vertical"
             android:layout_marginBottom="80dp"
+            android:orientation="vertical"
             android:paddingHorizontal="@dimen/screen_margin">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/inter"
                 android:drawableStart="@drawable/baseline_email_24"
-                android:hint="Email"
                 android:drawablePadding="12sp"
+                android:fontFamily="@font/inter"
+                android:hint="Email"
                 android:textSize="16sp" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:drawablePadding="12sp"
                 android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="12sp"
                 android:hint="Password"
                 android:textSize="16sp" />
 
@@ -85,10 +85,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:backgroundTint="#43D6FA"
                 android:fontFamily="@font/inter_bold"
                 android:text="Login"
-                android:textSize="18sp"
-                android:backgroundTint="#43D6FA"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
