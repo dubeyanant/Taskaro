@@ -11,16 +11,16 @@ import com.soc.taskaro.R;
 
 public class WelcomeScreen extends AppCompatActivity {
 
-    Button welcomeScreenButton;
+    Button skipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 
-        welcomeScreenButton = (Button) findViewById(R.id.welcomeScreenButton);
+        skipButton = (Button) findViewById(R.id.skipButton);
 
-        welcomeScreenButton.setOnClickListener(new View.OnClickListener() {
+        skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LoginScreen.class);
