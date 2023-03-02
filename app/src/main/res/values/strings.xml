@@ -2,7 +2,7 @@
     <string name="app_name">Taskaro</string>
     <string name="welcome">Welcome</string>
     <string name="welcomeScreenTagLine">What is Task Prioritization?</string>
-    <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by urgency and importance. Using the tool, you\'ll divide your tasks into four boxes based on the tasks you\'ll do first, the tasks you\'ll schedule for later, the tasks you\'ll delegate, and the tasks you\'ll delete.</string>
+    <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by urgency and importance.</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
 
 </resources>
