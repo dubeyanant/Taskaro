@@ -4,5 +4,6 @@
     <string name="welcomeScreenTagLine">What is Task Prioritization?</string>
     <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by urgency and importance.</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
+    <string name="skip">Skip</string>
 
 </resources>
