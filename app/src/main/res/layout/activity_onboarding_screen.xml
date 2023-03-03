@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.activity_onboarding_screen">
+    tools:context=".activities.OnboardingScreen">
 
     <LinearLayout
         android:id="@+id/onBoard_linearLayout1"
@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/onBoarding_viewPager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <Button
         android:id="@+id/onBoard_Skip_Button"
@@ -24,16 +24,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#B2B0B5"
+        android:text="Skip"
+        android:textColor="@color/md_theme_dark_background"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/onBoarding_viewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toEndOf="@+id/onBoard_linearLayout1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
-        android:text="Skip"
-        android:backgroundTint="#B2B0B5"
-        android:textColor="@color/md_theme_dark_background"
-        android:textSize="15sp"/>
+        app:layout_constraintVertical_bias="0.4" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/onBoarding_viewPager"
@@ -78,7 +78,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/onBoarding_viewPager"
         app:layout_constraintVertical_bias="0.617" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

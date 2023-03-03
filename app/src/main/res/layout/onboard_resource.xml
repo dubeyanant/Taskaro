@@ -12,7 +12,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/onboarding_screen_1_image"/>
+        android:src="@drawable/onboarding_screen_1_image" />
 
     <TextView
         android:id="@+id/onBoard_RTextView1"
@@ -22,8 +22,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center|top"
-        android:textSize="26sp"
-        android:text="These are Urgent and Important. You should do them without any further delay."/>
+        android:text="These are Urgent and Important. You should do them without any further delay."
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/onBoard_RTextView2"
@@ -31,10 +31,10 @@
         android:layout_height="87dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="DO IT!"
-        android:textStyle="bold"
-        android:textSize="36sp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
-        android:layout_marginRight="20dp"/>
+        android:text="DO IT!"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

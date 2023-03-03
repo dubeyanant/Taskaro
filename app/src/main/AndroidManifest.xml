@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -11,42 +11,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31" >
-        <activity
-<<<<<<< HEAD
+        tools:targetApi="31">
 
-            android:name=".activities.activity_onboarding_screen"
-=======
+        <activity
+            android:name=".activities.OnboardingScreen"
+            android:exported="false" />
+        <activity
             android:name=".forgot_password"
             android:exported="false" />
         <activity
             android:name=".activities.LoginScreen"
             android:exported="false" />
+
         <activity
             android:name=".activities.WelcomeScreen"
->>>>>>> bc17e0b0766feb8e47c4a9077bc9d674c4d79a7d
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginScreen"
-            android:exported="false" />
-        <activity
-            android:name=".activities.WelcomeScreen"
-            android:exported="false">
 
-        </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>
