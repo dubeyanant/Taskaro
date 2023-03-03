@@ -27,9 +27,9 @@ public class OnboardingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding_screen);
 
-        prev.findViewById(R.id.onBoard_Prev_Button);
-        next.findViewById(R.id.onBoard_Next_Button);
-        skip.findViewById(R.id.onBoard_Skip_Button);
+        prev = findViewById(R.id.onBoard_Prev_Button);
+        next = findViewById(R.id.onBoard_Next_Button);
+        skip = findViewById(R.id.onBoard_Skip_Button);
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +43,7 @@ public class OnboardingScreen extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getItem(0) < 3) {
+                if (getItem(0) < onboardingAdapter.getCount()-1) {
                     viewPager.setCurrentItem(getItem(1), true);
                 } else {
                     Intent i = new Intent(OnboardingScreen.this, WelcomeScreen.class);
@@ -62,8 +62,8 @@ public class OnboardingScreen extends AppCompatActivity {
             }
         });
 
-        viewPager = (ViewPager) findViewById(R.id.onBoarding_viewPager);
-        dotsLayout = (LinearLayout) findViewById(R.id.onBoard_linearLayout1);
+        viewPager = findViewById(R.id.onBoarding_viewPager);
+        dotsLayout = findViewById(R.id.onBoard_linearLayout1);
 
         onboardingAdapter = new OnboardingAdapter(this);
         viewPager.setAdapter(onboardingAdapter);
@@ -72,6 +72,7 @@ public class OnboardingScreen extends AppCompatActivity {
     }
 
     public void setUpIndicator(int position) {
+        int count = onboardingAdapter.getCount();
         dots = new TextView[4];
         dotsLayout.removeAllViews();
 
@@ -79,10 +80,10 @@ public class OnboardingScreen extends AppCompatActivity {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.md_theme_light_inverseOnSurface, getApplicationContext().getTheme()));
+            dots[i].setTextColor(getResources().getColor(R.color.md_theme_light_inverseOnSurface));
             dotsLayout.addView(dots[i]);
         }
-        dots[position].setTextColor(getResources().getColor(R.color.md_theme_dark_shadow, getApplicationContext().getTheme()));
+        dots[position].setTextColor(getResources().getColor(R.color.md_theme_dark_shadow));
     }
 
     ViewPager.OnPageChangeListener viewLisner = new ViewPager.OnPageChangeListener() {
@@ -95,7 +96,7 @@ public class OnboardingScreen extends AppCompatActivity {
         public void onPageSelected(int position) {
             if (position > 0)
                 prev.setVisibility(View.VISIBLE);
-            else
+            else if(position==0)
                 prev.setVisibility(View.INVISIBLE);
         }
 

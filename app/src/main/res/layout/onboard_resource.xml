@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/onBoard_RImageView"
-        android:layout_width="match_parent"
-        android:layout_height="307dp"
+        android:layout_width="wrap_content"
+        android:layout_height="246dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
@@ -16,10 +16,9 @@
 
     <TextView
         android:id="@+id/onBoard_RTextView1"
-        android:layout_width="match_parent"
-        android:layout_height="173dp"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center|top"
         android:text="These are Urgent and Important. You should do them without any further delay."
@@ -27,14 +26,14 @@
 
     <TextView
         android:id="@+id/onBoard_RTextView2"
-        android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="DO IT!"
         android:textSize="36sp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold" />
 
 </LinearLayout>

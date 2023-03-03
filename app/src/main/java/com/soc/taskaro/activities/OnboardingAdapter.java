@@ -16,6 +16,8 @@ import com.soc.taskaro.R;
 public class OnboardingAdapter extends PagerAdapter {
 
     Context context;
+    LayoutInflater layoutInflater;
+
 
     int Images[] = {
             R.drawable.onboarding_screen_1_image,
@@ -44,6 +46,7 @@ public class OnboardingAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
+
         return headings.length;
     }
 
@@ -67,6 +70,11 @@ public class OnboardingAdapter extends PagerAdapter {
         sliderdescription.setText(description[position]);
 
         container.addView(view);
-        return view;
+        return view ;
+    }
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((LinearLayout)object);
     }
 }
