@@ -46,7 +46,7 @@ public class OnboardingScreen extends AppCompatActivity {
                 if (getItem(0) < onboardingAdapter.getCount()-1) {
                     viewPager.setCurrentItem(getItem(1), true);
                 } else {
-                    Intent i = new Intent(OnboardingScreen.this, WelcomeScreen.class);
+                    Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
                     startActivity(i);
                     finish();
                 }
@@ -56,7 +56,7 @@ public class OnboardingScreen extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(OnboardingScreen.this, WelcomeScreen.class);
+                Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
                 startActivity(i);
                 finish();
             }
