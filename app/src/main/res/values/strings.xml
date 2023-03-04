@@ -7,6 +7,8 @@
     <string name="welcomeScreenButton">Let\'s get started!</string>
 
     <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
 
     <string name="do_it">DO IT!</string>
     <string name="schedule_it">SCHEDULE IT!</string>

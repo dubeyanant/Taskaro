@@ -19,10 +19,10 @@ public class OnboardingAdapter extends PagerAdapter {
     LayoutInflater layoutInflater;
 
     int Images[] = {
-            R.drawable.onboarding_screen_1_image,
-            R.drawable.onboarding_screen_2_image,
-            R.drawable.onboarding_screen_3_image,
-            R.drawable.onboarding_screen_4_image
+            R.drawable.doit,
+            R.drawable.schedule,
+            R.drawable.delegate,
+            R.drawable.delete
     };
 
     int headings[] = {
