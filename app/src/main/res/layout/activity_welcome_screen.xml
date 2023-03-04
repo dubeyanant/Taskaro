@@ -8,18 +8,16 @@
     android:orientation="vertical"
     tools:context=".activities.WelcomeScreen">
 
-    <Button
-        android:id="@+id/skipButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/skip" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="40dp"/>
 
     <ImageView
         android:id="@+id/welcomeImageView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:scaleType="centerCrop"
         android:src="@drawable/welcome" />
 
     <LinearLayout

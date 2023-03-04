@@ -17,6 +17,6 @@
     <string name="do_it_description">These are Urgent and Important. You should do them without any further delay.</string>
     <string name="schedule_it_description">These are Non-Urgent and Important. You should schedule them for future completion.</string>
     <string name="delegate_it_description">These are Urgent but Non-Important. You should delegate them to someone else.</string>
-    <string name="delete_it_description">These are Non-Urgent and Non-Important. You should delete them.</string>
+    <string name="delete_it_description">These are Non-Urgent and Non-Important. You should delete them.\n</string>
 
 </resources>
