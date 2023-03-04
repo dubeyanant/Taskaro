@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
+    android:layout_marginVertical="@dimen/screen_margin_vertical"
+    android:orientation="vertical"
     tools:context=".activities.WelcomeScreen">
 
     <Button
         android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/skip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="end"
+        android:text="@string/skip" />
 
     <ImageView
         android:id="@+id/welcomeImageView"
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
-        android:src="@drawable/welcome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skipButton" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/welcome" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="390dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/welcomeHeading"
@@ -55,8 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/welcomeScreenTagLine"
-        android:textSize="37sp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:textSize="37sp" />
 
     <TextView
         android:id="@+id/welcomeScreenDesTextView"
@@ -64,16 +57,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:text="@string/welcomeScreenDescription"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeScreenTagTextView" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/welcomeScreenButton"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/welcomeScreenButton"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textSize="20sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
