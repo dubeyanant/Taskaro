@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.OnboardingScreen">
+
+    <LinearLayout
+        android:id="@+id/onBoard_linearLayout1"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/onBoarding_viewPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        android:gravity="bottom|center"></LinearLayout>
+
+    <Button
+        android:id="@+id/onBoard_Skip_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#B2B0B5"
+        android:text="Skip"
+        android:textColor="@color/md_theme_dark_background"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/onBoarding_viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toEndOf="@+id/onBoard_linearLayout1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/onBoarding_viewPager"
+        android:layout_width="399dp"
+        android:layout_height="538dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.628" />
+
+    <Button
+        android:id="@+id/onBoard_Prev_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#B2B0B5"
+        android:text="Prev"
+        android:textColor="@color/md_theme_dark_background"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/onBoard_Next_Button"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/onBoarding_viewPager"
+        app:layout_constraintVertical_bias="0.617" />
+
+    <Button
+
+        android:id="@+id/onBoard_Next_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="#B2B0B5"
+        android:text="Next"
+        android:textColor="@color/md_theme_dark_background"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/onBoarding_viewPager"
+        app:layout_constraintVertical_bias="0.617" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

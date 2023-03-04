@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/onBoard_Resource"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/onBoard_RImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="246dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/onboarding_screen_1_image" />
+
+    <TextView
+        android:id="@+id/onBoard_RTextView1"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center|top"
+        android:text="These are Urgent and Important. You should do them without any further delay."
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/onBoard_RTextView2"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="DO IT!"
+        android:textSize="36sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold" />
+
+</LinearLayout>
