@@ -1,20 +1,20 @@
 <resources>
+
     <string name="app_name">Taskaro</string>
     <string name="welcome">Welcome</string>
     <string name="welcomeScreenTagLine">What is Task Prioritization?</string>
     <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by <b>urgency</b> and <b>importance</b>.</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
 
+    <string name="skip">Skip</string>
+
     <string name="do_it">DO IT!</string>
     <string name="schedule_it">SCHEDULE IT!</string>
     <string name="delegate_it">DELEGATE IT!</string>
     <string name="delete_it">DELETE IT!</string>
     <string name="do_it_description">These are Urgent and Important. You should do them without any further delay.</string>
-    <string name="schedule_it_description">These are Urgent and Important. You should do them without any further delay.</string>
+    <string name="schedule_it_description">These are Non-Urgent and Important. You should schedule them for future completion.</string>
     <string name="delegate_it_description">These are Urgent but Non-Important. You should delegate them to someone else.</string>
     <string name="delete_it_description">These are Non-Urgent and Non-Important. You should delete them.</string>
-
-    <string name="skip">Skip</string>
-
 
 </resources>

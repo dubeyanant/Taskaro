@@ -3,11 +3,12 @@
     android:id="@+id/onBoard_Resource"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/onBoard_RImageView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="246dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -21,7 +22,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center|top"
-        android:text="These are Urgent and Important. You should do them without any further delay."
+        android:text="@string/do_it_description"
         android:textSize="26sp" />
 
     <TextView
@@ -29,11 +30,11 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="DO IT!"
+        android:text="@string/do_it"
         android:textSize="36sp"
-        android:layout_marginTop="10dp"
         android:textStyle="bold" />
 
 </LinearLayout>

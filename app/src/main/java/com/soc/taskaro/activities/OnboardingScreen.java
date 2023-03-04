@@ -21,6 +21,25 @@ public class OnboardingScreen extends AppCompatActivity {
 
     TextView[] dots;
     OnboardingAdapter onboardingAdapter;
+    ViewPager.OnPageChangeListener viewLisner = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (position > 0)
+                prev.setVisibility(View.VISIBLE);
+            else if (position == 0)
+                prev.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +62,7 @@ public class OnboardingScreen extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getItem(0) < onboardingAdapter.getCount()-1) {
+                if (getItem(0) < onboardingAdapter.getCount() - 1) {
                     viewPager.setCurrentItem(getItem(1), true);
                 } else {
                     Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
@@ -85,26 +104,6 @@ public class OnboardingScreen extends AppCompatActivity {
         }
         dots[position].setTextColor(getResources().getColor(R.color.md_theme_dark_shadow));
     }
-
-    ViewPager.OnPageChangeListener viewLisner = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (position > 0)
-                prev.setVisibility(View.VISIBLE);
-            else if(position==0)
-                prev.setVisibility(View.INVISIBLE);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
