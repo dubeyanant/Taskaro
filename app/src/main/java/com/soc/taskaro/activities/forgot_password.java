@@ -1,7 +1,9 @@
-package com.soc.taskaro;
+package com.soc.taskaro.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.soc.taskaro.R;
 
 public class forgot_password extends AppCompatActivity {
 
