@@ -19,4 +19,14 @@
     <string name="delegate_it_description">These are Urgent but Non-Important. You should delegate them to someone else.</string>
     <string name="delete_it_description">These are Non-Urgent and Non-Important. You should delete them.\n</string>
 
+    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_password_reset_instructions">Enter your registered email below to\nrecieve password reset instruction.</string>
+    <string name="send">Send</string>
+    <string name="login_screen_tag_line">Already \nhave an\naccount?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="login">Login</string>
+    <string name="register_now">New user? Register Now</string>
+
 </resources>

@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/screen_margin_horizontal"
     android:paddingVertical="@dimen/screen_margin_vertical"
-    android:orientation="vertical"
     tools:context=".activities.WelcomeScreen">
 
     <View

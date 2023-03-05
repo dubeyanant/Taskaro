@@ -3,15 +3,12 @@ package com.soc.taskaro.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.soc.taskaro.R;
-
-import org.w3c.dom.Text;
 
 public class LoginScreen extends AppCompatActivity {
     TextView txt_go_to_signup, txt_go_to_forget;
@@ -22,10 +19,9 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        txt_go_to_signup = (TextView)  findViewById(R.id.txt_go_to_signup);
+        txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
         img_go_to_signup = (ImageView) findViewById(R.id.img_go_to_signup);
-
-        txt_go_to_forget = (TextView)  findViewById(R.id.txt_go_to_forget);
+        txt_go_to_forget = (TextView) findViewById(R.id.txt_go_to_forget);
 
         txt_go_to_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +48,5 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 }

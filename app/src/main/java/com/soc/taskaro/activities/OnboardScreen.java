@@ -13,13 +13,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.soc.taskaro.R;
 
-public class OnboardingScreen extends AppCompatActivity {
+public class OnboardScreen extends AppCompatActivity {
 
     ViewPager viewPager;
     LinearLayout dotsLayout;
     Button prev, next, skip;
     TextView[] dots;
-    OnboardingAdapter onboardingAdapter;
+    OnboardAdapter onboardAdapter;
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -35,7 +35,7 @@ public class OnboardingScreen extends AppCompatActivity {
             prev.setVisibility(View.INVISIBLE);
             if (position != 0) prev.setVisibility(View.VISIBLE);
 
-            if (position == (onboardingAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
+            if (position == (onboardAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
             else skip.setVisibility(View.VISIBLE);
         }
     };
@@ -56,17 +56,17 @@ public class OnboardingScreen extends AppCompatActivity {
         });
 
         next.setOnClickListener(view -> {
-            if (getItem(0) < onboardingAdapter.getCount() - 1) {
+            if (getItem(0) < onboardAdapter.getCount() - 1) {
                 viewPager.setCurrentItem(getItem(1), true);
             } else {
-                Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
+                Intent i = new Intent(OnboardScreen.this, LoginScreen.class);
                 startActivity(i);
                 finish();
             }
         });
 
         skip.setOnClickListener(view -> {
-            Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
+            Intent i = new Intent(OnboardScreen.this, LoginScreen.class);
             startActivity(i);
             finish();
         });
@@ -74,14 +74,14 @@ public class OnboardingScreen extends AppCompatActivity {
         viewPager = findViewById(R.id.onBoarding_viewPager);
         dotsLayout = findViewById(R.id.onBoard_linearLayout1);
 
-        onboardingAdapter = new OnboardingAdapter(this);
-        viewPager.setAdapter(onboardingAdapter);
+        onboardAdapter = new OnboardAdapter(this);
+        viewPager.setAdapter(onboardAdapter);
         setUpIndicator(0);
         viewPager.addOnPageChangeListener(viewListener);
     }
 
     public void setUpIndicator(int position) {
-        int count = onboardingAdapter.getCount();
+        int count = onboardAdapter.getCount();
         dots = new TextView[4];
         dotsLayout.removeAllViews();
 

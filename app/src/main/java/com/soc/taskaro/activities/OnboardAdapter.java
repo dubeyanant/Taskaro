@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.soc.taskaro.R;
 
-public class OnboardingAdapter extends PagerAdapter {
+public class OnboardAdapter extends PagerAdapter {
 
     Context context;
 
@@ -38,7 +38,7 @@ public class OnboardingAdapter extends PagerAdapter {
             R.string.delete_it_description,
     };
 
-    public OnboardingAdapter(Context context) {
+    public OnboardAdapter(Context context) {
         this.context = context;
     }
 
@@ -49,7 +49,7 @@ public class OnboardingAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == (LinearLayout) object;
+        return view == object;
     }
 
     @NonNull
@@ -58,9 +58,9 @@ public class OnboardingAdapter extends PagerAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboard_resource, container, false);
 
-        ImageView slideTitleImage = (ImageView) view.findViewById(R.id.onBoard_RImageView);
-        TextView sliderHeading = (TextView) view.findViewById(R.id.onBoard_RTextView2);
-        TextView sliderDescription = (TextView) view.findViewById(R.id.onBoard_RTextView1);
+        ImageView slideTitleImage = view.findViewById(R.id.onBoard_RImageView);
+        TextView sliderHeading = view.findViewById(R.id.onBoard_RTextView2);
+        TextView sliderDescription = view.findViewById(R.id.onBoard_RTextView1);
 
         slideTitleImage.setImageResource(Images[position]);
         sliderHeading.setText(headings[position]);
