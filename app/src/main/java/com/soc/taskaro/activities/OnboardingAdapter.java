@@ -16,23 +16,22 @@ import com.soc.taskaro.R;
 public class OnboardingAdapter extends PagerAdapter {
 
     Context context;
-    LayoutInflater layoutInflater;
 
-    int Images[] = {
+    int[] Images = {
             R.drawable.doit,
             R.drawable.schedule,
             R.drawable.delegate,
             R.drawable.delete
     };
 
-    int headings[] = {
+    int[] headings = {
             R.string.do_it,
             R.string.schedule_it,
             R.string.delegate_it,
             R.string.delete_it,
     };
 
-    int description[] = {
+    int[] description = {
             R.string.do_it_description,
             R.string.schedule_it_description,
             R.string.delegate_it_description,
@@ -45,7 +44,6 @@ public class OnboardingAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-
         return headings.length;
     }
 
@@ -57,16 +55,16 @@ public class OnboardingAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboard_resource, container, false);
 
         ImageView slideTitleImage = (ImageView) view.findViewById(R.id.onBoard_RImageView);
         TextView sliderHeading = (TextView) view.findViewById(R.id.onBoard_RTextView2);
-        TextView sliderdescription = (TextView) view.findViewById(R.id.onBoard_RTextView1);
+        TextView sliderDescription = (TextView) view.findViewById(R.id.onBoard_RTextView1);
 
         slideTitleImage.setImageResource(Images[position]);
         sliderHeading.setText(headings[position]);
-        sliderdescription.setText(description[position]);
+        sliderDescription.setText(description[position]);
 
         container.addView(view);
         return view;

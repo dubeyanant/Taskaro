@@ -18,26 +18,25 @@ public class OnboardingScreen extends AppCompatActivity {
     ViewPager viewPager;
     LinearLayout dotsLayout;
     Button prev, next, skip;
-
     TextView[] dots;
     OnboardingAdapter onboardingAdapter;
-    ViewPager.OnPageChangeListener viewLisner = new ViewPager.OnPageChangeListener() {
+
+    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (position > 0)
-                prev.setVisibility(View.VISIBLE);
-            else if (position == 0)
-                prev.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
+        }
 
+        @Override
+        public void onPageSelected(int position) {
+            prev.setVisibility(View.INVISIBLE);
+            if (position != 0) prev.setVisibility(View.VISIBLE);
+
+            if (position == (onboardingAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
+            else skip.setVisibility(View.VISIBLE);
         }
     };
 
@@ -50,35 +49,26 @@ public class OnboardingScreen extends AppCompatActivity {
         next = findViewById(R.id.onBoard_Next_Button);
         skip = findViewById(R.id.onBoard_Skip_Button);
 
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getItem(0) > 0) {
-                    viewPager.setCurrentItem(getItem(-1), true);
-                }
+        prev.setOnClickListener(view -> {
+            if (getItem(0) > 0) {
+                viewPager.setCurrentItem(getItem(-1), true);
             }
         });
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getItem(0) < onboardingAdapter.getCount() - 1) {
-                    viewPager.setCurrentItem(getItem(1), true);
-                } else {
-                    Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
-                    startActivity(i);
-                    finish();
-                }
-            }
-        });
-
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        next.setOnClickListener(view -> {
+            if (getItem(0) < onboardingAdapter.getCount() - 1) {
+                viewPager.setCurrentItem(getItem(1), true);
+            } else {
                 Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
                 startActivity(i);
                 finish();
             }
+        });
+
+        skip.setOnClickListener(view -> {
+            Intent i = new Intent(OnboardingScreen.this, LoginScreen.class);
+            startActivity(i);
+            finish();
         });
 
         viewPager = findViewById(R.id.onBoarding_viewPager);
@@ -87,7 +77,7 @@ public class OnboardingScreen extends AppCompatActivity {
         onboardingAdapter = new OnboardingAdapter(this);
         viewPager.setAdapter(onboardingAdapter);
         setUpIndicator(0);
-        viewPager.addOnPageChangeListener(viewLisner);
+        viewPager.addOnPageChangeListener(viewListener);
     }
 
     public void setUpIndicator(int position) {

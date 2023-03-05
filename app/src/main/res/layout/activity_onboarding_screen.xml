@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/screen_margin_horizontal"
-    android:layout_marginVertical="@dimen/screen_margin_vertical"
+    android:paddingVertical="@dimen/screen_margin_vertical"
     tools:context=".activities.OnboardingScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal">
 
         <LinearLayout
             android:id="@+id/onBoard_linearLayout1"
@@ -46,7 +46,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal">
 
         <Button
             android:id="@+id/onBoard_Prev_Button"
