@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.soc.taskaro.R;
 
-public class forgot_password extends AppCompatActivity {
+public class ForgetPassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,7 +17,7 @@
             android:name=".activities.OnboardingScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.forgot_password"
+            android:name=".activities.ForgetPassword"
             android:exported="false" />
         <activity
             android:name=".activities.SignUpActivity"
