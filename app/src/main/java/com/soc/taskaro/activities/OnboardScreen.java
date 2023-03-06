@@ -41,6 +41,8 @@ public class OnboardScreen extends AppCompatActivity {
 
             if (position == (onboardAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
             else skip.setVisibility(View.VISIBLE);
+
+            setUpIndicator(getItem(0));
         }
     };
 
@@ -53,10 +55,12 @@ public class OnboardScreen extends AppCompatActivity {
         next = findViewById(R.id.onBoard_Next_Button);
         skip = findViewById(R.id.onBoard_Skip_Button);
         prev.setVisibility(View.INVISIBLE);
+
         prev.setOnClickListener(view -> {
             if (getItem(0) > 0) {
                 viewPager.setCurrentItem(getItem(-1), true);
             }
+            setUpIndicator(getItem(0));
         });
 
         next.setOnClickListener(view -> {
@@ -67,6 +71,7 @@ public class OnboardScreen extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
+            setUpIndicator(getItem(0));
         });
 
         skip.setOnClickListener(view -> {
@@ -85,8 +90,7 @@ public class OnboardScreen extends AppCompatActivity {
     }
 
     public void setUpIndicator(int position) {
-        int count = onboardAdapter.getCount();
-        dots = new TextView[4];
+        dots = new TextView[onboardAdapter.getCount()];
         dotsLayout.removeAllViews();
 
         for (int i = 0; i < dots.length; i++) {
