@@ -44,6 +44,7 @@ public class OnboardAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
+
         return headings.length;
     }
 
