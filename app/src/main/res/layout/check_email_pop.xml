@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="285dp"
+        android:layout_height="285dp"
+        android:layout_gravity="center"
+        android:src="@drawable/send_email" />
+
+    <TextView
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:gravity="center"
+        android:text="Check your email"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="327dp"
+        android:layout_height="104dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="We have sent a password reset instruction to your email"
+        android:textSize="25sp" />
+</LinearLayout>
