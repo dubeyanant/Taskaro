@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1016838300254",
+    "project_id": "taskaro-25d0a",
+    "storage_bucket": "taskaro-25d0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016838300254:android:e91e4f2525067a158d4acf",
+        "android_client_info": {
+          "package_name": "com.soc.taskaro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016838300254-nqpms43uk6sej7pjdtdc89a289j5m3m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLzVftTm1YVBwfxdy2MLNJ9COAlv4Op8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016838300254-nqpms43uk6sej7pjdtdc89a289j5m3m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
