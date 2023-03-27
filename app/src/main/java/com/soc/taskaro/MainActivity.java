@@ -1,7 +1,9 @@
 package com.soc.taskaro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(MainActivity.this, "FAB button clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.other:
+                    Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(i);
                     break;
             }
 

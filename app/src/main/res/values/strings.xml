@@ -37,7 +37,7 @@
     <string name="home">Home</string>
     <string name="analytics">Analytics</string>
     <string name="notes">Notes</string>
-    <string name="other">Other</string>
+    <string name="settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_home_fragment">Home blank fragment</string>
