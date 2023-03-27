@@ -74,4 +74,18 @@
     <string name="fri">F</string>
     <string name="sat">S</string>
 
+    <!-- Signup activity strings -->
+    <string name="email_error">Empty Field</string>
+    <string name="password_error">Empty Field</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="name_error">Empty Field</string>
+    <string name="phone_error">Empty Field</string>
+    <string name="error_invalid_phone">Invalid Phone no.</string>
+    <string name="error_Empty_Password">Empty Field</string>
+    <string name="error_LowerCase_Password">Must Contain LowerCase Letters[a-z]</string>
+    <string name="error_digitCase_Password">Must Contain digits[0-9]</string>
+    <string name="length_error">Password must contain atleast 8 characters</string>
+    <string name="error_Empty_CPassword">Empty Field</string>
+    <string name="error_Cpassword_Match">Password and Confirm Password Doesn\'t Match</string>
+
 </resources>
