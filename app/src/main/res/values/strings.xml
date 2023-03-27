@@ -40,6 +40,7 @@
     <string name="other">Other</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Home blank fragment</string>
+    <string name="hello_blank_home_fragment">Home blank fragment</string>
+    <string name="hello_blank_notes_fragment">Notes blank fragment</string>
 
 </resources>

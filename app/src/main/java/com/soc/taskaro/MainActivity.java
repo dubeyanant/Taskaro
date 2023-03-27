@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.notes:
+                    replaceFragment(new NotesFragment());
                     break;
 
                 case R.id.other:
