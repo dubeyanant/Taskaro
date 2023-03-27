@@ -3,16 +3,20 @@ package com.soc.taskaro.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.soc.taskaro.MainActivity;
 import com.soc.taskaro.R;
 
 public class LoginScreen extends AppCompatActivity {
     TextView txt_go_to_signup, txt_go_to_forget;
     ImageView img_go_to_signup;
+
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,16 @@ public class LoginScreen extends AppCompatActivity {
         txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
         img_go_to_signup = (ImageView) findViewById(R.id.img_go_to_signup);
         txt_go_to_forget = (TextView) findViewById(R.id.txt_go_to_forget);
+
+        login = (Button) findViewById(R.id.login);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginScreen.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         txt_go_to_signup.setOnClickListener(new View.OnClickListener() {
             @Override
