@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.analytics:
+                    replaceFragment(new AnalyticsFragment());
                     break;
 
                 case R.id.notes:

@@ -42,5 +42,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_home_fragment">Home blank fragment</string>
     <string name="hello_blank_notes_fragment">Notes blank fragment</string>
+    <string name="hello_blank_analytics_fragment">Analytics blank fragment</string>
 
 </resources>
