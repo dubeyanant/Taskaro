@@ -118,7 +118,7 @@
                 android:background="@drawable/style_create_task_dark"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="01/01/1999"
+                android:text=""
                 android:textSize="18sp" />
 
             <View
@@ -137,7 +137,5 @@
                 android:text=""
                 android:textSize="18sp" />
         </LinearLayout>
-
-
     </LinearLayout>
 </LinearLayout>
