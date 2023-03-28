@@ -24,13 +24,14 @@ public class CreateTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_task);
 
         TextView dateTextView = (TextView) findViewById(R.id.date);
+        dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
         TextView timeTextView = (TextView) findViewById(R.id.time);
+        timeTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date())));
 
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker()
-                        .setTitleText("Select Date").setSelection(MaterialDatePicker.todayInUtcMilliseconds()).build();
+                MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select Date").setSelection(MaterialDatePicker.todayInUtcMilliseconds()).build();
 
                 materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
                     @Override
@@ -44,16 +45,26 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
-//        timeTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_12H)
-//                        .setHour(12).setMinute(10).setTitleText("Select time").build();
-//
-//
-//
-//                materialTimePicker.show(getSupportFragmentManager(), "tag");
-//            }
-//        });
+        timeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_12H).setHour(12).setMinute(10).setTitleText("Select time").build();
+
+                materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int hour = materialTimePicker.getHour();
+                        int minute = materialTimePicker.getMinute();
+                        String amPm = (hour < 12) ? "am" : "pm";
+                        hour = (hour > 12) ? hour - 12 : hour;
+                        hour = (hour == 0) ? 12 : hour;
+                        String time = String.format(Locale.getDefault(), "%02d:%02d %s", hour, minute, amPm);
+                        timeTextView.setText(time);
+                    }
+                });
+
+                materialTimePicker.show(getSupportFragmentManager(), "tag");
+            }
+        });
     }
 }
