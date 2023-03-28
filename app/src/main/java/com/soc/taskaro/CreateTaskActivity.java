@@ -2,6 +2,9 @@ package com.soc.taskaro;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
+        // Date Picker
         TextView dateTextView = (TextView) findViewById(R.id.date);
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
         dateTextView.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +46,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // Time Picker
         TextView timeTextView = (TextView) findViewById(R.id.time);
         timeTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date())));
         timeTextView.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +71,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // Days Picker
         TextView[] days = new TextView[]{
                 findViewById(R.id.sun),
                 findViewById(R.id.mon),
@@ -92,5 +98,27 @@ public class CreateTaskActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // Add sub-task
+        LinearLayout addTaskButtonLL = (LinearLayout) findViewById(R.id.addTaskButtonLL);
+        LinearLayout subTaskLL = (LinearLayout) findViewById(R.id.subTaskLL);
+
+        addTaskButtonLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
+                EditText editText = (EditText) findViewById(R.id.editTextSubTask);
+                ImageView imageView = (ImageView) subTaskView.findViewById(R.id.imageViewRemove);
+
+                subTaskLL.addView(subTaskView);
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        subTaskLL.removeView(subTaskView);
+                    }
+                });
+            }
+        });
     }
 }
