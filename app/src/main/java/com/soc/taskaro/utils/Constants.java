@@ -1,4 +1,4 @@
-package com.soc.taskaro.activities.utils;
+package com.soc.taskaro.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap;
 
 public class Constants {
     public static final String USERS = "users";
+    public static final String TASKARO_PREFERENCES = "TaskaroPrefs";
     public static final String LOGGED_IN_USERNAME = "logged_in_username";
     public static final String Extra_User_Details = "extra_user_details";
     public static final String Extra_Product_ID = "extra_product_details";
@@ -23,7 +24,7 @@ public class Constants {
     public static final String USER_PROFILE_IMAGE = "User_Profile_Image";
     public static final String COMPLETE_PROFILE = "profileCompleted";
 
-    //Products
+    //Productsx
     public static final String PRODUCTS = "products";
     public static final String PRODUCT_IMAGE = "Product_Image";
     public static final String USER_ID = "user_id";

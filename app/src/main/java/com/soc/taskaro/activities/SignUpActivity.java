@@ -6,6 +6,8 @@ import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -118,11 +120,25 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(FirebaseFirestore.getInstance()+"/////////////");
-                setValidation();
-                progressBar.setVisibility(VISIBLE);
-
-
+                boolean have_WIFI = false;
+                boolean have_MobileData = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+                NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+                for(NetworkInfo info:networkInfos){
+                    if(info.getTypeName().equalsIgnoreCase("WIFI"))
+                        if(info.isConnected())
+                            have_WIFI = true;
+                    if(info.getTypeName().equalsIgnoreCase("MOBILE"))
+                        if(info.isConnected())
+                            have_MobileData = true;
+                }
+                if(have_MobileData || have_WIFI){
+                    setValidation();
+                    progressBar.setVisibility(VISIBLE);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Authentication Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
