@@ -2,7 +2,6 @@ package com.soc.taskaro.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +17,11 @@ public class WelcomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 
-        welcomeScreenButton = (Button) findViewById(R.id.welcomeScreenButton);
+        welcomeScreenButton = findViewById(R.id.welcomeScreenButton);
 
-        welcomeScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), LoginScreen.class);
-                startActivity(intent);
-            }
+        welcomeScreenButton.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), OnboardScreen.class);
+            startActivity(intent);
         });
     }
 }

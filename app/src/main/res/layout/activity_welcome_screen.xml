@@ -3,20 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/screen_margin"
+    android:paddingHorizontal="@dimen/screen_margin_horizontal"
+    android:paddingVertical="@dimen/screen_margin_vertical"
     tools:context=".activities.WelcomeScreen">
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="40dp" />
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
         android:src="@drawable/welcome" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -30,34 +35,29 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:src="@drawable/all_squares" />
-
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_medium"
         android:text="@string/welcomeScreenTagLine"
         android:textSize="37sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/inter_medium"
-        android:paddingEnd="30dp"
+        android:layout_marginEnd="40dp"
         android:text="@string/welcomeScreenDescription"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/welcomeScreenButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_medium"
         android:text="@string/welcomeScreenButton"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>
