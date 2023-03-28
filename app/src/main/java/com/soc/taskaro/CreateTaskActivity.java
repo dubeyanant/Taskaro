@@ -66,5 +66,32 @@ public class CreateTaskActivity extends AppCompatActivity {
                 materialTimePicker.show(getSupportFragmentManager(), "tag");
             }
         });
+
+        TextView[] days = new TextView[]{
+                findViewById(R.id.sun),
+                findViewById(R.id.mon),
+                findViewById(R.id.tue),
+                findViewById(R.id.wed),
+                findViewById(R.id.thu),
+                findViewById(R.id.fri),
+                findViewById(R.id.sat)
+        };
+        final int[] dayClickCount = {0, 0, 0, 0, 0, 0, 0};
+
+        for (int i = 0; i < days.length; i++) {
+            final int index = i;
+            days[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (dayClickCount[index] == 0) {
+                        days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle_dark));
+                        dayClickCount[index] = 1;
+                    } else {
+                        days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle));
+                        dayClickCount[index] = 0;
+                    }
+                }
+            });
+        }
     }
 }
