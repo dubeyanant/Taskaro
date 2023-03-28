@@ -25,9 +25,6 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         TextView dateTextView = (TextView) findViewById(R.id.date);
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
-        TextView timeTextView = (TextView) findViewById(R.id.time);
-        timeTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date())));
-
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +42,8 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        TextView timeTextView = (TextView) findViewById(R.id.time);
+        timeTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date())));
         timeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
