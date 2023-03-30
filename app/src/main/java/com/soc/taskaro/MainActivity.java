@@ -10,6 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.soc.taskaro.databinding.ActivityMainBinding;
+import com.soc.taskaro.fragments.AnalyticsFragment;
+import com.soc.taskaro.fragments.HomeFragment;
+import com.soc.taskaro.fragments.NotesFragment;
+import com.soc.taskaro.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
