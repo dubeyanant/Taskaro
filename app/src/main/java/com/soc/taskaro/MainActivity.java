@@ -38,18 +38,36 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     replaceFragment(new HomeFragment());
+                    binding.fab.setVisibility(View.VISIBLE);
+                    binding.fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MainActivity.this, CreateTaskActivity.class);
+                            startActivity(i);
+                        }
+                    });
                     break;
 
                 case R.id.analytics:
                     replaceFragment(new AnalyticsFragment());
+                    binding.fab.setVisibility(View.GONE);
                     break;
 
                 case R.id.notes:
                     replaceFragment(new NotesFragment());
+                    binding.fab.setVisibility(View.VISIBLE);
+                    binding.fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MainActivity.this, CreateNotesActivity.class);
+                            startActivity(i);
+                        }
+                    });
                     break;
 
                 case R.id.other:
                     replaceFragment(new SettingsFragment());
+                    binding.fab.setVisibility(View.GONE);
                     break;
             }
 
