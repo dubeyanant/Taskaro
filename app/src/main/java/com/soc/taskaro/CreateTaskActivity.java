@@ -1,6 +1,5 @@
 package com.soc.taskaro;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +7,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
+
+    boolean notificationEnabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +143,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.GONE);
                 notificationLL.setVisibility(View.VISIBLE);
+                notificationEnabled = true;
             }
         });
 
@@ -153,6 +154,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.VISIBLE);
                 notificationLL.setVisibility(View.GONE);
+                notificationEnabled = false;
             }
         });
     }
