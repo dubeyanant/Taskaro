@@ -75,5 +75,6 @@
     <string name="length_error">Password must contain atleast 8 characters</string>
     <string name="error_Empty_CPassword">Empty Field</string>
     <string name="error_Cpassword_Match">Password and Confirm Password Doesn\'t Match</string>
+    <string name="done">Done</string>
 
 </resources>
