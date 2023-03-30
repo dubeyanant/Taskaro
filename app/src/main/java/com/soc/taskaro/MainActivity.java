@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.other:
-                    Intent i = new Intent(MainActivity.this, SettingsActivity.class);
-                    startActivity(i);
+                    replaceFragment(new SettingsFragment());
                     break;
             }
 

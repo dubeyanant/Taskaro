@@ -45,6 +45,8 @@
     <string name="hello_blank_home_fragment">Home blank fragment</string>
     <string name="hello_blank_notes_fragment">Notes blank fragment</string>
     <string name="hello_blank_analytics_fragment">Analytics blank fragment</string>
+    <string name="hello_blank_settings_fragment">Settings blank fragment</string>
+
     <string name="title">Title</string>
     <string name="description">Description...</string>
     <string name="add_sub_task">Add sub-task</string>
@@ -69,7 +71,7 @@
     <string name="error_invalid_phone">Invalid Phone no.</string>
     <string name="error_Empty_Password">Empty Field</string>
     <string name="error_LowerCase_Password">Must Contain LowerCase Letters[a-z]</string>
-    <string name="error_digitCase_Password">Must Contain digits[0-9]</string>
+    <string name="error_digitCase_Password">Must Contain digits[0–9]</string>
     <string name="length_error">Password must contain atleast 8 characters</string>
     <string name="error_Empty_CPassword">Empty Field</string>
     <string name="error_Cpassword_Match">Password and Confirm Password Doesn\'t Match</string>
