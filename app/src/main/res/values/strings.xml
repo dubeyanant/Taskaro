@@ -76,5 +76,6 @@
     <string name="error_Empty_CPassword">Empty Field</string>
     <string name="error_Cpassword_Match">Password and Confirm Password Doesn\'t Match</string>
     <string name="done">Done</string>
+    <string name="add_notification">Notification</string>
 
 </resources>
