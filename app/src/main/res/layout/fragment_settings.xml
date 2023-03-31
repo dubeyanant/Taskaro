@@ -4,46 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/screen_margin_horizontal"
     android:scrollbars="none"
     tools:context=".fragments.SettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_margin_horizontal">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_margin_top"
-            android:fontFamily="@font/inter_semibold"
-            android:text="@string/settings"
-            android:textSize="36sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="18dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/settings"
+                android:textSize="36sp" />
 
-            <ImageView
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_saveSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/save"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="40dp">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/pic_abstract" />
+                android:layout_height="match_parent"
+                app:cardCornerRadius="18dp">
 
-        </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pic_abstract" />
+
+                <ImageButton
+                    android:id="@+id/editProfilePhotoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:background="#00000000"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_edit" />
+
+                <ImageButton
+                    android:id="@+id/deleteProfilePhotoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:background="#00000000"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_close" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:text="@string/name"
             android:textSize="16sp" />
 
         <LinearLayout
+            android:id="@+id/nameTextViewLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -61,69 +106,71 @@
                 android:layout_weight="1" />
 
             <ImageButton
+                android:id="@+id/nameTextViewEditBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="#00000000"
                 android:paddingHorizontal="5dp"
                 android:src="@drawable/ic_edit" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/email"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textSize="26sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/mobile"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mobile"
-            android:textSize="26sp" />
 
         <LinearLayout
+            android:id="@+id/nameEditTextLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/password"
+                android:layout_marginStart="-4dp"
+                android:layout_marginTop="-7dp"
+                android:layout_weight="1"
+                android:hint="@string/name"
                 android:textSize="26sp" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
             <ImageButton
+                android:id="@+id/nameTextViewDoneBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="#00000000"
                 android:paddingHorizontal="5dp"
-                android:src="@drawable/ic_edit" />
+                android:src="@drawable/ic_done" />
         </LinearLayout>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/email"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="26sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/mobile"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/logoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="58dp"
             android:background="@drawable/style_bg_black"
             android:gravity="center"
             android:paddingVertical="15dp"
@@ -132,6 +179,7 @@
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/deleteAccountBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"

@@ -126,8 +126,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Return to MainActivity
-        Button createTaskDone = findViewById(R.id.createTaskDone);
-        createTaskDone.setOnClickListener(new View.OnClickListener() {
+        Button btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
+        btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
