@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.drjacky.imagepicker.ImagePicker;
@@ -35,6 +39,7 @@ public class SettingsFragment extends Fragment {
     TextView logoutBtn;
     ImageView profileImageView;
     ActivityResultLauncher<Intent> launcher;
+    Button saveSettingBtn;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -54,6 +59,7 @@ public class SettingsFragment extends Fragment {
         nameEditTextLL = view.findViewById(R.id.nameEditTextLL);
         logoutBtn = view.findViewById(R.id.logoutBtn);
         profileImageView = view.findViewById(R.id.profileImageView);
+        saveSettingBtn = view.findViewById(R.id.saveSettingBtn);
 
         // Replacing textView with editText
         nameTextViewEditBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +75,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 nameTextViewLL.setVisibility(View.VISIBLE);
                 nameEditTextLL.setVisibility(View.GONE);
+                enableSave();
             }
         });
 
@@ -84,6 +91,8 @@ public class SettingsFragment extends Fragment {
         editProfilePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                enableSave();
+
                 ImagePicker.Companion.with(requireActivity())
                         .crop()
                         .maxResultSize(1080, 1080, true)
@@ -102,24 +111,38 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        launcher=
-                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),(ActivityResult result)->{
-                    if(result.getResultCode()==RESULT_OK){
-                        Uri uri=result.getData().getData();
-                        profileImageView.setImageURI(uri);
-                    }else if(result.getResultCode()==ImagePicker.RESULT_ERROR){
-                        Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), (ActivityResult result) -> {
+            if (result.getResultCode() == RESULT_OK) {
+                Uri uri = result.getData().getData();
+                profileImageView.setImageURI(uri);
+            } else if (result.getResultCode() == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Remove profile photo
         deleteProfilePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileImageView.setImageResource(R.drawable.pic_abstract);
+                if (profileImageView.getDrawable() != ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)) {
+                    profileImageView.setImageResource(R.drawable.pic_abstract);
+                    enableSave();
+                }
+            }
+        });
+
+        // Disable save button
+        saveSettingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveSettingBtn.setEnabled(false);
             }
         });
 
         return view;
+    }
+
+    void enableSave() {
+        saveSettingBtn.setEnabled(true);
     }
 }

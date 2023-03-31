@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    android:padding="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/notes_list_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:singleLine="true"
+            android:text="Take Bolt for walk."
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="27dp"/>
+        <TextView
+            android:id="@+id/notes_list_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notes_list_text1"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:text="At 5:30 pm today, and don’t miss..."
+            android:textSize="16sp"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginBottom="11dp"/>
+
+    </RelativeLayout>
+    
+</androidx.cardview.widget.CardView>
