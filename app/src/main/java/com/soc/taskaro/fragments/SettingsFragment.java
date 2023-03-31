@@ -18,9 +18,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.drjacky.imagepicker.ImagePicker;
@@ -29,7 +27,10 @@ import com.soc.taskaro.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
@@ -75,7 +76,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 nameTextViewLL.setVisibility(View.VISIBLE);
                 nameEditTextLL.setVisibility(View.GONE);
-                enableSave();
+                enableDisableSave(true);
             }
         });
 
@@ -91,19 +92,26 @@ public class SettingsFragment extends Fragment {
         editProfilePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableSave();
+                enableDisableSave(true);
 
                 ImagePicker.Companion.with(requireActivity())
-                        .crop()
+                        .setDismissListener(new Function0<Unit>() {
+                            @Override
+                            public Unit invoke() {
+                                enableDisableSave(false);
+                                return Unit.INSTANCE;
+                            }
+                        })
+                        .crop(16f, 9f)
                         .maxResultSize(1080, 1080, true)
-                        .provider(ImageProvider.BOTH) //Or bothCameraGallery()
+                        .provider(ImageProvider.BOTH)
                         .createIntentFromDialog(new Function1() {
                             public Object invoke(Object var1) {
                                 this.invoke((Intent) var1);
                                 return Unit.INSTANCE;
                             }
 
-                            public final void invoke(@NotNull Intent it) {
+                            public void invoke(@NotNull Intent it) {
                                 Intrinsics.checkNotNullParameter(it, "it");
                                 launcher.launch(it);
                             }
@@ -124,9 +132,9 @@ public class SettingsFragment extends Fragment {
         deleteProfilePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (profileImageView.getDrawable() != ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)) {
+                if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
                     profileImageView.setImageResource(R.drawable.pic_abstract);
-                    enableSave();
+                    enableDisableSave(true);
                 }
             }
         });
@@ -135,14 +143,15 @@ public class SettingsFragment extends Fragment {
         saveSettingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveSettingBtn.setEnabled(false);
+                enableDisableSave(false);
             }
         });
 
         return view;
     }
 
-    void enableSave() {
-        saveSettingBtn.setEnabled(true);
+    // Enable or Disable save button
+    void enableDisableSave(boolean enable) {
+        saveSettingBtn.setEnabled(enable);
     }
 }
