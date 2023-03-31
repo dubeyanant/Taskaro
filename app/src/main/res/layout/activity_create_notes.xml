@@ -22,8 +22,7 @@
         android:layout_height="650dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
-        app:cardCornerRadius="7dp"
-        app:cardBackgroundColor="@color/md_theme_light_outlineVariant">
+        app:cardCornerRadius="7dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
