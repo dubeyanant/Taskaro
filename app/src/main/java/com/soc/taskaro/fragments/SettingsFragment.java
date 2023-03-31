@@ -76,7 +76,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 nameTextViewLL.setVisibility(View.VISIBLE);
                 nameEditTextLL.setVisibility(View.GONE);
-                enableDisableSave(true);
+                saveSettingBtn.setEnabled(true);
             }
         });
 
@@ -92,16 +92,7 @@ public class SettingsFragment extends Fragment {
         editProfilePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableDisableSave(true);
-
                 ImagePicker.Companion.with(requireActivity())
-                        .setDismissListener(new Function0<Unit>() {
-                            @Override
-                            public Unit invoke() {
-                                enableDisableSave(false);
-                                return Unit.INSTANCE;
-                            }
-                        })
                         .crop(16f, 9f)
                         .maxResultSize(1080, 1080, true)
                         .provider(ImageProvider.BOTH)
@@ -134,7 +125,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
                     profileImageView.setImageResource(R.drawable.pic_abstract);
-                    enableDisableSave(true);
+                    saveSettingBtn.setEnabled(true);
                 }
             }
         });
@@ -143,15 +134,18 @@ public class SettingsFragment extends Fragment {
         saveSettingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableDisableSave(false);
+                saveSettingBtn.setEnabled(false);
             }
         });
 
         return view;
     }
 
-    // Enable or Disable save button
-    void enableDisableSave(boolean enable) {
-        saveSettingBtn.setEnabled(enable);
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
+            saveSettingBtn.setEnabled(true);
+        } else saveSettingBtn.setEnabled(false);
     }
 }

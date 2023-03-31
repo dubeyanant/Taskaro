@@ -51,7 +51,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="18dp">
+                app:cardCornerRadius="22dp">
 
                 <ImageView
                     android:id="@+id/profileImageView"
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
-                    android:background="#00000000"
+                    android:background="@drawable/style_create_task_circle"
                     android:padding="10dp"
                     android:src="@drawable/ic_edit" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|end"
-                    android:background="#00000000"
+                    android:background="@drawable/style_create_task_circle"
                     android:padding="10dp"
                     android:src="@drawable/ic_close" />
             </androidx.cardview.widget.CardView>
