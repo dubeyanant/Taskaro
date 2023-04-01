@@ -32,6 +32,7 @@ public class ForgetPassword extends AppCompatActivity {
     EditText txt_email;
     boolean isEmailValid;
     private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,25 +50,25 @@ public class ForgetPassword extends AppCompatActivity {
                 boolean have_MobileData = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
                 NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
-                for(NetworkInfo info:networkInfos){
-                    if(info.getTypeName().equalsIgnoreCase("WIFI"))
-                        if(info.isConnected())
+                for (NetworkInfo info : networkInfos) {
+                    if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                        if (info.isConnected())
                             have_WIFI = true;
 
-                    if(info.getTypeName().equalsIgnoreCase("MOBILE"))
-                        if(info.isConnected())
+                    if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                        if (info.isConnected())
                             have_MobileData = true;
                 }
-                if(have_MobileData || have_WIFI){
+                if (have_MobileData || have_WIFI) {
                     progressBar.setVisibility(VISIBLE);
                     SetValidation();
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     public void SetValidation() {
         if (txt_email.getText().toString().isEmpty()) {
             txt_email.setError(getResources().getString(R.string.email_error));
@@ -75,7 +76,7 @@ public class ForgetPassword extends AppCompatActivity {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
             txt_email.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
-        } else  {
+        } else {
             isEmailValid = true;
         }
 
@@ -85,7 +86,7 @@ public class ForgetPassword extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     progressBar.setVisibility(GONE);
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         TextView txt_goToLogin;
                         Dialog dialog = new Dialog(ForgetPassword.this);
                         dialog.setContentView(R.layout.check_email_pop);
@@ -101,8 +102,7 @@ public class ForgetPassword extends AppCompatActivity {
                             }
                         });
                         dialog.show();
-                    }
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Failed! You are not registered with this Email ID", Toast.LENGTH_SHORT).show();
                     }
                 }
