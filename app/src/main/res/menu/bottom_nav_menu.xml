@@ -6,16 +6,17 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/analytics"
-        android:icon="@drawable/ic_analytics"
-        android:title="@string/analytics" />
-    <item
-        android:id="@+id/placeholder"
-        android:title="" />
-    <item
         android:id="@+id/notes"
         android:icon="@drawable/ic_notes"
         android:title="@string/notes" />
+    <item
+        android:id="@+id/placeholder"
+        android:enabled="false"
+        android:title="" />
+    <item
+        android:id="@+id/analytics"
+        android:icon="@drawable/ic_analytics"
+        android:title="@string/analytics" />
     <item
         android:id="@+id/other"
         android:icon="@drawable/ic_settings"

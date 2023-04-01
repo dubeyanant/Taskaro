@@ -1,14 +1,14 @@
 package com.soc.taskaro;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class SettingsActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class CreateNotesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_create_notes);
     }
 }

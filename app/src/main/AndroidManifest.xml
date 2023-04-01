@@ -20,12 +20,20 @@
             android:name=".forgot_password"
 =======
         tools:targetApi="31">
-
         <activity
-            android:name=".CreateTaskActivity"
+            android:name=".activities.SplashActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreateNotesActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".CreateTaskActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -45,12 +53,14 @@
             android:exported="false" />
         <activity
             android:name=".activities.WelcomeScreen"
+<<<<<<< HEAD
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+=======
+            android:exported="false">
+>>>>>>> 9cabec7a5adbe44e9d690d8ec098dbd75eeb741e
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 <<<<<<< HEAD
         <activity

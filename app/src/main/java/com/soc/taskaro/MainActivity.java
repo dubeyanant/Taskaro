@@ -10,6 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.soc.taskaro.databinding.ActivityMainBinding;
+import com.soc.taskaro.fragments.AnalyticsFragment;
+import com.soc.taskaro.fragments.HomeFragment;
+import com.soc.taskaro.fragments.NotesFragment;
+import com.soc.taskaro.fragments.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,19 +38,36 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     replaceFragment(new HomeFragment());
+                    binding.fab.setVisibility(View.VISIBLE);
+                    binding.fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MainActivity.this, CreateTaskActivity.class);
+                            startActivity(i);
+                        }
+                    });
                     break;
 
                 case R.id.analytics:
                     replaceFragment(new AnalyticsFragment());
+                    binding.fab.setVisibility(View.GONE);
                     break;
 
                 case R.id.notes:
                     replaceFragment(new NotesFragment());
+                    binding.fab.setVisibility(View.VISIBLE);
+                    binding.fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MainActivity.this, CreateNotesActivity.class);
+                            startActivity(i);
+                        }
+                    });
                     break;
 
                 case R.id.other:
-                    Intent i = new Intent(MainActivity.this, SettingsActivity.class);
-                    startActivity(i);
+                    replaceFragment(new SettingsFragment());
+                    binding.fab.setVisibility(View.GONE);
                     break;
             }
 

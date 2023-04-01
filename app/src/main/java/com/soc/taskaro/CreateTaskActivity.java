@@ -2,10 +2,11 @@ package com.soc.taskaro;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
+
+    boolean notificationEnabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +122,39 @@ public class CreateTaskActivity extends AppCompatActivity {
                         subTaskLL.removeView(subTaskView);
                     }
                 });
+            }
+        });
+
+        // Return to MainActivity
+        Button btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
+        btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                finish();
+            }
+        });
+
+        // Add notification
+        LinearLayout addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
+        LinearLayout notificationLL = findViewById(R.id.notificationLL);
+        addNotificationButtonLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNotificationButtonLL.setVisibility(View.GONE);
+                notificationLL.setVisibility(View.VISIBLE);
+                notificationEnabled = true;
+            }
+        });
+
+        // Remove notification
+        ImageButton closeNotification = findViewById(R.id.closeNotification);
+        closeNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNotificationButtonLL.setVisibility(View.VISIBLE);
+                notificationLL.setVisibility(View.GONE);
+                notificationEnabled = false;
             }
         });
     }
