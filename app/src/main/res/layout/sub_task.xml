@@ -9,13 +9,19 @@
     <EditText
         android:id="@+id/editTextSubTask"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/style_create_task"
         android:fontFamily="@font/inter"
         android:hint="@string/add_sub_task"
+        android:inputType="textCapSentences|textMultiLine"
+        android:isScrollContainer="true"
         android:maxWidth="488dp"
+        android:maxLength="400"
+        android:maxLines="4"
         android:paddingHorizontal="24dp"
+        android:paddingVertical="15dp"
+        android:singleLine="false"
         android:textSize="20sp" />
 
     <ImageView
