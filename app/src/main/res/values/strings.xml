@@ -18,6 +18,8 @@
     <string name="schedule_it_description">Plan ahead and allocate your time wisely by scheduling important tasks for a later time or date with the "Schedule" section of this app.</string>
     <string name="delegate_it_description">Maximize your productivity by delegating urgent tasks to others who are better equipped to handle them with the "Delegate" section of this app.</string>
     <string name="delete_it_description">Streamline your workload and focus on what really matters by identifying and eliminating unnecessary tasks and distractions with the "Don't Do" section of this app.</string>
+    <string name="under_construction">This is Under Construction!</string>
+    <string name="explore">Till then <b>explore</b>.</string>
 
     <string name="forgot_password">Forgot password?</string>
     <string name="forgot_password_reset_instructions">Enter your registered email below to\nreceive password reset instruction.</string>
