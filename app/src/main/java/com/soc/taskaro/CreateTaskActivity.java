@@ -28,7 +28,8 @@ public class CreateTaskActivity extends AppCompatActivity {
     TextView dateTextView, timeTextView;
     TextView[] days;
     LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
-    Button btn_saveCreateTask;
+    Button btn_saveCreateTask, saveSubTaskButton;
+    EditText titleEditText;
     ImageButton closeNotification;
     boolean notificationEnabled = false;
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
@@ -51,12 +52,14 @@ public class CreateTaskActivity extends AppCompatActivity {
         };
         addTaskButtonLL = findViewById(R.id.addTaskButtonLL);
         subTaskLL = findViewById(R.id.subTaskLL);
-        btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
+        btn_saveCreateTask = findViewById(R.id.saveCreateTaskButton);
+        titleEditText = findViewById(R.id.titleEditText);
         addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
         notificationLL = findViewById(R.id.notificationLL);
         closeNotification = findViewById(R.id.closeNotification);
         importantSwitch = findViewById(R.id.importantSwitch);
         urgentSwitch = findViewById(R.id.urgentSwitch);
+        saveSubTaskButton = findViewById(R.id.saveSubTaskButton);
 
         // Date Picker
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
@@ -122,6 +125,12 @@ public class CreateTaskActivity extends AppCompatActivity {
         addTaskButtonLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (saveSubTaskButton.getVisibility() == View.GONE) {
+                    saveSubTaskButton.setVisibility(View.VISIBLE);
+                }
+
+                saveSubTaskButton.setEnabled(true);
+
                 View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
                 EditText editText = findViewById(R.id.editTextSubTask);
                 ImageView imageView = subTaskView.findViewById(R.id.imageViewRemove);
@@ -137,12 +146,23 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        saveSubTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveSubTaskButton.setEnabled(false);
+            }
+        });
+
         // Return to MainActivity
         btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
-                finish();
+                if (titleEditText.getText().toString().equals("")) {
+                    Toast.makeText(CreateTaskActivity.this, "Please enter title!", Toast.LENGTH_SHORT).show();
+                } else {
+                    onBackPressed();
+                    finish();
+                }
             }
         });
 
@@ -168,11 +188,11 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         // Switch
         importantSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
+            if (isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, "Un-checked important", Toast.LENGTH_SHORT).show();
         });
         urgentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
+            if (isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
         });
     }

@@ -79,5 +79,6 @@
     <string name="add_notification">Notification</string>
     <string name="logout">Logout</string>
     <string name="delete_account">Delete account</string>
+    <string name="save_sub_tasks">Save sub-tasks</string>
 
 </resources>
