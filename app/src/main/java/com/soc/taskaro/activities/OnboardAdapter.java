@@ -18,10 +18,10 @@ public class OnboardAdapter extends PagerAdapter {
     Context context;
 
     int[] Images = {
-            R.drawable.doit,
-            R.drawable.schedule,
-            R.drawable.delegate,
-            R.drawable.delete
+            R.drawable.pic_doit,
+            R.drawable.pic_schedule,
+            R.drawable.pic_delegate,
+            R.drawable.pic_delete
     };
 
     int[] headings = {

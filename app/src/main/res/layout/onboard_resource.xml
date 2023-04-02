@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="centerCrop"
-        android:src="@drawable/doit" />
+        android:src="@drawable/pic_doit" />
 
     <TextView
         android:id="@+id/onBoard_RTextView1"
