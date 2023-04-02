@@ -23,6 +23,12 @@ import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
+    final int[] dayClickCount = {0, 0, 0, 0, 0, 0, 0};
+    TextView dateTextView, timeTextView;
+    TextView[] days;
+    LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
+    Button btn_saveCreateTask;
+    ImageButton closeNotification;
     boolean notificationEnabled = false;
 
     @Override
@@ -30,8 +36,25 @@ public class CreateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
+        dateTextView = findViewById(R.id.date);
+        timeTextView = findViewById(R.id.time);
+        days = new TextView[]{
+                findViewById(R.id.sun),
+                findViewById(R.id.mon),
+                findViewById(R.id.tue),
+                findViewById(R.id.wed),
+                findViewById(R.id.thu),
+                findViewById(R.id.fri),
+                findViewById(R.id.sat)
+        };
+        addTaskButtonLL = findViewById(R.id.addTaskButtonLL);
+        subTaskLL = findViewById(R.id.subTaskLL);
+        btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
+        addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
+        notificationLL = findViewById(R.id.notificationLL);
+        closeNotification = findViewById(R.id.closeNotification);
+
         // Date Picker
-        TextView dateTextView = (TextView) findViewById(R.id.date);
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
         dateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +74,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Time Picker
-        TextView timeTextView = (TextView) findViewById(R.id.time);
         timeTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date())));
         timeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +98,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Days Picker
-        TextView[] days = new TextView[]{
-                findViewById(R.id.sun),
-                findViewById(R.id.mon),
-                findViewById(R.id.tue),
-                findViewById(R.id.wed),
-                findViewById(R.id.thu),
-                findViewById(R.id.fri),
-                findViewById(R.id.sat)
-        };
-        final int[] dayClickCount = {0, 0, 0, 0, 0, 0, 0};
-
         for (int i = 0; i < days.length; i++) {
             final int index = i;
             days[i].setOnClickListener(new View.OnClickListener() {
@@ -104,15 +115,12 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         // Add sub-task
-        LinearLayout addTaskButtonLL = (LinearLayout) findViewById(R.id.addTaskButtonLL);
-        LinearLayout subTaskLL = (LinearLayout) findViewById(R.id.subTaskLL);
-
         addTaskButtonLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
-                EditText editText = (EditText) findViewById(R.id.editTextSubTask);
-                ImageView imageView = (ImageView) subTaskView.findViewById(R.id.imageViewRemove);
+                EditText editText = findViewById(R.id.editTextSubTask);
+                ImageView imageView = subTaskView.findViewById(R.id.imageViewRemove);
 
                 subTaskLL.addView(subTaskView);
 
@@ -126,7 +134,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Return to MainActivity
-        Button btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
         btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,8 +143,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Add notification
-        LinearLayout addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
-        LinearLayout notificationLL = findViewById(R.id.notificationLL);
         addNotificationButtonLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +153,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
 
         // Remove notification
-        ImageButton closeNotification = findViewById(R.id.closeNotification);
         closeNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

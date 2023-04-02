@@ -60,7 +60,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/important"
+                android:id="@+id/importantSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/important"
@@ -73,7 +73,7 @@
                 android:background="#000" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/urgent"
+                android:id="@+id/urgentSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/urgent"
