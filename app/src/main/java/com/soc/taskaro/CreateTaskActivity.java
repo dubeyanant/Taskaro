@@ -2,7 +2,9 @@ package com.soc.taskaro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -38,6 +40,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     boolean notificationEnabled = false;
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
+    ViewGroup.MarginLayoutParams addTaskButtonLLParams; // Helps in changing margin of the particular layout viewGroup
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         importantSwitch = findViewById(R.id.importantSwitch);
         urgentSwitch = findViewById(R.id.urgentSwitch);
         saveSubTaskButton = findViewById(R.id.saveSubTaskButton);
+        addTaskButtonLLParams = (ViewGroup.MarginLayoutParams) addTaskButtonLL.getLayoutParams();
 
         // Date Picker
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
@@ -144,6 +148,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                 Animation slideInLeft = AnimationUtils.loadAnimation(CreateTaskActivity.this, R.anim.slide_in_left);
                 subTaskView.startAnimation(slideInLeft);
 
+                addTaskButtonLLParams.setMargins(0, inDP(12), 0, inDP(7));
+
 //                // This get the data of the sub-task text views
 //                checkIfValidAndRead();
 //                if (subTaskArrayList.size() > 0)
@@ -154,6 +160,11 @@ public class CreateTaskActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         subTaskLL.removeView(subTaskView);
+
+                        if (subTaskLL.getChildCount() == 0) {
+                            saveSubTaskButton.setVisibility(View.GONE);
+                            addTaskButtonLLParams.setMargins(0, inDP(24), 0, 0);
+                        }
                     }
                 });
             }
@@ -220,6 +231,15 @@ public class CreateTaskActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * @param pixels takes size in pixels
+     * @return size in DP
+     */
+    private int inDP(int pixels) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, getResources().getDisplayMetrics());
+    }
+
+    // This method reads the dynamic sub-task editText
     private boolean checkIfValidAndRead() {
         subTaskArrayList.clear();
         boolean result = true;
