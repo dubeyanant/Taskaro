@@ -2,8 +2,8 @@
 
     <string name="app_name">Taskaro</string>
     <string name="welcome">Welcome</string>
-    <string name="welcomeScreenTagLine">What is Task Prioritization?</string>
-    <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by <b>urgency</b> and <b>importance</b>.</string>
+    <string name="welcomeScreenTagLine">Taskaro - Your Time Management Tool</string>
+    <string name="welcomeScreenDescription">Discover how to manage your time effectively and increase productivity with this powerful app. Prioritize, schedule, delegate, and streamline your workload by eliminating unnecessary distractions. Take control of your time and achieve your goals!</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
 
     <string name="skip">Skip</string>
