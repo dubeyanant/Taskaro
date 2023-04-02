@@ -3,9 +3,9 @@ package com.soc.taskaro.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +18,10 @@ public class OnboardScreen extends AppCompatActivity {
 
     ViewPager viewPager;
     LinearLayout dotsLayout;
-    Button prev, next, skip;
+    Button next, skip;
     TextView[] dots;
     OnboardAdapter onboardAdapter;
+    View tempView;
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -34,13 +35,17 @@ public class OnboardScreen extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
 
-             if(position != 0)
-                prev.setVisibility(View.VISIBLE);
-             else
-                 prev.setVisibility(View.INVISIBLE);
-
-            if (position == (onboardAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
-            else skip.setVisibility(View.VISIBLE);
+            if (position == (onboardAdapter.getCount() - 1)) {
+                skip.setVisibility(View.GONE);
+                next.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                tempView.setVisibility(View.GONE);
+                next.setText(R.string.lets_login);
+            } else {
+                skip.setVisibility(View.VISIBLE);
+                next.setLayoutParams(new LinearLayout.LayoutParams(inDP(170), LinearLayout.LayoutParams.WRAP_CONTENT));
+                tempView.setVisibility(View.VISIBLE);
+                next.setText(R.string.next);
+            }
 
             setUpIndicator(getItem(0));
         }
@@ -51,17 +56,9 @@ public class OnboardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding_screen);
 
-        prev = findViewById(R.id.onBoard_Prev_Button);
         next = findViewById(R.id.onBoard_Next_Button);
         skip = findViewById(R.id.onBoard_Skip_Button);
-        prev.setVisibility(View.INVISIBLE);
-
-        prev.setOnClickListener(view -> {
-            if (getItem(0) > 0) {
-                viewPager.setCurrentItem(getItem(-1), true);
-            }
-            setUpIndicator(getItem(0));
-        });
+        tempView = findViewById(R.id.tempView);
 
         next.setOnClickListener(view -> {
             if (getItem(0) < onboardAdapter.getCount() - 1) {
@@ -105,5 +102,13 @@ public class OnboardScreen extends AppCompatActivity {
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
+    }
+
+    /**
+     * @param pixels takes size in pixels
+     * @return size in DP
+     */
+    private int inDP(int pixels) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, getResources().getDisplayMetrics());
     }
 }
