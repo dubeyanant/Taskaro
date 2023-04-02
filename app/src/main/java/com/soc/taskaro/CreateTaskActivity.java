@@ -1,7 +1,10 @@
 package com.soc.taskaro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +22,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,6 +37,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     ImageButton closeNotification;
     boolean notificationEnabled = false;
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
+    ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,10 +137,18 @@ public class CreateTaskActivity extends AppCompatActivity {
                 saveSubTaskButton.setEnabled(true);
 
                 View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
-                EditText editText = findViewById(R.id.editTextSubTask);
                 ImageView imageView = subTaskView.findViewById(R.id.imageViewRemove);
 
                 subTaskLL.addView(subTaskView);
+
+                Animation slideInLeft = AnimationUtils.loadAnimation(CreateTaskActivity.this, R.anim.slide_in_left);
+                subTaskView.startAnimation(slideInLeft);
+
+//                // This get the data of the sub-task text views
+//                checkIfValidAndRead();
+//                if (subTaskArrayList.size() > 0)
+//                    for (int i = 0; i < subTaskArrayList.size(); i++)
+//                        System.out.println(subTaskArrayList.get(i).getSubTask());
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -146,10 +159,20 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // Save sub-task
         saveSubTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveSubTaskButton.setEnabled(false);
+
+                if (checkIfValidAndRead()) {
+                    Intent intent = new Intent(CreateTaskActivity.this, SubTaskActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("list", subTaskArrayList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+//                saveSubTaskButton.setEnabled(false);
             }
         });
 
@@ -195,5 +218,34 @@ public class CreateTaskActivity extends AppCompatActivity {
             if (isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private boolean checkIfValidAndRead() {
+        subTaskArrayList.clear();
+        boolean result = true;
+
+        for (int i = 0; i < subTaskLL.getChildCount(); i++) {
+            View subTaskView = subTaskLL.getChildAt(i);
+
+            EditText editText = subTaskView.findViewById(R.id.editTextSubTask);
+
+            SubTask subTask = new SubTask();
+
+            if (!editText.getText().toString().equals("")) {
+                subTask.setSubTask(editText.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            subTaskArrayList.add(subTask);
+        }
+
+        if (subTaskArrayList.size() == 0) {
+            result = false;
+            Toast.makeText(this, "Enter sub-task", Toast.LENGTH_SHORT).show();
+        }
+
+        return result;
     }
 }
