@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
@@ -126,6 +125,7 @@ public class SettingsFragment extends Fragment {
                 if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
                     profileImageView.setImageResource(R.drawable.pic_abstract);
                     saveSettingBtn.setEnabled(true);
+                    deleteProfilePhotoBtn.setVisibility(View.GONE);
                 }
             }
         });
@@ -147,5 +147,9 @@ public class SettingsFragment extends Fragment {
         if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
             saveSettingBtn.setEnabled(true);
         } else saveSettingBtn.setEnabled(false);
+
+        if (profileImageView.getDrawable().getConstantState() != Objects.requireNonNull(ContextCompat.getDrawable(requireContext(), R.drawable.pic_abstract)).getConstantState()) {
+            deleteProfilePhotoBtn.setVisibility(View.VISIBLE);
+        } else deleteProfilePhotoBtn.setVisibility(View.GONE);
     }
 }
