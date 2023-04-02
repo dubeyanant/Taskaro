@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     Button btn_saveCreateTask;
     ImageButton closeNotification;
     boolean notificationEnabled = false;
+    com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
         notificationLL = findViewById(R.id.notificationLL);
         closeNotification = findViewById(R.id.closeNotification);
+        importantSwitch = findViewById(R.id.importantSwitch);
+        urgentSwitch = findViewById(R.id.urgentSwitch);
 
         // Date Picker
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
@@ -160,6 +164,16 @@ public class CreateTaskActivity extends AppCompatActivity {
                 notificationLL.setVisibility(View.GONE);
                 notificationEnabled = false;
             }
+        });
+
+        // Switch
+        importantSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(this, "Un-checked important", Toast.LENGTH_SHORT).show();
+        });
+        urgentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
+            else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
         });
     }
 }
