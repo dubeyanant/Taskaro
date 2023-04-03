@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".CreateTaskActivity">
+    tools:context=".createtask.CreateTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btn_saveCreateTask"
+                android:id="@+id/saveCreateTaskButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
@@ -43,13 +43,20 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/titleEditText"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="@drawable/style_create_task"
             android:hint="@string/title"
+            android:inputType="textCapSentences|textMultiLine"
+            android:isScrollContainer="true"
+            android:maxLength="400"
+            android:maxLines="4"
+            android:paddingVertical="15dp"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
+            android:singleLine="false"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -82,24 +89,26 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/style_create_task"
             android:fontFamily="@font/inter"
             android:gravity="top"
             android:hint="@string/description"
+            android:inputType="textCapSentences|textMultiLine"
+            android:isScrollContainer="true"
+            android:maxLength="2000"
+            android:paddingVertical="15dp"
             android:paddingStart="24dp"
-            android:paddingTop="20dp"
             android:paddingEnd="24dp"
+            android:singleLine="false"
             android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/subTaskLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical"/>
 
         <LinearLayout
             android:id="@+id/addTaskButtonLL"
@@ -123,6 +132,16 @@
                 android:text="@string/add_sub_task"
                 android:textSize="20sp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/saveSubTaskButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:paddingVertical="5dp"
+            android:text="@string/save_sub_tasks"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/addNotificationButtonLL"

@@ -1,7 +1,12 @@
-package com.soc.taskaro;
+package com.soc.taskaro.createtask;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,9 +21,11 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+import com.soc.taskaro.R;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,10 +35,13 @@ public class CreateTaskActivity extends AppCompatActivity {
     TextView dateTextView, timeTextView;
     TextView[] days;
     LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
-    Button btn_saveCreateTask;
+    Button btn_saveCreateTask, saveSubTaskButton;
+    EditText titleEditText;
     ImageButton closeNotification;
     boolean notificationEnabled = false;
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
+    ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
+    ViewGroup.MarginLayoutParams addTaskButtonLLParams; // Helps in changing margin of the particular layout viewGroup
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +61,15 @@ public class CreateTaskActivity extends AppCompatActivity {
         };
         addTaskButtonLL = findViewById(R.id.addTaskButtonLL);
         subTaskLL = findViewById(R.id.subTaskLL);
-        btn_saveCreateTask = findViewById(R.id.btn_saveCreateTask);
+        btn_saveCreateTask = findViewById(R.id.saveCreateTaskButton);
+        titleEditText = findViewById(R.id.titleEditText);
         addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
         notificationLL = findViewById(R.id.notificationLL);
         closeNotification = findViewById(R.id.closeNotification);
         importantSwitch = findViewById(R.id.importantSwitch);
         urgentSwitch = findViewById(R.id.urgentSwitch);
+        saveSubTaskButton = findViewById(R.id.saveSubTaskButton);
+        addTaskButtonLLParams = (ViewGroup.MarginLayoutParams) addTaskButtonLL.getLayoutParams();
 
         // Date Picker
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
@@ -122,18 +135,56 @@ public class CreateTaskActivity extends AppCompatActivity {
         addTaskButtonLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (saveSubTaskButton.getVisibility() == View.GONE) {
+                    saveSubTaskButton.setVisibility(View.VISIBLE);
+                }
+
+                saveSubTaskButton.setEnabled(true);
+
                 View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
-                EditText editText = findViewById(R.id.editTextSubTask);
                 ImageView imageView = subTaskView.findViewById(R.id.imageViewRemove);
 
                 subTaskLL.addView(subTaskView);
+
+                Animation slideInLeft = AnimationUtils.loadAnimation(CreateTaskActivity.this, R.anim.slide_in_left);
+                subTaskView.startAnimation(slideInLeft);
+
+                addTaskButtonLLParams.setMargins(0, inDP(12), 0, inDP(7));
+
+//                // This get the data of the sub-task text views
+//                checkIfValidAndRead();
+//                if (subTaskArrayList.size() > 0)
+//                    for (int i = 0; i < subTaskArrayList.size(); i++)
+//                        System.out.println(subTaskArrayList.get(i).getSubTask());
 
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         subTaskLL.removeView(subTaskView);
+
+                        if (subTaskLL.getChildCount() == 0) {
+                            saveSubTaskButton.setVisibility(View.GONE);
+                            addTaskButtonLLParams.setMargins(0, inDP(24), 0, 0);
+                        }
                     }
                 });
+            }
+        });
+
+        // Save sub-task
+        saveSubTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (checkIfValidAndRead()) {
+                    Intent intent = new Intent(CreateTaskActivity.this, SubTaskActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("list", subTaskArrayList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+//                saveSubTaskButton.setEnabled(false);
             }
         });
 
@@ -141,8 +192,12 @@ public class CreateTaskActivity extends AppCompatActivity {
         btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
-                finish();
+                if (titleEditText.getText().toString().equals("")) {
+                    Toast.makeText(CreateTaskActivity.this, "Please enter title!", Toast.LENGTH_SHORT).show();
+                } else {
+                    onBackPressed();
+                    finish();
+                }
             }
         });
 
@@ -168,12 +223,50 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         // Switch
         importantSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
+            if (isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, "Un-checked important", Toast.LENGTH_SHORT).show();
         });
         urgentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
+            if (isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    /**
+     * @param pixels takes size in pixels
+     * @return size in DP
+     */
+    private int inDP(int pixels) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, getResources().getDisplayMetrics());
+    }
+
+    // This method reads the dynamic sub-task editText
+    private boolean checkIfValidAndRead() {
+        subTaskArrayList.clear();
+        boolean result = true;
+
+        for (int i = 0; i < subTaskLL.getChildCount(); i++) {
+            View subTaskView = subTaskLL.getChildAt(i);
+
+            EditText editText = subTaskView.findViewById(R.id.editTextSubTask);
+
+            SubTask subTask = new SubTask();
+
+            if (!editText.getText().toString().equals("")) {
+                subTask.setSubTask(editText.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            subTaskArrayList.add(subTask);
+        }
+
+        if (subTaskArrayList.size() == 0) {
+            result = false;
+            Toast.makeText(this, "Enter sub-task", Toast.LENGTH_SHORT).show();
+        }
+
+        return result;
     }
 }
