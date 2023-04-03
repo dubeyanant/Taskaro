@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,10 +33,10 @@ public class OnboardScreen extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
 
-             if(position != 0)
+            if (position != 0)
                 prev.setVisibility(View.VISIBLE);
-             else
-                 prev.setVisibility(View.INVISIBLE);
+            else
+                prev.setVisibility(View.INVISIBLE);
 
             if (position == (onboardAdapter.getCount() - 1)) skip.setVisibility(View.INVISIBLE);
             else skip.setVisibility(View.VISIBLE);

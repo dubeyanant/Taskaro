@@ -16,7 +16,7 @@
         android:textColor="@color/md_theme_light_shadow"
         android:textSize="36sp"
         android:textStyle="bold" />
-    
+
     <androidx.cardview.widget.CardView
         android:layout_width="362dp"
         android:layout_height="650dp"
