@@ -1,7 +1,5 @@
 package com.soc.taskaro.fragments;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.soc.taskaro.R;
 
 import java.util.ArrayList;
 
@@ -48,7 +48,7 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
 
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
-            notesHeading = (TextView) itemView.findViewById(R.id.notes_list_text1);
+            notesHeading = itemView.findViewById(R.id.notes_list_text1);
             notesDescription = itemView.findViewById(R.id.notes_list_text2);
         }
     }

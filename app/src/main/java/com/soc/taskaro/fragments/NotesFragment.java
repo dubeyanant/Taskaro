@@ -90,12 +90,30 @@ public class NotesFragment extends Fragment {
         notesHeading = new String[]{
                 getString(R.string.delete_it),
                 getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
                 getString(R.string.do_it)};
 
         notesDescription = new String[]{
                 getString(R.string.delete_it_description),
                 getString(R.string.delegate_it_description),
-                getString(R.string.do_it_description)
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
         };
         for (int i = 0; i < notesHeading.length; i++) {
             Notes notes = new Notes(notesHeading[i], notesDescription[i]);
