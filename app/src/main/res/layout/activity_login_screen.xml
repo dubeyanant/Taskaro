@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_edit_text_bg"
-        android:drawableStart="@drawable/ic_mail"
+        android:drawableStart="@drawable/ic_mail_outline"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter"
         android:hint="@string/email"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/style_edit_text_bg"
-        android:drawableStart="@drawable/ic_lock"
+        android:drawableStart="@drawable/ic_lock_outline"
         android:drawableEnd="@drawable/ic_remove_eye_outline"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter"
@@ -91,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:padding="3dp"
         android:layout_marginBottom="55dp"
         android:orientation="horizontal">
 

@@ -1,7 +1,5 @@
 package com.soc.taskaro.activities;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.annotation.SuppressLint;
@@ -12,18 +10,13 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
@@ -43,14 +35,12 @@ import com.soc.taskaro.utils.Extras;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
-    ImageView img_go_to_login;
-    TextView txt_go_to_login;
-
+    LinearLayout txt_go_to_login;
     EditText name, email, phone, password, cpassword;
     Button btn_signup;
     boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid;
     ProgressDialog progressDialog;
-    CheckBox showPassword;
+    //    CheckBox showPassword;
     private FirebaseAuth firebaseAuth;
 
     @SuppressLint("ResourceType")
@@ -59,40 +49,29 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        txt_go_to_login = (TextView) findViewById(R.id.txt_back);
-        img_go_to_login = (ImageView) findViewById(R.id.img_back);
-
+        txt_go_to_login = findViewById(R.id.txt_back);
         name = (EditText) findViewById(R.id.txt_name);
         email = (EditText) findViewById(R.id.txt_email);
         phone = (EditText) findViewById(R.id.txt_mobile);
         password = (EditText) findViewById(R.id.txt_password);
         cpassword = (EditText) findViewById(R.id.txt_cpassword);
         btn_signup = (Button) findViewById(R.id.btn_register);
-        showPassword = (CheckBox) findViewById(R.id.showPassword);
+//        showPassword = (CheckBox) findViewById(R.id.showPassword);
         firebaseAuth = FirebaseAuth.getInstance();
 
         Window window = getWindow();
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
+        // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-// finally change the color
+        // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_light_secondary));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.getDecorView().getWindowInsetsController().setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS);
         }
-
-
-        img_go_to_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });
 
         txt_go_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,18 +82,18 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         //To display text from the fields of password
-        showPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (showPassword.isChecked()) {
-                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    cpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    cpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-            }
-        });
+//        showPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (showPassword.isChecked()) {
+//                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                    cpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                } else {
+//                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    cpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                }
+//            }
+//        });
 
         //Signup Button logic
         btn_signup.setOnClickListener(new View.OnClickListener() {
