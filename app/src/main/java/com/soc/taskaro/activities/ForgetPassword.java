@@ -27,7 +27,8 @@ import com.soc.taskaro.R;
 
 public class ForgetPassword extends AppCompatActivity {
 
-    Button btn_back, btn_send;
+    Button btn_send;
+    TextView goToLoginTextView;
     ProgressBar progressBar;
     EditText txt_email;
     boolean isEmailValid;
@@ -38,9 +39,10 @@ public class ForgetPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        btn_send = (Button) findViewById(R.id.btn_send);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        txt_email = (EditText) findViewById(R.id.txt_email);
+        btn_send = findViewById(R.id.btn_send);
+        goToLoginTextView = findViewById(R.id.goToLoginTextView);
+        progressBar = findViewById(R.id.progressBar);
+        txt_email = findViewById(R.id.txt_email);
         firebaseAuth = FirebaseAuth.getInstance();
 
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +67,14 @@ public class ForgetPassword extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        goToLoginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                finish();
             }
         });
     }

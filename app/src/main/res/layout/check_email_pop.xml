@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:fontFamily="@font/inter_semibold"
-        android:text="@string/back_to_login"
+        android:text="@string/back_to_login_underline"
         android:textSize="16sp" />
 </LinearLayout>
