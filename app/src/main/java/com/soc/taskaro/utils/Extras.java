@@ -29,11 +29,11 @@ public class Extras {
         }
         if (have_MobileData || have_WIFI) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
+
     public ProgressDialog showProgressBar(Activity activity) {
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.show();

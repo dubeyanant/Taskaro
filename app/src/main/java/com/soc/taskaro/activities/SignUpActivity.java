@@ -79,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.md_theme_light_secondary));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_light_secondary));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.getDecorView().getWindowInsetsController().setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS);
         }
@@ -105,11 +105,10 @@ public class SignUpActivity extends AppCompatActivity {
         showPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(showPassword.isChecked()){
+                if (showPassword.isChecked()) {
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     cpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-                else{
+                } else {
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     cpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
@@ -124,33 +123,32 @@ public class SignUpActivity extends AppCompatActivity {
                 boolean have_MobileData = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
                 NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
-                for(NetworkInfo info:networkInfos){
-                    if(info.getTypeName().equalsIgnoreCase("WIFI"))
-                        if(info.isConnected())
+                for (NetworkInfo info : networkInfos) {
+                    if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                        if (info.isConnected())
                             have_WIFI = true;
-                    if(info.getTypeName().equalsIgnoreCase("MOBILE"))
-                        if(info.isConnected())
+                    if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                        if (info.isConnected())
                             have_MobileData = true;
                 }
-                if(have_MobileData || have_WIFI){
+                if (have_MobileData || have_WIFI) {
                     setValidation();
                     progressBar.setVisibility(VISIBLE);
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Authentication Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void setValidation(){
+    private void setValidation() {
         Pattern lowerCase = Pattern.compile("[a-z]");
         Pattern digitCase = Pattern.compile("[0-9]");
         if (name.getText().toString().trim().isEmpty()) {
             name.setError(getResources().getString(R.string.name_error));
             isNameValid = false;
         }
-        if(!name.getText().toString().trim().isEmpty()) {
+        if (!name.getText().toString().trim().isEmpty()) {
             isNameValid = true;
         }
         if (email.getText().toString().trim().isEmpty()) {
@@ -217,24 +215,22 @@ public class SignUpActivity extends AppCompatActivity {
                                 firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
+                                        if (task.isSuccessful()) {
                                             firebaseAuth.signOut();
                                             Intent signinActivity = new Intent(SignUpActivity.this, LoginScreen.class);
                                             SignUpActivity.this.startActivity(signinActivity);
                                             finish();
                                             //for (int i=0; i < 3; i++)
                                             //{
-                                                Toast.makeText(getApplicationContext(), "Email Send! Please check your Email Address to get Verified.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Email Send! Please check your Email Address to get Verified.", Toast.LENGTH_SHORT).show();
                                             //}
-                                        }
-                                        else{
+                                        } else {
                                             Toast.makeText(getApplicationContext(), "Failed! Unable to send Email.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
 
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), "User with this email already exist.", Toast.LENGTH_SHORT).show();
                             }
 

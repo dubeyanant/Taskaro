@@ -126,7 +126,7 @@ public class FirestoreClass {
         documentReference.update(userHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                if(fragment instanceof SettingsFragment){
+                if (fragment instanceof SettingsFragment) {
                     ((SettingsFragment) fragment).userDataUpdateSuccess();
                 }
             }
@@ -148,15 +148,15 @@ public class FirestoreClass {
     }
 
     public void uploadImageToCloudStorage(Fragment fragment, Uri mSelectedImageFileUri, String imageType) {
-        StorageReference sRef = FirebaseStorage.getInstance().getReference().child(imageType + System.currentTimeMillis()+"."+Constants.getFileExtension(fragment.getActivity(), mSelectedImageFileUri));
+        StorageReference sRef = FirebaseStorage.getInstance().getReference().child(imageType + System.currentTimeMillis() + "." + Constants.getFileExtension(fragment.getActivity(), mSelectedImageFileUri));
         sRef.putFile(mSelectedImageFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 System.out.println("Ola!!!!!!!!!!!!!!!!");
-                    ((SettingsFragment) fragment).imageUploadSuccess(mSelectedImageFileUri);
+                ((SettingsFragment) fragment).imageUploadSuccess(mSelectedImageFileUri);
             }
         }).addOnFailureListener(e -> {
-                Toast.makeText(fragment.getContext(), "Error! Unable to add product.", Toast.LENGTH_LONG).show();
+            Toast.makeText(fragment.getContext(), "Error! Unable to add product.", Toast.LENGTH_LONG).show();
         });
     }
 }

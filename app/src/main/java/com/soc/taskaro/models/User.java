@@ -75,7 +75,8 @@ public class User implements Parcelable {
         email = mail;
         mobile = Long.parseLong(mobileNo);
     }
-    public User(){
+
+    public User() {
 
     }
 

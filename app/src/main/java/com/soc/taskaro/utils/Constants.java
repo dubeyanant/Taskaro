@@ -29,12 +29,12 @@ public class Constants {
     public static final String PRODUCT_IMAGE = "Product_Image";
     public static final String USER_ID = "user_id";
 
-    public static void showImageChooser(Activity activity){
+    public static void showImageChooser(Activity activity) {
         Intent gallaryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         activity.startActivityForResult(gallaryIntent, PICK_IMAGE_REQUEST_CODE);
     }
 
-    public static String getFileExtension(Activity activity, Uri uri){
+    public static String getFileExtension(Activity activity, Uri uri) {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(activity.getContentResolver().getType(uri));
     }
 }

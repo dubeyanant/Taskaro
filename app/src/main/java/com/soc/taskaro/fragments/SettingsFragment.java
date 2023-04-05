@@ -66,6 +66,7 @@ public class SettingsFragment extends Fragment {
 
     private String userProfileImageURL = "";
     EditText nameEditText;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -122,7 +123,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getContext(), "Logout Successfully...", Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
@@ -145,7 +146,7 @@ public class SettingsFragment extends Fragment {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(getContext(), "Account Deleted Successfully...", Toast.LENGTH_SHORT).show();
-                                        Intent i=new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                                        Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
                                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(i);
@@ -173,7 +174,6 @@ public class SettingsFragment extends Fragment {
                 alert.show();
             }
         });
-
 
 
         // Choose Image for Profile
@@ -224,12 +224,11 @@ public class SettingsFragment extends Fragment {
         saveSettingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Extras.networkCheck(getContext())){
+                if (Extras.networkCheck(getContext())) {
                     saveSettingBtn.setEnabled(false);
                     progressDialog = new Extras().showProgressBar(SettingsFragment.this);
                     setValidation();
-                }
-                else{
+                } else {
                     Toast.makeText(getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -240,23 +239,21 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setValidation() {
-        if(nameEditText.getText().toString().trim().isEmpty()){
+        if (nameEditText.getText().toString().trim().isEmpty()) {
             isNameValid = false;
             Toast.makeText(getActivity(), "Please enter Name", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
-        }
-        else{
+        } else {
             isNameValid = true;
         }
 
-        if(isNameValid){
-            if(userProfileImageURL.equals("")){
+        if (isNameValid) {
+            if (userProfileImageURL.equals("")) {
                 HashMap<String, Object> userHashMap = new HashMap<>();
                 userHashMap.put(Constants.IMAGE, userProfileImageURL);
                 userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
                 new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
-            }
-            else{
+            } else {
                 new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.PRODUCT_IMAGE);
                 HashMap<String, Object> userHashMap = new HashMap<>();
                 userHashMap.put(Constants.IMAGE, userProfileImageURL);
@@ -279,14 +276,13 @@ public class SettingsFragment extends Fragment {
     }
 
     public void userGetDataSuccess(User user) {
-        if(user.image.equals("")){
+        if (user.image.equals("")) {
             nameEditText.setText(user.getName());
             nameTextView.setText(user.getName());
             emailTextView.setText(user.getEmail());
             mobileTextView.setText(String.valueOf(user.getMobile()));
             progressDialog.dismiss();
-        }
-        else{
+        } else {
             deleteProfilePhotoBtn.setVisibility(View.VISIBLE);
             userProfileImageURL = user.getImage();
             uri = Uri.parse(user.getImage());
