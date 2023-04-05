@@ -136,9 +136,9 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 //Setting message manually and performing action on button click
-                builder.setMessage("Do you want to delete your account?")
+                builder.setMessage("Do you want to delete your account?").setTitle("Alert!")
                         .setCancelable(false)
-                        .setPositiveButton("Yes Delete", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 new FirestoreClass().deleteUsersDetails(SettingsFragment.this);
@@ -169,8 +169,6 @@ public class SettingsFragment extends Fragment {
                         });
                 //Creating dialog box
                 AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("AlertDialogExample");
                 alert.show();
             }
         });
@@ -257,10 +255,6 @@ public class SettingsFragment extends Fragment {
                 new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
             } else {
                 new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.PRODUCT_IMAGE);
-                HashMap<String, Object> userHashMap = new HashMap<>();
-                userHashMap.put(Constants.IMAGE, userProfileImageURL);
-                userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
-                new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
             }
         }
     }
@@ -298,11 +292,13 @@ public class SettingsFragment extends Fragment {
     }
 
     public void userDataUpdateSuccess() {
-        Toast.makeText(getActivity(), "Data updated successfully", Toast.LENGTH_SHORT).show();
         progressDialog.dismiss();
     }
 
     public void imageUploadSuccess(Uri imageUri) {
-        Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
+        HashMap<String, Object> userHashMap = new HashMap<>();
+        userHashMap.put(Constants.IMAGE, userProfileImageURL);
+        userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
+        new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
     }
 }
