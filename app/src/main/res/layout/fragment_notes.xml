@@ -52,7 +52,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         tools:listitem="@layout/notes_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 
 </LinearLayout>
