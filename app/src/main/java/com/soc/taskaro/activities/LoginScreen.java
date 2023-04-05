@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +31,12 @@ import com.soc.taskaro.models.User;
 
 public class LoginScreen extends AppCompatActivity {
 
-    TextView txt_go_to_signup, txt_go_to_forget;
-    EditText txt_email, txt_password;
+    TextView goToForgotTextView;
+    EditText emailEditText, passwordEditText;
     boolean isEmailValid, isPasswordValid;
+    LinearLayout goToSignupLL;
     ProgressBar progressBar;
-    Button btn_login;
+    Button loginBtn;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -43,14 +44,13 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        txt_email = (EditText) findViewById(R.id.txt_email);
-        txt_password = (EditText) findViewById(R.id.txt_password);
-        txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
-        txt_go_to_forget = (TextView) findViewById(R.id.txt_go_to_forget);
-        txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        emailEditText = (EditText) findViewById(R.id.emailEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        goToForgotTextView = (TextView) findViewById(R.id.goToForgotTextView);
+        loginBtn = (Button) findViewById(R.id.loginBtn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         firebaseAuth = FirebaseAuth.getInstance();
+        goToSignupLL = findViewById(R.id.goToSignupLL);
 
 //        showPassword.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -63,7 +63,7 @@ public class LoginScreen extends AppCompatActivity {
 //            }
 //        });
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean have_WIFI = false;
@@ -87,7 +87,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
 
-        txt_go_to_signup.setOnClickListener(new View.OnClickListener() {
+        goToSignupLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginScreen.this, SignUpActivity.class);
@@ -96,7 +96,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
 
-        txt_go_to_forget.setOnClickListener(new View.OnClickListener() {
+        goToForgotTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginScreen.this, ForgetPassword.class);
@@ -106,19 +106,19 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void SetValidation() {
-        if (txt_email.getText().toString().isEmpty()) {
-            txt_email.setError(getResources().getString(R.string.email_error));
+        if (emailEditText.getText().toString().isEmpty()) {
+            emailEditText.setError(getResources().getString(R.string.email_error));
             isEmailValid = false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
-            txt_email.setError(getResources().getString(R.string.error_invalid_email));
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailEditText.getText().toString()).matches()) {
+            emailEditText.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
         } else {
             isEmailValid = true;
         }
 
         // Check for a valid password.
-        if (txt_password.getText().toString().isEmpty()) {
-            txt_password.setError(getResources().getString(R.string.password_error));
+        if (passwordEditText.getText().toString().isEmpty()) {
+            passwordEditText.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
         } else {
             isPasswordValid = true;
@@ -126,8 +126,8 @@ public class LoginScreen extends AppCompatActivity {
 
 
         if (isEmailValid && isPasswordValid) {
-            String email_txt = txt_email.getText().toString().trim();
-            String password_txt = txt_password.getText().toString().trim();
+            String email_txt = emailEditText.getText().toString().trim();
+            String password_txt = passwordEditText.getText().toString().trim();
 
             firebaseAuth.signInWithEmailAndPassword(email_txt, password_txt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
