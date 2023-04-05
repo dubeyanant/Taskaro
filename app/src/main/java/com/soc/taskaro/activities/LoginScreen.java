@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,15 +30,13 @@ import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 
 public class LoginScreen extends AppCompatActivity {
-    TextView txt_go_to_signup, txt_go_to_forget;
-    ImageView img_go_to_signup;
 
+    TextView txt_go_to_signup, txt_go_to_forget;
     EditText txt_email, txt_password;
     boolean isEmailValid, isPasswordValid;
-    CheckBox showPassword;
     ProgressBar progressBar;
-    private FirebaseAuth firebaseAuth;
     Button btn_login;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +46,23 @@ public class LoginScreen extends AppCompatActivity {
         txt_email = (EditText) findViewById(R.id.txt_email);
         txt_password = (EditText) findViewById(R.id.txt_password);
         txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
-        img_go_to_signup = (ImageView) findViewById(R.id.img_go_to_signup);
         txt_go_to_forget = (TextView) findViewById(R.id.txt_go_to_forget);
         txt_go_to_signup = (TextView) findViewById(R.id.txt_go_to_signup);
         btn_login = (Button) findViewById(R.id.btn_login);
-        showPassword = (CheckBox) findViewById(R.id.chk_showPassword);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        showPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(showPassword.isChecked()){
-                    txt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-                else{
-                    txt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-            }
-        });
+//        showPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (showPassword.isChecked()) {
+//                    txt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                } else {
+//                    txt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                }
+//            }
+//        });
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,34 +70,24 @@ public class LoginScreen extends AppCompatActivity {
                 boolean have_MobileData = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
                 NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
-                for(NetworkInfo info:networkInfos){
-                    if(info.getTypeName().equalsIgnoreCase("WIFI"))
-                        if(info.isConnected())
+                for (NetworkInfo info : networkInfos) {
+                    if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                        if (info.isConnected())
                             have_WIFI = true;
-                    if(info.getTypeName().equalsIgnoreCase("MOBILE"))
-                        if(info.isConnected())
+                    if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                        if (info.isConnected())
                             have_MobileData = true;
                 }
-                if(have_MobileData || have_WIFI){
+                if (have_MobileData || have_WIFI) {
                     SetValidation();
                     progressBar.setVisibility(VISIBLE);
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Login Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         txt_go_to_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginScreen.this, SignUpActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-
-        img_go_to_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginScreen.this, SignUpActivity.class);
@@ -129,7 +112,7 @@ public class LoginScreen extends AppCompatActivity {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
             txt_email.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
-        } else  {
+        } else {
             isEmailValid = true;
         }
 
@@ -137,7 +120,7 @@ public class LoginScreen extends AppCompatActivity {
         if (txt_password.getText().toString().isEmpty()) {
             txt_password.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else  {
+        } else {
             isPasswordValid = true;
         }
 
@@ -150,22 +133,19 @@ public class LoginScreen extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar.setVisibility(GONE);
-                    if(task.isSuccessful()){
-                        if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                    if (task.isSuccessful()) {
+                        if (firebaseAuth.getCurrentUser().isEmailVerified()) {
                             try {
                                 Thread.sleep(2000);
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
                             new FirestoreClass().getUsersDetails(LoginScreen.this);
 
-                        }
-                        else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "Login Failed! Your Email ID is not Verified, Check your Email to get verified.", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Login Failed! Check your Email ID or Password.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -179,11 +159,12 @@ public class LoginScreen extends AppCompatActivity {
 
         }
     }
-    public void userLoggedInSuccess(User user){
-            Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
-            Intent doneActivity = new Intent(LoginScreen.this, MainActivity.class);
-            LoginScreen.this.startActivity(doneActivity);
-            finish();
+
+    public void userLoggedInSuccess(User user) {
+        Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
+        Intent doneActivity = new Intent(LoginScreen.this, MainActivity.class);
+        LoginScreen.this.startActivity(doneActivity);
+        finish();
 
     }
 }
