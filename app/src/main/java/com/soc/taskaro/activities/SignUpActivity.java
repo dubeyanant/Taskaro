@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
+import com.soc.taskaro.utils.Extras;
 
 import java.util.regex.Pattern;
 
@@ -47,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText name, email, phone, password, cpassword;
     Button btn_signup;
     boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     CheckBox showPassword;
     private FirebaseAuth firebaseAuth;
 
@@ -68,7 +70,6 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signup = (Button) findViewById(R.id.btn_register);
         showPassword = (CheckBox) findViewById(R.id.showPassword);
         firebaseAuth = FirebaseAuth.getInstance();
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         Window window = getWindow();
 
@@ -133,7 +134,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if (have_MobileData || have_WIFI) {
                     setValidation();
-                    progressBar.setVisibility(VISIBLE);
+                    progressDialog = new Extras().showProgressBar(SignUpActivity.this);
                 } else {
                     Toast.makeText(getApplicationContext(), "Authentication Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
@@ -207,7 +208,6 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressBar.setVisibility(GONE);
 
                             if (task.isSuccessful()) {
                                 User userInfo = new User(firebaseAuth.getUid(), name.getText().toString().trim(), email_txt, phone.getText().toString().trim());
@@ -222,15 +222,18 @@ public class SignUpActivity extends AppCompatActivity {
                                             finish();
                                             //for (int i=0; i < 3; i++)
                                             //{
+                                            progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Email Send! Please check your Email Address to get Verified.", Toast.LENGTH_SHORT).show();
                                             //}
                                         } else {
+                                            progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(), "Failed! Unable to send Email.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
 
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "User with this email already exist.", Toast.LENGTH_SHORT).show();
                             }
 

@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,12 +25,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.soc.taskaro.R;
+import com.soc.taskaro.utils.Extras;
 
 public class ForgetPassword extends AppCompatActivity {
 
     Button btn_send;
     TextView goToLoginTextView;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     EditText txt_email;
     boolean isEmailValid;
     private FirebaseAuth firebaseAuth;
@@ -41,7 +43,6 @@ public class ForgetPassword extends AppCompatActivity {
 
         btn_send = findViewById(R.id.btn_send);
         goToLoginTextView = findViewById(R.id.goToLoginTextView);
-        progressBar = findViewById(R.id.progressBar);
         txt_email = findViewById(R.id.txt_email);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -62,7 +63,7 @@ public class ForgetPassword extends AppCompatActivity {
                             have_MobileData = true;
                 }
                 if (have_MobileData || have_WIFI) {
-                    progressBar.setVisibility(VISIBLE);
+                    progressDialog = new Extras().showProgressBar(ForgetPassword.this);
                     SetValidation();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
@@ -95,9 +96,10 @@ public class ForgetPassword extends AppCompatActivity {
             firebaseAuth.sendPasswordResetEmail(email_txt).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    progressBar.setVisibility(GONE);
+
                     if (task.isSuccessful()) {
                         TextView txt_goToLogin;
+                        progressDialog.dismiss();
                         Dialog dialog = new Dialog(ForgetPassword.this);
                         dialog.setContentView(R.layout.check_email_pop);
                         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

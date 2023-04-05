@@ -3,6 +3,7 @@ package com.soc.taskaro.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -28,6 +29,7 @@ import com.soc.taskaro.MainActivity;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
+import com.soc.taskaro.utils.Extras;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -35,7 +37,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText emailEditText, passwordEditText;
     boolean isEmailValid, isPasswordValid;
     LinearLayout goToSignupLL;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     Button loginBtn;
     private FirebaseAuth firebaseAuth;
 
@@ -48,7 +50,6 @@ public class LoginScreen extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         goToForgotTextView = (TextView) findViewById(R.id.goToForgotTextView);
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         firebaseAuth = FirebaseAuth.getInstance();
         goToSignupLL = findViewById(R.id.goToSignupLL);
 
@@ -79,8 +80,8 @@ public class LoginScreen extends AppCompatActivity {
                             have_MobileData = true;
                 }
                 if (have_MobileData || have_WIFI) {
+                    progressDialog = new Extras().showProgressBar(LoginScreen.this);
                     SetValidation();
-                    progressBar.setVisibility(VISIBLE);
                 } else {
                     Toast.makeText(getApplicationContext(), "Login Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
@@ -107,9 +108,11 @@ public class LoginScreen extends AppCompatActivity {
 
     public void SetValidation() {
         if (emailEditText.getText().toString().isEmpty()) {
+            progressDialog.dismiss();
             emailEditText.setError(getResources().getString(R.string.email_error));
             isEmailValid = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailEditText.getText().toString()).matches()) {
+            progressDialog.dismiss();
             emailEditText.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
         } else {
@@ -118,6 +121,7 @@ public class LoginScreen extends AppCompatActivity {
 
         // Check for a valid password.
         if (passwordEditText.getText().toString().isEmpty()) {
+            progressDialog.dismiss();
             passwordEditText.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
         } else {
@@ -132,7 +136,6 @@ public class LoginScreen extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email_txt, password_txt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(GONE);
                     if (task.isSuccessful()) {
                         if (firebaseAuth.getCurrentUser().isEmailVerified()) {
                             try {
@@ -143,9 +146,11 @@ public class LoginScreen extends AppCompatActivity {
                             new FirestoreClass().getUsersDetails(LoginScreen.this);
 
                         } else {
+                            progressDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "Login Failed! Your Email ID is not Verified, Check your Email to get verified.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Login Failed! Check your Email ID or Password.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -161,6 +166,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void userLoggedInSuccess(User user) {
+        progressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
         Intent doneActivity = new Intent(LoginScreen.this, MainActivity.class);
         LoginScreen.this.startActivity(doneActivity);
