@@ -167,7 +167,7 @@
         <TextView
             android:id="@+id/mobileTextView"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:text="@string/mobile"
             android:textSize="26sp" />
 
