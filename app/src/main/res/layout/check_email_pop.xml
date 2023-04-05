@@ -31,7 +31,8 @@
         android:id="@+id/txt_goToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
         android:fontFamily="@font/inter_semibold"
         android:text="@string/back_to_login_underline"
         android:textSize="16sp" />

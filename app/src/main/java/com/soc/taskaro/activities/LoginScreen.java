@@ -101,6 +101,7 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(LoginScreen.this, ForgetPassword.class);
                 startActivity(i);
+                finish();
             }
         });
     }
