@@ -40,11 +40,13 @@ public class OnboardScreen extends AppCompatActivity {
                 next.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
                 tempView.setVisibility(View.GONE);
                 next.setText(R.string.lets_login);
+                next.setBackgroundColor(next.getContext().getResources().getColor(R.color.md_theme_light_shadow));
             } else {
                 skip.setVisibility(View.VISIBLE);
                 next.setLayoutParams(new LinearLayout.LayoutParams(inDP(170), LinearLayout.LayoutParams.WRAP_CONTENT));
                 tempView.setVisibility(View.VISIBLE);
                 next.setText(R.string.next);
+                next.setBackgroundColor(next.getContext().getResources().getColor(R.color.md_theme_light_primary));
             }
 
             setUpIndicator(getItem(0));
