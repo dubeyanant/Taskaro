@@ -24,7 +24,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="forgot_password_reset_instructions">Enter your registered email to receive\npassword reset link</string>
     <string name="forgot_password_done_instructions">We have sent you an email\nwith the reset link</string>
-    <string name="login_screen_tag_line">Already Have An Account?</string>
+    <string name="login_screen_tag_line">Already Have an Account?</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>
@@ -35,7 +35,8 @@
     <string name="lets_login">Let\'s Login</string>
     <string name="send">Send</string>
     <string name="signup">Register</string>
-    <string name="register_now">Let\'s Sign You UP!</string>
+    <string name="register_tagline">Let\'s Sign You UP!</string>
+    <string name="register_now">New User? Register Now</string>
     <string name="back_to_login">Back to Login</string>
     <string name="back_to_login_underline"><u>Back to Login</u></string>
 

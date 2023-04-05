@@ -9,6 +9,7 @@
     tools:context=".activities.SignUpActivity">
 
     <ImageView
+        android:id="@+id/faceImageView"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="50dp"
@@ -21,11 +22,11 @@
         android:layout_marginVertical="20dp"
         android:fontFamily="@font/inter_bold"
         android:gravity="center_horizontal"
-        android:text="@string/register_now"
+        android:text="@string/register_tagline"
         android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/txt_name"
+        android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_edit_text_bg"
@@ -39,7 +40,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txt_email"
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -54,7 +55,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txt_mobile"
+        android:id="@+id/mobileEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -69,7 +70,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txt_password"
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -85,7 +86,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/txt_cpassword"
+        android:id="@+id/confirmPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -106,7 +107,7 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/md_theme_light_shadow"
@@ -116,7 +117,8 @@
         android:textSize="20sp" />
 
     <LinearLayout
-        android:id="@+id/txt_back"
+        android:id="@+id/goToLoginLL"
+        android:layout_marginEnd="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
