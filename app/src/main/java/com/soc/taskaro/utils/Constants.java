@@ -14,6 +14,8 @@ public class Constants {
     public static final String Extra_Product_ID = "extra_product_details";
     public static final int READ_STORAGE_PERMISSION_CODE = 2;
     public static final int PICK_IMAGE_REQUEST_CODE = 1;
+
+    public static final String FIRST_ENTRY_OF_USER = "first_entry";
     public static final String NAME = "name";
     public static final String LAST_NAME = "lastName";
     public static final String MALE = "male";
