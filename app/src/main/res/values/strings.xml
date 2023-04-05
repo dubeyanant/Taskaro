@@ -23,6 +23,7 @@
 
     <string name="forgot_password">Forgot password?</string>
     <string name="forgot_password_reset_instructions">Enter your registered email to receive\npassword reset link</string>
+    <string name="forgot_password_done_instructions">We have sent you an email\nwith the reset link</string>
     <string name="login_screen_tag_line">Already \nhave an\naccount?</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
@@ -35,7 +36,7 @@
     <string name="send">Send</string>
     <string name="signup">Register</string>
     <string name="register_now">New user? Register Now</string>
-    <string name="back_to_login">Back to Login</string>
+    <string name="back_to_login"><u>Back to Login</u></string>
 
     <string name="home">Home</string>
     <string name="analytics">Analytics</string>
@@ -86,5 +87,6 @@
 
     <!-- Create Task Activity strings -->
     <string name="empty_field_error">Empty Field</string>
+    <string name="check_your_email">Check Your Email!</string>
 
 </resources>
