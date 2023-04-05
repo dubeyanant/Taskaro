@@ -3,16 +3,20 @@ package com.soc.taskaro.activities;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextPaint;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     LinearLayout goToLoginLL;
     EditText nameEditText, emailEditText, mobileEditText, passwordEditText, confirmPasswordEditText;
     Button registerButton;
+    TextView signUpTagline;
     boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid;
     ProgressDialog progressDialog;
     ImageView faceImageView;
@@ -42,6 +47,14 @@ public class SignUpActivity extends AppCompatActivity {
     Random randomNumber = new Random();
     //    CheckBox showPassword;
     private FirebaseAuth firebaseAuth;
+    private Runnable run = new Runnable() {
+        @Override
+        public void run() {
+            int randNum = randomNumber.nextInt(face.length - 1);
+            faceImageView.setImageDrawable(getResources().getDrawable(face[randNum]));
+            handler.postDelayed(this, 1200);
+        }
+    };
 
     @SuppressLint("ResourceType")
     @Override
@@ -59,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
 //        showPassword = (CheckBox) findViewById(R.id.showPassword);
         firebaseAuth = FirebaseAuth.getInstance();
         faceImageView = findViewById(R.id.faceImageView);
+        signUpTagline = findViewById(R.id.signUpTagline);
         face = new int[]{
                 R.drawable.vct_face_1,
                 R.drawable.vct_face_2,
@@ -74,7 +88,18 @@ public class SignUpActivity extends AppCompatActivity {
                 R.drawable.vct_face_12
         };
 
+        // This methods change the face in the activity
         startCounting();
+
+        // This fills the textView with gradient
+        TextPaint paint = signUpTagline.getPaint();
+        float width = paint.measureText(getString(R.string.register_tagline));
+        Shader textShader = new LinearGradient(0, 0, width, signUpTagline.getTextSize(),
+                new int[]{
+                        getResources().getColor(R.color.md_theme_light_shadow),
+                        getResources().getColor(R.color.seed)
+                }, null, Shader.TileMode.CLAMP);
+        signUpTagline.getPaint().setShader(textShader);
 
         goToLoginLL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,15 +154,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void startCounting() {
         handler.post(run);
     }
-
-    private Runnable run = new Runnable() {
-        @Override
-        public void run() {
-            int randNum = randomNumber.nextInt(face.length - 1);
-            faceImageView.setImageDrawable(getResources().getDrawable(face[randNum]));
-            handler.postDelayed(this, 1200);
-        }
-    };
 
     private void setValidation() {
         Pattern lowerCase = Pattern.compile("[a-z]");

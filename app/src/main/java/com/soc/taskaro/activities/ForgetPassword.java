@@ -6,9 +6,12 @@ import static android.view.View.VISIBLE;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +33,7 @@ import com.soc.taskaro.utils.Extras;
 public class ForgetPassword extends AppCompatActivity {
 
     Button btn_send;
-    TextView goToLoginTextView;
+    TextView goToLoginTextView, forgotPasswordTagline;
     ProgressDialog progressDialog;
     EditText txt_email;
     boolean isEmailValid;
@@ -45,6 +48,17 @@ public class ForgetPassword extends AppCompatActivity {
         goToLoginTextView = findViewById(R.id.goToLoginTextView);
         txt_email = findViewById(R.id.txt_email);
         firebaseAuth = FirebaseAuth.getInstance();
+        forgotPasswordTagline = findViewById(R.id.forgotPasswordTagline);
+
+        // This fills the textView with gradient
+        TextPaint paint = forgotPasswordTagline.getPaint();
+        float width = paint.measureText(getString(R.string.forget_password));
+        Shader textShader = new LinearGradient(0, 0, width, forgotPasswordTagline.getTextSize(),
+                new int[]{
+                        getResources().getColor(R.color.md_theme_light_shadow),
+                        getResources().getColor(R.color.seed)
+                }, null, Shader.TileMode.CLAMP);
+        forgotPasswordTagline.getPaint().setShader(textShader);
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +121,17 @@ public class ForgetPassword extends AppCompatActivity {
                         dialog.setCancelable(false);
                         dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                         txt_goToLogin = dialog.findViewById(R.id.txt_goToLogin);
+
+                        // This fills the textView with gradient
+                        TextPaint paint = txt_goToLogin.getPaint();
+                        float width = paint.measureText(getString(R.string.back_to_login_underline));
+                        Shader textShader = new LinearGradient(0, 0, width, txt_goToLogin.getTextSize(),
+                                new int[]{
+                                        getResources().getColor(R.color.md_theme_light_shadow),
+                                        getResources().getColor(R.color.seed)
+                                }, null, Shader.TileMode.CLAMP);
+                        txt_goToLogin.getPaint().setShader(textShader);
+
                         txt_goToLogin.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

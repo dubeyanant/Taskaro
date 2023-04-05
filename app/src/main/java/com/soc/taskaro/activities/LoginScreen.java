@@ -5,9 +5,12 @@ import static android.view.View.VISIBLE;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +36,7 @@ import com.soc.taskaro.utils.Extras;
 
 public class LoginScreen extends AppCompatActivity {
 
-    TextView goToForgotTextView;
+    TextView goToForgotTextView, loginTagLine;
     EditText emailEditText, passwordEditText;
     boolean isEmailValid, isPasswordValid;
     LinearLayout goToSignupLL;
@@ -52,6 +55,17 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.loginBtn);
         firebaseAuth = FirebaseAuth.getInstance();
         goToSignupLL = findViewById(R.id.goToSignupLL);
+        loginTagLine = findViewById(R.id.loginTagLine);
+
+        // This fills the textView with gradient
+        TextPaint paint = loginTagLine.getPaint();
+        float width = paint.measureText(getString(R.string.login_screen_tag_line));
+        Shader textShader = new LinearGradient(0, 0, width, loginTagLine.getTextSize(),
+                new int[]{
+                        getResources().getColor(R.color.md_theme_light_shadow),
+                        getResources().getColor(R.color.seed)
+                }, null, Shader.TileMode.CLAMP);
+        loginTagLine.getPaint().setShader(textShader);
 
 //        showPassword.setOnClickListener(new View.OnClickListener() {
 //            @Override
