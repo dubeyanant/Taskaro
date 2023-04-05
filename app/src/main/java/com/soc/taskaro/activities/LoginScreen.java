@@ -1,8 +1,6 @@
 package com.soc.taskaro.activities;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.LinearGradient;
@@ -11,12 +9,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextPaint;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +38,14 @@ public class LoginScreen extends AppCompatActivity {
 
     TextView goToForgotTextView, loginTagLine;
     EditText emailEditText, passwordEditText;
+    boolean passwordVisible;
     boolean isEmailValid, isPasswordValid;
     LinearLayout goToSignupLL;
     ProgressDialog progressDialog;
     Button loginBtn;
     private FirebaseAuth firebaseAuth;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,16 +69,38 @@ public class LoginScreen extends AppCompatActivity {
                 }, null, Shader.TileMode.CLAMP);
         loginTagLine.getPaint().setShader(textShader);
 
-//        showPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (showPassword.isChecked()) {
-//                    txt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                } else {
-//                    txt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                }
-//            }
-//        });
+        // Show or hide password
+        passwordEditText.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                final int Right = 2;
+                if (event.getAction() >= MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= passwordEditText.getRight() - passwordEditText.getCompoundDrawables()[Right].getBounds().width()) {
+                        int selection = passwordEditText.getSelectionEnd();
+
+                        if (passwordVisible) {
+                            // Set drawable image
+                            passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_off_outline, 0);
+                            // To hide password
+                            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible = false;
+                        } else {
+                            // Set drawable image
+                            passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_outline, 0);
+                            // To show password
+                            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible = true;
+                        }
+
+                        passwordEditText.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

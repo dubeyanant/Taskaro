@@ -10,7 +10,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
     LinearLayout goToLoginLL;
     EditText nameEditText, emailEditText, mobileEditText, passwordEditText, confirmPasswordEditText;
+    boolean passwordVisible;
     Button registerButton;
     TextView signUpTagline;
     boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid;
@@ -45,7 +49,6 @@ public class SignUpActivity extends AppCompatActivity {
     int[] face;
     Handler handler = new Handler();
     Random randomNumber = new Random();
-    //    CheckBox showPassword;
     private FirebaseAuth firebaseAuth;
     private Runnable run = new Runnable() {
         @Override
@@ -56,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,6 @@ public class SignUpActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         confirmPasswordEditText = (EditText) findViewById(R.id.confirmPasswordEditText);
         registerButton = (Button) findViewById(R.id.registerButton);
-//        showPassword = (CheckBox) findViewById(R.id.showPassword);
         firebaseAuth = FirebaseAuth.getInstance();
         faceImageView = findViewById(R.id.faceImageView);
         signUpTagline = findViewById(R.id.signUpTagline);
@@ -110,19 +112,71 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        //To display text from the fields of password
-//        showPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (showPassword.isChecked()) {
-//                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                    cpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                } else {
-//                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    cpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                }
-//            }
-//        });
+        // Show or hide password for password
+        passwordEditText.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                final int Right = 2;
+                if (event.getAction() >= MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= passwordEditText.getRight() - passwordEditText.getCompoundDrawables()[Right].getBounds().width()) {
+                        int selection = passwordEditText.getSelectionEnd();
+
+                        if (passwordVisible) {
+                            // Set drawable image
+                            passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_off_outline, 0);
+                            // To hide password
+                            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible = false;
+                        } else {
+                            // Set drawable image
+                            passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_outline, 0);
+                            // To show password
+                            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible = true;
+                        }
+
+                        passwordEditText.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        // Show or hide password for confirm password
+        confirmPasswordEditText.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                final int Right = 2;
+                if (event.getAction() >= MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= confirmPasswordEditText.getRight() - confirmPasswordEditText.getCompoundDrawables()[Right].getBounds().width()) {
+                        int selection = confirmPasswordEditText.getSelectionEnd();
+
+                        if (passwordVisible) {
+                            // Set drawable image
+                            confirmPasswordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_off_outline, 0);
+                            // To hide password
+                            confirmPasswordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible = false;
+                        } else {
+                            // Set drawable image
+                            confirmPasswordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_lock_outline, 0, R.drawable.ic_visibility_outline, 0);
+                            // To show password
+                            confirmPasswordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible = true;
+                        }
+
+                        confirmPasswordEditText.setSelection(selection);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         //Signup Button logic
         registerButton.setOnClickListener(new View.OnClickListener() {
