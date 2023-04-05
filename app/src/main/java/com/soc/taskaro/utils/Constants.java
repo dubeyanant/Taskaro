@@ -14,7 +14,7 @@ public class Constants {
     public static final String Extra_Product_ID = "extra_product_details";
     public static final int READ_STORAGE_PERMISSION_CODE = 2;
     public static final int PICK_IMAGE_REQUEST_CODE = 1;
-    public static final String FIRST_NAME = "firstName";
+    public static final String NAME = "name";
     public static final String LAST_NAME = "lastName";
     public static final String MALE = "male";
     public static final String FEMALE = "female";
@@ -25,7 +25,7 @@ public class Constants {
     public static final String COMPLETE_PROFILE = "profileCompleted";
 
     //Productsx
-    public static final String PRODUCTS = "products";
+    public static final String TASKS = "tasks";
     public static final String PRODUCT_IMAGE = "Product_Image";
     public static final String USER_ID = "user_id";
 

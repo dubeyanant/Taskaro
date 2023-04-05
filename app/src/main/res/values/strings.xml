@@ -84,4 +84,7 @@
     <string name="delete_account">Delete account</string>
     <string name="save_sub_tasks">Save sub-tasks</string>
 
+    <!-- Create Task Activity strings -->
+    <string name="empty_field_error">Empty Field</string>
+
 </resources>

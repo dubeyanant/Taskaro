@@ -40,6 +40,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-firestore:24.1.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -50,6 +52,5 @@ dependencies {
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'me.relex:circleindicator:2.1.6'
-
     implementation 'com.github.Drjacky:ImagePicker:2.3.22'
 }

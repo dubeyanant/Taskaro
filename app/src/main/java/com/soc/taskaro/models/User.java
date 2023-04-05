@@ -13,8 +13,63 @@ public class User implements Parcelable {
     public String gender = "";
     public int profileCompleted = 0;
 
+    public String getId() {
+        return id;
+    }
 
-        public User(String uid, String name, String mail, String mobileNo) {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public long getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(long mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public void setProfileCompleted(int profileCompleted) {
+        this.profileCompleted = profileCompleted;
+    }
+
+    public User(String uid, String name, String mail, String mobileNo) {
         id = uid;
         this.name = name;
         email = mail;

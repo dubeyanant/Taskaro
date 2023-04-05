@@ -222,10 +222,10 @@ public class SignUpActivity extends AppCompatActivity {
                                             Intent signinActivity = new Intent(SignUpActivity.this, LoginScreen.class);
                                             SignUpActivity.this.startActivity(signinActivity);
                                             finish();
-                                            for (int i=0; i < 3; i++)
-                                            {
+                                            //for (int i=0; i < 3; i++)
+                                            //{
                                                 Toast.makeText(getApplicationContext(), "Email Send! Please check your Email Address to get Verified.", Toast.LENGTH_SHORT).show();
-                                            }
+                                            //}
                                         }
                                         else{
                                             Toast.makeText(getApplicationContext(), "Failed! Unable to send Email.", Toast.LENGTH_SHORT).show();
