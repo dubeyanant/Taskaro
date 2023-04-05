@@ -152,7 +152,6 @@ public class FirestoreClass {
         sRef.putFile(mSelectedImageFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                System.out.println("Ola!!!!!!!!!!!!!!!!");
                 ((SettingsFragment) fragment).imageUploadSuccess(mSelectedImageFileUri);
             }
         }).addOnFailureListener(e -> {

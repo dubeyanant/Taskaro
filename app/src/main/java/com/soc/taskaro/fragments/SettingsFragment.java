@@ -216,6 +216,8 @@ public class SettingsFragment extends Fragment {
                     profileImageView.setImageResource(R.drawable.pic_abstract);
                     saveSettingBtn.setEnabled(true);
                     deleteProfilePhotoBtn.setVisibility(View.GONE);
+                    userProfileImageURL ="";
+                    uri = null;
                 }
             }
         });
