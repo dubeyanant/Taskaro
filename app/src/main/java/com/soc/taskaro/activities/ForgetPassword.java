@@ -110,6 +110,7 @@ public class ForgetPassword extends AppCompatActivity {
                             public void onClick(View view) {
                                 Intent i = new Intent(ForgetPassword.this, LoginScreen.class);
                                 startActivity(i);
+                                dialog.dismiss();
                                 finish();
                             }
                         });
