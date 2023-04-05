@@ -48,8 +48,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
-        dateTextView = findViewById(R.id.dateTextView);
-        timeTextView = findViewById(R.id.dateTextView);
+        dateTextView = findViewById(R.id.time);
+        timeTextView = findViewById(R.id.date);
         days = new TextView[]{
                 findViewById(R.id.sun),
                 findViewById(R.id.mon),
