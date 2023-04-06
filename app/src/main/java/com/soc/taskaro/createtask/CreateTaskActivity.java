@@ -1,5 +1,6 @@
 package com.soc.taskaro.createtask;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -22,24 +23,31 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.soc.taskaro.R;
+import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.utils.Extras;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
-    final int[] dayClickCount = {0, 0, 0, 0, 0, 0, 0};
+    Boolean[] dayClickCountArray = {false, false, false, false, false, false, false};
     TextView dateTextView, timeTextView;
     TextView[] days;
     LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
-    Button btn_saveCreateTask, saveSubTaskButton;
-    EditText titleEditText;
+    public Button btn_saveCreateTask, saveSubTaskButton;
+    EditText titleEditText, descriptionEditText;
     ImageButton closeNotification;
-    boolean notificationEnabled = false;
+    boolean isNotificationEnabled = false;
+
+    boolean isTitleValid;
+    ProgressDialog progressDialog;
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
+
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
     ViewGroup.MarginLayoutParams addTaskButtonLLParams; // Helps in changing margin of the particular layout viewGroup
 
@@ -63,6 +71,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         subTaskLL = findViewById(R.id.subTaskLL);
         btn_saveCreateTask = findViewById(R.id.saveCreateTaskButton);
         titleEditText = findViewById(R.id.titleEditText);
+        descriptionEditText = findViewById(R.id.descriptionEditText);
         addNotificationButtonLL = findViewById(R.id.addNotificationButtonLL);
         notificationLL = findViewById(R.id.notificationLL);
         closeNotification = findViewById(R.id.closeNotification);
@@ -70,6 +79,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         urgentSwitch = findViewById(R.id.urgentSwitch);
         saveSubTaskButton = findViewById(R.id.saveSubTaskButton);
         addTaskButtonLLParams = (ViewGroup.MarginLayoutParams) addTaskButtonLL.getLayoutParams();
+
 
         // Date Picker
         dateTextView.setText(MessageFormat.format("{0}", new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date())));
@@ -120,12 +130,12 @@ public class CreateTaskActivity extends AppCompatActivity {
             days[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (dayClickCount[index] == 0) {
+                    if (dayClickCountArray[index] == false) {
                         days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle_dark));
-                        dayClickCount[index] = 1;
+                        dayClickCountArray[index] = true;
                     } else {
                         days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle));
-                        dayClickCount[index] = 0;
+                        dayClickCountArray[index] = false;
                     }
                 }
             });
@@ -192,12 +202,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         btn_saveCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (titleEditText.getText().toString().equals("")) {
-                    Toast.makeText(CreateTaskActivity.this, "Please enter title!", Toast.LENGTH_SHORT).show();
-                } else {
-                    onBackPressed();
-                    finish();
-                }
+                progressDialog = new Extras().showProgressBar(CreateTaskActivity.this);
+                setValidation();
             }
         });
 
@@ -207,7 +213,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.GONE);
                 notificationLL.setVisibility(View.VISIBLE);
-                notificationEnabled = true;
+                isNotificationEnabled = true;
             }
         });
 
@@ -217,20 +223,11 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.VISIBLE);
                 notificationLL.setVisibility(View.GONE);
-                notificationEnabled = false;
+                isNotificationEnabled = false;
             }
         });
-
-        // Switch
-        importantSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Un-checked important", Toast.LENGTH_SHORT).show();
-        });
-        urgentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
-        });
     }
+
 
     /**
      * @param pixels takes size in pixels
@@ -268,5 +265,31 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         return result;
+    }
+
+    private void setValidation() {
+        if(titleEditText.getText().toString().trim().isEmpty()){
+            progressDialog.dismiss();
+            titleEditText.setError(getResources().getString(R.string.empty_field_error));
+        }else{
+            isTitleValid = true;
+        }
+
+        if (isTitleValid){
+            if(isNotificationEnabled == false){
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled);
+            }
+            else{
+
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
+            }
+        }
+    }
+
+    public void uploadDataSuccess() {
+        progressDialog.dismiss();
+        Toast.makeText(this, "Data uploaded successfully...", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        finish();
     }
 }

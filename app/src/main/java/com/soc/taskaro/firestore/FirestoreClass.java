@@ -27,12 +27,21 @@ import com.google.firebase.storage.UploadTask;
 import com.soc.taskaro.MainActivity;
 import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
+import com.soc.taskaro.createtask.CreateTaskActivity;
+import com.soc.taskaro.createtask.SubTask;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.CreateTask;
 import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.models.User;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FirestoreClass {
     FirebaseFirestore dbroot = FirebaseFirestore.getInstance();
@@ -104,10 +113,11 @@ public class FirestoreClass {
             }
         });
 
-    /*public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String txt_title, String txt_description) {
+    }
+    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
-        CreateTask task = new CreateTask(getCurrentUserID(), txt_title, txt_description, documentReference.getId());
+        CreateTask task = new CreateTask(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -117,9 +127,24 @@ public class FirestoreClass {
             Toast.makeText(createTaskActivity, "Error! Unable to add product.", Toast.LENGTH_SHORT).show();
             createTaskActivity.btn_saveCreateTask.setEnabled(true);
         });
-    }*/
     }
 
+    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected, String time, String date, Boolean[] daysArray) {
+        DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
+
+        ArrayList<Boolean> daysArrayList = new ArrayList<Boolean>();
+        Collections.addAll(daysArrayList, daysArray);
+        CreateTask task = new CreateTask(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, date, time, daysArrayList);
+        documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                createTaskActivity.uploadDataSuccess();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(createTaskActivity, "Error! Unable to add product.", Toast.LENGTH_SHORT).show();
+            createTaskActivity.btn_saveCreateTask.setEnabled(true);
+        });
+    }
     public void updateUserDetails(HashMap<String, Object> userHashMap, Fragment fragment) {
 
         DocumentReference documentReference = dbroot.collection(Constants.USERS).document(getCurrentUserID());
@@ -158,4 +183,6 @@ public class FirestoreClass {
             Toast.makeText(fragment.getContext(), "Error! Unable to add product.", Toast.LENGTH_LONG).show();
         });
     }
+
+
 }
