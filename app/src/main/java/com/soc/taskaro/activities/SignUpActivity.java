@@ -106,7 +106,6 @@ public class SignUpActivity extends AppCompatActivity {
         goToLoginLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.removeCallbacksAndMessages(null);
                 finish();
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -307,5 +306,11 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacksAndMessages(null);
     }
 }
