@@ -4,8 +4,8 @@ public class Notes {
 
     String heading, description;
 
-    public Notes(String heading , String description) {
+    public Notes(String heading, String description) {
         this.heading = heading;
-        this.description= description;
+        this.description = description;
     }
 }

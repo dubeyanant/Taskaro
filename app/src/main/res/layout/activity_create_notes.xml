@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateNotesActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".CreateNotesActivity">
 
     <TextView
         android:layout_width="249dp"
@@ -27,13 +27,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/notes_screen_edit1"
                 android:layout_width="316dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginTop="27dp"
+                android:layout_marginEnd="24dp"
                 android:hint="Add Task"
                 android:textSize="23dp" />
 
@@ -50,15 +51,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/md_theme_dark_outline"
                 android:text="DONE"
                 android:textColor="@color/md_theme_light_shadow"
-                android:textSize="20sp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                />
+                android:textSize="20sp" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
