@@ -177,7 +177,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (checkIfValidAndRead()) {
-                    Intent intent = new Intent(CreateTaskActivity.this, SubTaskActivity.class);
+                    Intent intent = new Intent(CreateTaskActivity.this, ExpandedTaskActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("list", subTaskArrayList);
                     intent.putExtras(bundle);

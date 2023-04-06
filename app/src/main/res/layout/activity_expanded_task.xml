@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/screen_margin_horizontal"
     android:paddingBottom="30dp"
-    tools:context=".createtask.SubTaskActivity">
+    tools:context=".createtask.ExpandedTaskActivity">
 
     <TextView
         android:layout_width="wrap_content"

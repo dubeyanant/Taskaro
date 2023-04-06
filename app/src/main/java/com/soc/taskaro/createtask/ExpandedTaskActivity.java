@@ -11,7 +11,7 @@ import com.soc.taskaro.R;
 
 import java.util.ArrayList;
 
-public class SubTaskActivity extends AppCompatActivity {
+public class ExpandedTaskActivity extends AppCompatActivity {
 
     RecyclerView recyclerSubTask;
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
@@ -20,7 +20,7 @@ public class SubTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_task);
+        setContentView(R.layout.activity_expanded_task);
 
         recyclerSubTask = findViewById(R.id.recycler_subtask);
         taskTitleTextView = findViewById(R.id.taskTitleTextView);
