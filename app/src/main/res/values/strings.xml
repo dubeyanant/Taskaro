@@ -90,5 +90,6 @@
     <!-- Create Task Activity strings -->
     <string name="empty_field_error">Empty Field</string>
     <string name="check_your_email">Check Your Email!</string>
+    <string name="task_symbols">🌊🎯🚀</string>
 
 </resources>

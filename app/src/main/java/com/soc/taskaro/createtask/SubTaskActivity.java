@@ -1,6 +1,7 @@
 package com.soc.taskaro.createtask;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ public class SubTaskActivity extends AppCompatActivity {
 
     RecyclerView recyclerSubTask;
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
+    TextView taskTitleTextView, taskDescriptionTextView, taskNotificationTextView, taskNotificationDescriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,10 @@ public class SubTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub_task);
 
         recyclerSubTask = findViewById(R.id.recycler_subtask);
+        taskTitleTextView = findViewById(R.id.taskTitleTextView);
+        taskDescriptionTextView = findViewById(R.id.taskDescriptionTextView);
+        taskNotificationTextView = findViewById(R.id.taskNotificationTextView);
+        taskNotificationDescriptionTextView = findViewById(R.id.taskNotificationDescriptionTextView);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerSubTask.setLayoutManager(layoutManager);
