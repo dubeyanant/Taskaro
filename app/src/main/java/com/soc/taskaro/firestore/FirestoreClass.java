@@ -27,6 +27,7 @@ import com.google.firebase.storage.UploadTask;
 import com.soc.taskaro.MainActivity;
 import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
+import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.CreateTask;
 import com.soc.taskaro.utils.Constants;
@@ -104,10 +105,11 @@ public class FirestoreClass {
             }
         });
 
-    /*public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String txt_title, String txt_description) {
+    }
+    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
-        CreateTask task = new CreateTask(getCurrentUserID(), txt_title, txt_description, documentReference.getId());
+        CreateTask task = new CreateTask(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -117,9 +119,7 @@ public class FirestoreClass {
             Toast.makeText(createTaskActivity, "Error! Unable to add product.", Toast.LENGTH_SHORT).show();
             createTaskActivity.btn_saveCreateTask.setEnabled(true);
         });
-    }*/
     }
-
     public void updateUserDetails(HashMap<String, Object> userHashMap, Fragment fragment) {
 
         DocumentReference documentReference = dbroot.collection(Constants.USERS).document(getCurrentUserID());
