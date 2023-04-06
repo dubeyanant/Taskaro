@@ -24,26 +24,25 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
-import com.soc.taskaro.models.CreateTask;
-import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.utils.Extras;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
-    final int[] dayClickCount = {0, 0, 0, 0, 0, 0, 0};
+    Boolean[] dayClickCountArray = {false, false, false, false, false, false, false};
     TextView dateTextView, timeTextView;
     TextView[] days;
     LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
     public Button btn_saveCreateTask, saveSubTaskButton;
     EditText titleEditText, descriptionEditText;
     ImageButton closeNotification;
-    boolean notificationEnabled = false;
+    boolean isNotificationEnabled = false;
 
     boolean isTitleValid;
     ProgressDialog progressDialog;
@@ -131,12 +130,12 @@ public class CreateTaskActivity extends AppCompatActivity {
             days[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (dayClickCount[index] == 0) {
+                    if (dayClickCountArray[index] == false) {
                         days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle_dark));
-                        dayClickCount[index] = 1;
+                        dayClickCountArray[index] = true;
                     } else {
                         days[index].setBackground(getResources().getDrawable(R.drawable.style_create_task_circle));
-                        dayClickCount[index] = 0;
+                        dayClickCountArray[index] = false;
                     }
                 }
             });
@@ -214,7 +213,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.GONE);
                 notificationLL.setVisibility(View.VISIBLE);
-                notificationEnabled = true;
+                isNotificationEnabled = true;
             }
         });
 
@@ -224,18 +223,8 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addNotificationButtonLL.setVisibility(View.VISIBLE);
                 notificationLL.setVisibility(View.GONE);
-                notificationEnabled = false;
+                isNotificationEnabled = false;
             }
-        });
-
-        // Switch
-        importantSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) Toast.makeText(this, "Checked important", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Un-checked important", Toast.LENGTH_SHORT).show();
-        });
-        urgentSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) Toast.makeText(this, "Checked urgent", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Un-checked urgent", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -287,7 +276,13 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         if (isTitleValid){
-            new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked());
+            if(isNotificationEnabled == false){
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled);
+            }
+            else{
+
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
+            }
         }
     }
 
