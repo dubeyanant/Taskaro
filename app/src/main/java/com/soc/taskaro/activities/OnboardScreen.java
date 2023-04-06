@@ -106,10 +106,7 @@ public class OnboardScreen extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    /**
-     * @param pixels takes size in pixels
-     * @return size in DP
-     */
+
     private int inDP(int pixels) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pixels, getResources().getDisplayMetrics());
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,20 +18,37 @@
         android:textSize="36sp"
         android:textStyle="bold" />
 
-    <com.google.android.material.search.SearchBar
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/SearchbarCardView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="24dp"
-        android:hint="Search"
-        />
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/md_theme_dark_onSurfaceVariant"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/notesSearchBar"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            app:iconifiedByDefault="false" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginStart="24dp"
+        android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_height="wrap_content"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/notes_list" />
 
 
 </LinearLayout>

@@ -1,14 +1,18 @@
 package com.soc.taskaro.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.soc.taskaro.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +29,10 @@ public class NotesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<Notes> notesArrayList;
+    private String[] notesDescription;
+    private String[] notesHeading;
+    private RecyclerView recyclerView;
 
     public NotesFragment() {
         // Required empty public constructor
@@ -62,5 +70,54 @@ public class NotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notes, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        dataInitialize();
+        recyclerView = view.findViewById(R.id.notesRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        NotesFragmentAdapter notesFragmentAdapter = new NotesFragmentAdapter(getContext(), notesArrayList);
+        recyclerView.setAdapter(notesFragmentAdapter);
+        notesFragmentAdapter.notifyDataSetChanged();
+    }
+
+    private void dataInitialize() {
+        notesArrayList = new ArrayList<>();
+        notesHeading = new String[]{
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it),
+                getString(R.string.delete_it),
+                getString(R.string.delegate_it),
+                getString(R.string.do_it)};
+
+        notesDescription = new String[]{
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+                getString(R.string.delete_it_description),
+                getString(R.string.delegate_it_description),
+                getString(R.string.do_it_description),
+        };
+        for (int i = 0; i < notesHeading.length; i++) {
+            Notes notes = new Notes(notesHeading[i], notesDescription[i]);
+            notesArrayList.add(notes);
+        }
     }
 }
