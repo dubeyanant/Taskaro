@@ -23,6 +23,11 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         this.notesArrayList = notesArrayList;
     }
 
+    public void setFilteredList(ArrayList<Notes> filteredList) {
+        this.notesArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
