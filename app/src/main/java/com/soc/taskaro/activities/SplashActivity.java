@@ -15,7 +15,7 @@ import com.soc.taskaro.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final long SPLASH_SCREEN_TIME_OUT = 0;
+    private static final long SPLASH_SCREEN_TIME_OUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

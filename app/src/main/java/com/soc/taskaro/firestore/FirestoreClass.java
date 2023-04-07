@@ -3,10 +3,9 @@ package com.soc.taskaro.firestore;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,24 +23,20 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.soc.taskaro.MainActivity;
+import com.soc.taskaro.CreateNotesActivity;
 import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
 import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
 import com.soc.taskaro.fragments.SettingsFragment;
-import com.soc.taskaro.models.CreateTask;
+import com.soc.taskaro.models.Note;
+import com.soc.taskaro.models.Task;
 import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.models.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class FirestoreClass {
     FirebaseFirestore dbroot = FirebaseFirestore.getInstance();
@@ -117,14 +112,14 @@ public class FirestoreClass {
     public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
-        CreateTask task = new CreateTask(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask);
+        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 createTaskActivity.uploadDataSuccess();
             }
         }).addOnFailureListener(e -> {
-            Toast.makeText(createTaskActivity, "Error! Unable to add product.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(createTaskActivity, "Error! Unable to add task.", Toast.LENGTH_SHORT).show();
             createTaskActivity.btn_saveCreateTask.setEnabled(true);
         });
     }
@@ -134,7 +129,7 @@ public class FirestoreClass {
 
         ArrayList<Boolean> daysArrayList = new ArrayList<Boolean>();
         Collections.addAll(daysArrayList, daysArray);
-        CreateTask task = new CreateTask(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, date, time, daysArrayList);
+        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, date, time, daysArrayList);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -185,4 +180,18 @@ public class FirestoreClass {
     }
 
 
+    public void uploadNotesDetails(CreateNotesActivity createNotesActivity, String title, String description) {
+        DocumentReference documentReference = dbroot.collection(Constants.Notes).document();
+
+        Note note = new Note(getCurrentUserID(), documentReference.getId(), title, description);
+        documentReference.set(note, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                createNotesActivity.uploadDataSuccess();
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(createNotesActivity, "Error! Unable to add notes.", Toast.LENGTH_SHORT).show();
+            createNotesActivity.doneSaveNotesTextView.setEnabled(true);
+        });
+    }
 }
