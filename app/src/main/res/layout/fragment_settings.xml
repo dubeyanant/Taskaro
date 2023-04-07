@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                android:textSize="26sp" />
+                android:textSize="22sp" />
 
             <View
                 android:layout_width="0dp"
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,31 +169,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mobile"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
-        <TextView
+        <Button
             android:id="@+id/logoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
-            android:background="@drawable/style_bg_black"
-            android:gravity="center"
-            android:paddingVertical="15dp"
+            android:layout_marginTop="72dp"
+            android:backgroundTint="@color/md_theme_light_shadow"
+            android:fontFamily="@font/inter_medium"
+            android:paddingVertical="12dp"
             android:text="@string/logout"
-            android:textColor="@color/md_theme_light_onPrimary"
+            android:gravity="center"
             android:textSize="24sp" />
 
-        <TextView
+        <Button
             android:id="@+id/deleteAccountBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/style_bg_red"
             android:gravity="center"
-            android:paddingVertical="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:backgroundTint="@color/md_theme_light_error"
+            android:fontFamily="@font/inter_medium"
+            android:paddingVertical="12dp"
             android:text="@string/delete_account"
-            android:textAllCaps="true"
-            android:textColor="@color/md_theme_light_onPrimary"
             android:textSize="24sp" />
     </LinearLayout>
 </ScrollView>

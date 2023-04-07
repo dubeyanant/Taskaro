@@ -34,7 +34,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.soc.taskaro.R;
 import com.soc.taskaro.activities.LoginScreen;
-import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 import com.soc.taskaro.utils.Constants;
@@ -50,22 +49,18 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
 public class SettingsFragment extends Fragment {
+    public ProgressDialog progressDialog;
     ImageButton nameTextViewEditBtn, nameTextViewDoneBtn, editProfilePhotoBtn, deleteProfilePhotoBtn;
     LinearLayout nameTextViewLL, nameEditTextLL;
-    TextView logoutBtn, deleteAccountBtn, nameTextView, emailTextView, mobileTextView;
+    TextView nameTextView, emailTextView, mobileTextView;
     ImageView profileImageView;
     ActivityResultLauncher<Intent> launcher;
-    Button saveSettingBtn;
-    public ProgressDialog progressDialog;
-
-    private Uri uri = null;
-
+    Button saveSettingBtn, logoutBtn, deleteAccountBtn;
     AlertDialog.Builder builder;
-
     Boolean isNameValid = false;
-
-    private String userProfileImageURL = "";
     EditText nameEditText;
+    private Uri uri = null;
+    private String userProfileImageURL = "";
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -214,7 +209,7 @@ public class SettingsFragment extends Fragment {
                     profileImageView.setImageResource(R.drawable.pic_abstract);
                     saveSettingBtn.setEnabled(true);
                     deleteProfilePhotoBtn.setVisibility(View.GONE);
-                    userProfileImageURL ="";
+                    userProfileImageURL = "";
                     uri = null;
                 }
             }
