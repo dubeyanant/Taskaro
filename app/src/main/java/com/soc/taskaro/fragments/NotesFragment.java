@@ -81,15 +81,15 @@ public class NotesFragment extends Fragment {
     private void dataInitialize() {
         notesArrayList = new ArrayList<>();
         notesHeading = new String[]{
-                getString(R.string.delete_it),
-                getString(R.string.delegate_it),
+                "Hello World",
+                "Anant Dubey",
                 getString(R.string.do_it),
                 getString(R.string.delete_it)
         };
 
         notesDescription = new String[]{
-                getString(R.string.delete_it_description),
-                getString(R.string.delegate_it_description),
+                "",
+                "Hello",
                 getString(R.string.do_it_description),
                 getString(R.string.delete_it_description)
         };

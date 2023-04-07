@@ -39,7 +39,11 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
     public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
         Notes notes = notesArrayList.get(position);
         holder.notesHeading.setText(notes.heading);
-        holder.notesDescription.setText(notes.description);
+        if (notes.description.equals("")) {
+            holder.notesDescription.setVisibility(View.GONE);
+        } else {
+            holder.notesDescription.setText(notes.description);
+        }
     }
 
     @Override
