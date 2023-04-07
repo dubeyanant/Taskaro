@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,18 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         } else {
             holder.notesDescription.setText(notes.description);
         }
+
+
+        // Removes views if clicked on delete button
+        int temp = holder.getAdapterPosition();
+        holder.deleteNoteImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notesArrayList.remove(temp);
+                notifyItemRemoved(temp);
+                notifyItemRangeChanged(temp, notesArrayList.size());
+            }
+        });
     }
 
     @Override
@@ -54,11 +67,13 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
     public static class NotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView notesHeading, notesDescription;
+        ImageButton deleteNoteImageButton;
 
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
             notesHeading = itemView.findViewById(R.id.notes_list_text1);
             notesDescription = itemView.findViewById(R.id.notes_list_text2);
+            deleteNoteImageButton = itemView.findViewById(R.id.deleteNoteImageButton);
         }
     }
 }
