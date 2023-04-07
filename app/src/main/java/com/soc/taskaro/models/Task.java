@@ -3,20 +3,16 @@ package com.soc.taskaro.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 import com.soc.taskaro.createtask.SubTask;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-public class CreateTask implements Parcelable {
+public class Task implements Parcelable {
     public String user_id = "";
     public String title = "";
 
     public String description = "";
-    public String product_id = "";
+    public String task_id = "";
 
     public boolean isImportant, isUrgent, isNotificationSelected;
 
@@ -26,11 +22,11 @@ public class CreateTask implements Parcelable {
 
    public ArrayList<Boolean> daysArrayList;
 
-    public CreateTask(String user_id, String title, String description, String product_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, String date, String time, ArrayList<Boolean> daysArrayList) {
+    public Task(String user_id, String title, String description, String task_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, String date, String time, ArrayList<Boolean> daysArrayList) {
         this.user_id = user_id;
         this.title = title;
         this.description = description;
-        this.product_id = product_id;
+        this.task_id = task_id;
         this.isImportant = isImportant;
         this.isUrgent = isUrgent;
         this.isNotificationSelected = isNotificationSelected;
@@ -40,25 +36,25 @@ public class CreateTask implements Parcelable {
         this.daysArrayList = daysArrayList;
     }
 
-    public CreateTask(String user_id, String title, String description, String product_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks) {
+    public Task(String user_id, String title, String description, String product_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks) {
         this.user_id = user_id;
         this.title = title;
         this.description = description;
-        this.product_id = product_id;
+        this.task_id = product_id;
         this.isImportant = isImportant;
         this.isUrgent = isUrgent;
         this.isNotificationSelected = isNotificationSelected;
         this.subTasks = subTasks;
     }
 
-    public CreateTask() {
+    public Task() {
     }
 
-    protected CreateTask(Parcel in) {
+    protected Task(Parcel in) {
         user_id = in.readString();
         title = in.readString();
         description = in.readString();
-        product_id = in.readString();
+        task_id = in.readString();
         isImportant = in.readByte() != 0;
         isUrgent = in.readByte() != 0;
         isNotificationSelected = in.readByte() != 0;
@@ -71,7 +67,7 @@ public class CreateTask implements Parcelable {
         dest.writeString(user_id);
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeString(product_id);
+        dest.writeString(task_id);
         dest.writeByte((byte) (isImportant ? 1 : 0));
         dest.writeByte((byte) (isUrgent ? 1 : 0));
         dest.writeByte((byte) (isNotificationSelected ? 1 : 0));
@@ -84,15 +80,15 @@ public class CreateTask implements Parcelable {
         return 0;
     }
 
-    public static final Creator<CreateTask> CREATOR = new Creator<CreateTask>() {
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
         @Override
-        public CreateTask createFromParcel(Parcel in) {
-            return new CreateTask(in);
+        public Task createFromParcel(Parcel in) {
+            return new Task(in);
         }
 
         @Override
-        public CreateTask[] newArray(int size) {
-            return new CreateTask[size];
+        public Task[] newArray(int size) {
+            return new Task[size];
         }
     };
 }

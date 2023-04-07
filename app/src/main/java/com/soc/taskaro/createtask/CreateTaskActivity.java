@@ -203,6 +203,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressDialog = new Extras().showProgressBar(CreateTaskActivity.this);
+                checkIfValidAndRead();
                 setValidation();
             }
         });

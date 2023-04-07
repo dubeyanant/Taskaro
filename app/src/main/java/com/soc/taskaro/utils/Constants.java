@@ -28,6 +28,7 @@ public class Constants {
 
     //Productsx
     public static final String TASKS = "tasks";
+    public static final String Notes = "notes";
     public static final String PRODUCT_IMAGE = "Product_Image";
     public static final String USER_ID = "user_id";
 
