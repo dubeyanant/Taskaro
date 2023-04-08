@@ -87,7 +87,21 @@ public class SignUpActivity extends AppCompatActivity {
                 R.drawable.vct_face_9,
                 R.drawable.vct_face_10,
                 R.drawable.vct_face_11,
-                R.drawable.vct_face_12
+                R.drawable.vct_face_12,
+                R.drawable.vct_face_13,
+                R.drawable.vct_face_14,
+                R.drawable.vct_face_15,
+                R.drawable.vct_face_16,
+                R.drawable.vct_face_17,
+                R.drawable.vct_face_18,
+                R.drawable.vct_face_19,
+                R.drawable.vct_face_20,
+                R.drawable.vct_face_21,
+                R.drawable.vct_face_22,
+                R.drawable.vct_face_23,
+                R.drawable.vct_face_24,
+                R.drawable.vct_face_25,
+                R.drawable.vct_face_26
         };
 
         // This methods change the face in the activity
