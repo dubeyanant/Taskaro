@@ -16,6 +16,7 @@ import com.soc.taskaro.R;
 
 import java.util.ArrayList;
 
+
 public class NotesFragment extends Fragment {
     SearchView searchView;
     NotesFragmentAdapter notesFragmentAdapter;
@@ -65,14 +66,18 @@ public class NotesFragment extends Fragment {
 
     private void filterList(String text) {
         ArrayList<Notes> filteredList = new ArrayList<>();
+
         for (Notes notes : notesArrayList) {
             if (notes.heading.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(notes);
             }
         }
 
+
+
         if (filteredList.isEmpty()) {
-            Toast.makeText(getContext(), "No notes found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No notes found outer", Toast.LENGTH_SHORT).show();
+
         } else {
             notesFragmentAdapter.setFilteredList(filteredList);
         }

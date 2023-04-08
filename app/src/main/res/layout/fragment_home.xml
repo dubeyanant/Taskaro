@@ -48,116 +48,33 @@
                     android:textSize="22dp"
                     android:textStyle="bold"></TextView>
 
-                <androidx.cardview.widget.CardView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Home_RecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#ADFF98"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/din1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:outlineAmbientShadowColor="@android:color/white"></CheckBox>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/dinTitle1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/inter"
-                                android:text="Burning Kitchen."
-                                android:textColor="@android:color/black"
-                                android:textSize="18dp"
-                                android:textStyle="bold"></TextView>
-
-                            <TextView
-                                android:id="@+id/dinDes1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:text="Extinguish the fire which is\nburning in the kitchen from the \nlast four hours."
-                                android:textSize="14sp"></TextView>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-                <!-- 2nd green card-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#ADFF98"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/din2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:outlineAmbientShadowColor="@android:color/white"></CheckBox>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/dinTitle2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/inter"
-                                android:text="Some Calls."
-                                android:textColor="@android:color/black"
-                                android:textSize="18dp"
-                                android:textStyle="bold"></TextView>
-
-                            <TextView
-                                android:id="@+id/dinDes2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:text="Return some calls from \nworkplace and call mother."
-                                android:textSize="14sp"></TextView>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_margin="15dp"
+                    tools:listitem="@layout/home_tasks"/>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <!-- Schedule it code -->
