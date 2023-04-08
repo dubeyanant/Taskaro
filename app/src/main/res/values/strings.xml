@@ -2,26 +2,29 @@
 
     <string name="app_name">Taskaro</string>
     <string name="welcome">Welcome</string>
-    <string name="welcomeScreenTagLine">What is Task Prioritization?</string>
-    <string name="welcomeScreenDescription">Taskaro helps you organize and prioritize tasks by <b>urgency</b> and <b>importance</b>.</string>
+    <string name="welcomeScreenTagLine">Taskaro - Your Time Management Tool</string>
+    <string name="welcomeScreenDescription">Discover how to manage your time effectively and increase productivity with this powerful app. Prioritize, schedule, delegate, and streamline your workload by eliminating unnecessary distractions. Take control of your time and achieve your goals!</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
 
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="prev">Prev</string>
 
-    <string name="do_it">DO IT!</string>
-    <string name="schedule_it">SCHEDULE IT!</string>
-    <string name="delegate_it">DELEGATE IT!</string>
-    <string name="delete_it">DELETE IT!</string>
-    <string name="do_it_description">These are Urgent and Important. You should do them without any further delay.</string>
-    <string name="schedule_it_description">These are Non-Urgent and Important. You should schedule them for future completion.</string>
-    <string name="delegate_it_description">These are Urgent but Non-Important. You should delegate them to someone else.</string>
-    <string name="delete_it_description">These are Non-Urgent and Non-Important. You should delete them.\n</string>
+    <string name="do_it">Do First - Prioritize Urgent Tasks</string>
+    <string name="schedule_it">Schedule - Plan Important Tasks</string>
+    <string name="delegate_it">Delegate - Share Urgent Tasks</string>
+    <string name="delete_it">Delete - Eliminate Unnecessary Tasks</string>
+    <string name="do_it_description">Get things done quickly and efficiently by identifying and prioritizing urgent tasks that require your immediate attention with the "Do First" section of this app.</string>
+    <string name="schedule_it_description">Plan ahead and allocate your time wisely by scheduling important tasks for a later time or date with the "Schedule" section of this app.</string>
+    <string name="delegate_it_description">Maximize your productivity by delegating urgent tasks to others who are better equipped to handle them with the "Delegate" section of this app.</string>
+    <string name="delete_it_description">Streamline your workload and focus on what really matters by identifying and eliminating unnecessary tasks and distractions with the "Don't Do" section of this app.</string>
+    <string name="under_construction">This is Under Construction!</string>
+    <string name="explore">Till then <b>explore</b>.</string>
 
     <string name="forgot_password">Forgot password?</string>
-    <string name="forgot_password_reset_instructions">Enter your registered email below to\nreceive password reset instruction.</string>
-    <string name="login_screen_tag_line">Already \nhave an\naccount?</string>
+    <string name="forgot_password_reset_instructions">Enter your registered email to receive\npassword reset link</string>
+    <string name="forgot_password_done_instructions">We have sent you an email\nwith the reset link</string>
+    <string name="login_screen_tag_line">Already Have an Account?</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>
@@ -29,10 +32,13 @@
     <string name="c_password">Confirm Password</string>
     <string name="forget_password">Forget Password?</string>
     <string name="login">Login</string>
+    <string name="lets_login">Let\'s Login</string>
     <string name="send">Send</string>
     <string name="signup">Register</string>
-    <string name="register_now">New user? Register Now</string>
+    <string name="register_tagline">Let\'s Sign You UP!</string>
+    <string name="register_now">New User? Register Now</string>
     <string name="back_to_login">Back to Login</string>
+    <string name="back_to_login_underline"><u>Back to Login</u></string>
 
     <string name="home">Home</string>
     <string name="analytics">Analytics</string>
@@ -45,6 +51,8 @@
     <string name="hello_blank_home_fragment">Home blank fragment</string>
     <string name="hello_blank_notes_fragment">Notes blank fragment</string>
     <string name="hello_blank_analytics_fragment">Analytics blank fragment</string>
+    <string name="hello_blank_settings_fragment">Settings blank fragment</string>
+
     <string name="title">Title</string>
     <string name="description">Description...</string>
     <string name="add_sub_task">Add sub-task</string>
@@ -69,9 +77,24 @@
     <string name="error_invalid_phone">Invalid Phone no.</string>
     <string name="error_Empty_Password">Empty Field</string>
     <string name="error_LowerCase_Password">Must Contain LowerCase Letters[a-z]</string>
-    <string name="error_digitCase_Password">Must Contain digits[0-9]</string>
+    <string name="error_digitCase_Password">Must Contain digits[0–9]</string>
     <string name="length_error">Password must contain atleast 8 characters</string>
     <string name="error_Empty_CPassword">Empty Field</string>
     <string name="error_Cpassword_Match">Password and Confirm Password Doesn\'t Match</string>
+    <string name="save">Save</string>
+    <string name="add_notification">Notification</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete account</string>
+    <string name="save_sub_tasks">Save sub-tasks</string>
+
+    <!-- Create Task Activity strings -->
+    <string name="empty_field_error">Empty Field</string>
+    <string name="check_your_email">Check Your Email!</string>
+    <string name="task_symbols">🌊🎯🚀</string>
+    <string name="start_writing">Start writing...</string>
+    <string name="write_notes_title">Your amazing title!</string>
+    <string name="write_notes_description">Amazing title needs amazing description!</string>
+    <string name="done">Done</string>
+    <string name="profile">Profile</string>
 
 </resources>

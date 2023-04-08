@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/screen_margin_horizontal"
+    tools:context=".CreateNotesActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/start_writing"
+        android:textSize="36sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="40dp"
+        android:backgroundTint="@color/md_theme_light_primaryContainer"
+        app:cardCornerRadius="17dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_margin_horizontal">
+
+            <EditText
+                android:id="@+id/writeNotesTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:background="@null"
+                android:fontFamily="@font/inter_medium"
+                android:hint="@string/write_notes_title"
+                android:inputType="textCapSentences|textMultiLine"
+                android:isScrollContainer="true"
+                android:maxLength="400"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginTop="22dp"
+                android:background="@color/md_theme_light_shadow" />
+
+            <EditText
+                android:id="@+id/writeNotesDescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="18dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/inter"
+                android:gravity="top"
+                android:hint="@string/write_notes_description"
+                android:inputType="textCapSentences|textMultiLine"
+                android:isScrollContainer="true"
+                android:singleLine="false"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/doneSaveNotesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/style_create_task_dark"
+                android:fontFamily="@font/inter_semibold"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="10dp"
+                android:text="@string/done"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

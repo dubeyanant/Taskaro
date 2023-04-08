@@ -4,10 +4,14 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,23 +28,37 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.soc.taskaro.R;
+import com.soc.taskaro.utils.Extras;
 
 public class ForgetPassword extends AppCompatActivity {
 
-    Button btn_back, btn_send;
-    ProgressBar progressBar;
+    Button btn_send;
+    TextView goToLoginTextView, forgotPasswordTagline;
+    ProgressDialog progressDialog;
     EditText txt_email;
     boolean isEmailValid;
     private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        btn_send = (Button) findViewById(R.id.btn_send);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        txt_email = (EditText) findViewById(R.id.txt_email);
+        btn_send = findViewById(R.id.btn_send);
+        goToLoginTextView = findViewById(R.id.goToLoginTextView);
+        txt_email = findViewById(R.id.txt_email);
         firebaseAuth = FirebaseAuth.getInstance();
+        forgotPasswordTagline = findViewById(R.id.forgotPasswordTagline);
+
+        // This fills the textView with gradient
+        TextPaint paint = forgotPasswordTagline.getPaint();
+        float width = paint.measureText(getString(R.string.forget_password));
+        Shader textShader = new LinearGradient(0, 0, width, forgotPasswordTagline.getTextSize(),
+                new int[]{
+                        getResources().getColor(R.color.md_theme_light_shadow),
+                        getResources().getColor(R.color.seed)
+                }, null, Shader.TileMode.CLAMP);
+        forgotPasswordTagline.getPaint().setShader(textShader);
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,25 +67,34 @@ public class ForgetPassword extends AppCompatActivity {
                 boolean have_MobileData = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
                 NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
-                for(NetworkInfo info:networkInfos){
-                    if(info.getTypeName().equalsIgnoreCase("WIFI"))
-                        if(info.isConnected())
+                for (NetworkInfo info : networkInfos) {
+                    if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                        if (info.isConnected())
                             have_WIFI = true;
 
-                    if(info.getTypeName().equalsIgnoreCase("MOBILE"))
-                        if(info.isConnected())
+                    if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                        if (info.isConnected())
                             have_MobileData = true;
                 }
-                if(have_MobileData || have_WIFI){
-                    progressBar.setVisibility(VISIBLE);
+                if (have_MobileData || have_WIFI) {
+                    progressDialog = new Extras().showProgressBar(ForgetPassword.this);
                     SetValidation();
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        goToLoginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ForgetPassword.this, LoginScreen.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
+
     public void SetValidation() {
         if (txt_email.getText().toString().isEmpty()) {
             txt_email.setError(getResources().getString(R.string.email_error));
@@ -75,7 +102,7 @@ public class ForgetPassword extends AppCompatActivity {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(txt_email.getText().toString()).matches()) {
             txt_email.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
-        } else  {
+        } else {
             isEmailValid = true;
         }
 
@@ -84,31 +111,42 @@ public class ForgetPassword extends AppCompatActivity {
             firebaseAuth.sendPasswordResetEmail(email_txt).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    progressBar.setVisibility(GONE);
-                    if(task.isSuccessful()){
+
+                    if (task.isSuccessful()) {
                         TextView txt_goToLogin;
+                        progressDialog.dismiss();
                         Dialog dialog = new Dialog(ForgetPassword.this);
                         dialog.setContentView(R.layout.check_email_pop);
                         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         dialog.setCancelable(false);
                         dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                         txt_goToLogin = dialog.findViewById(R.id.txt_goToLogin);
+
+                        // This fills the textView with gradient
+                        TextPaint paint = txt_goToLogin.getPaint();
+                        float width = paint.measureText(getString(R.string.back_to_login_underline));
+                        Shader textShader = new LinearGradient(0, 0, width, txt_goToLogin.getTextSize(),
+                                new int[]{
+                                        getResources().getColor(R.color.md_theme_light_shadow),
+                                        getResources().getColor(R.color.seed)
+                                }, null, Shader.TileMode.CLAMP);
+                        txt_goToLogin.getPaint().setShader(textShader);
+
                         txt_goToLogin.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent i = new Intent(ForgetPassword.this, LoginScreen.class);
                                 startActivity(i);
+                                dialog.dismiss();
+                                finish();
                             }
                         });
                         dialog.show();
-                    }
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Failed! You are not registered with this Email ID", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-
         }
-
     }
 }

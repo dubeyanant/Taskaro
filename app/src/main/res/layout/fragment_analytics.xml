@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnalyticsFragment">
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/screen_margin_horizontal"
+    tools:context=".fragments.AnalyticsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:layout_marginTop="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic_under_construction" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="-40dp"
+        android:gravity="center_horizontal"
+        android:text="@string/under_construction"
+        android:textSize="30sp" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_blank_analytics_fragment"
-        android:textSize="25sp" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/inter"
+        android:gravity="center_horizontal"
+        android:text="@string/explore"
+        android:textSize="16sp" />
+</LinearLayout>
