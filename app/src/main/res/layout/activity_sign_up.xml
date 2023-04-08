@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_edit_text_bg"
-        android:drawableStart="@drawable/ic_person"
+        android:drawableStart="@drawable/ic_person_outline"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter"
         android:hint="@string/name"
