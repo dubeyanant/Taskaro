@@ -5,23 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.soc.taskaro.databinding.ProgressDialogBinding;
 import com.soc.taskaro.firestore.FirestoreClass;
-import com.soc.taskaro.fragments.NotesFragment;
-import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.utils.Extras;
 
 public class CreateNotesActivity extends AppCompatActivity {
 
-    EditText writeNotesTitleEditText, writeNotesDescriptionEditText;
     public TextView doneSaveNotesTextView;
-
+    EditText writeNotesTitleEditText, writeNotesDescriptionEditText;
     ProgressDialog progressDialog;
     boolean isTitleValid = false, isDescriptionValid = false;
 
@@ -34,6 +29,14 @@ public class CreateNotesActivity extends AppCompatActivity {
         writeNotesTitleEditText = findViewById(R.id.writeNotesTitleEditText);
         writeNotesDescriptionEditText = findViewById(R.id.writeNotesDescriptionEditText);
         doneSaveNotesTextView = findViewById(R.id.doneSaveNotesTextView);
+
+        // Executed when called by Main Notes Screen
+        Intent intent = getIntent();
+        String Title = intent.getStringExtra("title");
+        String Description = intent.getStringExtra("description");
+
+        writeNotesTitleEditText.setText(Title);
+        writeNotesDescriptionEditText.setText(Description);
 
         doneSaveNotesTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,28 +53,29 @@ public class CreateNotesActivity extends AppCompatActivity {
     }
 
     private void setValidation() {
-        if(writeNotesTitleEditText.getText().toString().isEmpty()){
+        if (writeNotesTitleEditText.getText().toString().isEmpty()) {
             progressDialog.dismiss();
             doneSaveNotesTextView.setEnabled(true);
             writeNotesTitleEditText.setError(getResources().getString(R.string.empty_field_error));
             isTitleValid = false;
-        }else{
+        } else {
             isTitleValid = true;
         }
 
-        if(writeNotesDescriptionEditText.getText().toString().isEmpty()){
+        if (writeNotesDescriptionEditText.getText().toString().isEmpty()) {
             progressDialog.dismiss();
             doneSaveNotesTextView.setEnabled(true);
             writeNotesDescriptionEditText.setError(getResources().getString(R.string.empty_field_error));
             isDescriptionValid = false;
-        }else{
+        } else {
             isDescriptionValid = true;
         }
 
-        if(isTitleValid && isDescriptionValid){
+        if (isTitleValid && isDescriptionValid) {
             new FirestoreClass().uploadNotesDetails(CreateNotesActivity.this, writeNotesTitleEditText.getText().toString().trim(), writeNotesDescriptionEditText.getText().toString().trim());
         }
     }
+
     public void uploadDataSuccess() {
         doneSaveNotesTextView.setEnabled(true);
         progressDialog.dismiss();

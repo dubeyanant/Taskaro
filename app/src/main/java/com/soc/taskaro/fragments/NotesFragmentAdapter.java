@@ -1,6 +1,7 @@
 package com.soc.taskaro.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.soc.taskaro.CreateNotesActivity;
 import com.soc.taskaro.R;
 
 import java.util.ArrayList;
@@ -46,7 +48,6 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
             holder.notesDescription.setText(notes.description);
         }
 
-
         // Removes views if clicked on delete button
         int temp = holder.getAdapterPosition();
         holder.deleteNoteImageButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +56,17 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
                 notesArrayList.remove(temp);
                 notifyItemRemoved(temp);
                 notifyItemRangeChanged(temp, notesArrayList.size());
+            }
+        });
+
+        // Used to click on items in recyclerView
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreateNotesActivity.class);
+                intent.putExtra("title", notes.heading);
+                intent.putExtra("description", notes.description);
+                v.getContext().startActivity(intent);
             }
         });
     }
