@@ -2,6 +2,8 @@ package com.soc.taskaro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
 
+        Menu menu = binding.bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.placeholder);
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i);
                         }
                     });
+                    menuItem.setVisible(true);
                     break;
 
                 case R.id.analytics:
                     replaceFragment(new AnalyticsFragment());
                     binding.fab.setVisibility(View.GONE);
+                    menuItem.setVisible(false);
                     break;
 
                 case R.id.notes:
@@ -64,11 +71,13 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(i);
                         }
                     });
+                    menuItem.setVisible(true);
                     break;
 
                 case R.id.other:
                     replaceFragment(new SettingsFragment());
                     binding.fab.setVisibility(View.GONE);
+                    menuItem.setVisible(false);
                     break;
             }
 
