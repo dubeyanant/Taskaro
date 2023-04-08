@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -28,6 +29,7 @@ import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
 import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
+import com.soc.taskaro.fragments.NotesFragment;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.models.Task;
@@ -40,7 +42,7 @@ import java.util.HashMap;
 
 public class FirestoreClass {
     FirebaseFirestore dbroot = FirebaseFirestore.getInstance();
-
+    boolean state;
     public void registerUser(SignUpActivity activity, User UsersInfo) {
         System.out.println(UsersInfo.id + UsersInfo.name + UsersInfo.email + UsersInfo.mobile);
         dbroot.collection(Constants.USERS).document(UsersInfo.id).set(UsersInfo, SetOptions.merge())
@@ -99,7 +101,6 @@ public class FirestoreClass {
                     ((SettingsFragment) fragment).userGetDataSuccess(user);
 
                 }
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -109,6 +110,7 @@ public class FirestoreClass {
         });
 
     }
+
     public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
@@ -140,6 +142,7 @@ public class FirestoreClass {
             createTaskActivity.btn_saveCreateTask.setEnabled(true);
         });
     }
+
     public void updateUserDetails(HashMap<String, Object> userHashMap, Fragment fragment) {
 
         DocumentReference documentReference = dbroot.collection(Constants.USERS).document(getCurrentUserID());
@@ -192,6 +195,49 @@ public class FirestoreClass {
         }).addOnFailureListener(e -> {
             Toast.makeText(createNotesActivity, "Error! Unable to add notes.", Toast.LENGTH_SHORT).show();
             createNotesActivity.doneSaveNotesTextView.setEnabled(true);
+        });
+    }
+
+    public void getNotesList(Fragment fragment){
+        dbroot.collection(Constants.Notes).whereEqualTo(Constants.USER_ID, getCurrentUserID()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<Note> notesList = new ArrayList();
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    Note note = documentSnapshot.toObject(Note.class);
+                    note.setNote_id(documentSnapshot.getId());
+                    notesList.add(note);
+                }
+                if(fragment instanceof NotesFragment){
+                    ((NotesFragment) fragment).onNotesListSuccess(notesList);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(fragment.getContext(), "Error! Unable to load Data. Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                ((NotesFragment) fragment).progressDialog.dismiss();
+            }
+        });
+    }
+
+    public void deleteNote(Fragment fragment , Note note, ArrayList<Note> notesArrayList) {
+        dbroot.collection(Constants.Notes).document(note.getNote_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
+                ((NotesFragment) fragment).onNoteDeleteSuccess();
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                ((NotesFragment) fragment).progressDialog.dismiss();
+                System.out.println(e);
+            }
         });
     }
 }

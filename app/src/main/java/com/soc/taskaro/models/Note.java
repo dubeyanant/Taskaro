@@ -6,15 +6,16 @@ import android.os.Parcelable;
 public class Note implements Parcelable {
     String user_id = "";
     String note_id = "";
-    String title = "";
+    String heading = "";
     String description = "";
 
-    public Note(String user_id, String note_id, String title, String description) {
+    public Note(String user_id, String note_id, String heading, String description) {
         this.user_id = user_id;
         this.note_id = note_id;
-        this.title = title;
+        this.heading = heading;
         this.description = description;
     }
+
 
     public Note() {
     }
@@ -22,7 +23,7 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         user_id = in.readString();
         note_id = in.readString();
-        title = in.readString();
+        heading = in.readString();
         description = in.readString();
     }
 
@@ -30,7 +31,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(user_id);
         dest.writeString(note_id);
-        dest.writeString(title);
+        dest.writeString(heading);
         dest.writeString(description);
     }
 
@@ -67,12 +68,12 @@ public class Note implements Parcelable {
         this.note_id = note_id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getHeading() {
+        return heading;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setHeading(String heading) {
+        this.heading = heading;
     }
 
     public String getDescription() {
