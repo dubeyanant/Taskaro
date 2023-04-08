@@ -26,5 +26,10 @@ Taskaro requires the following permissions:
 * Notification
 * SMS
 
+# Contributors ❤️
+<a href="https://github.com/dubeyanant/Taskaro/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=dubeyanant/Taskaro" />
+</a>
+
 # License 
 Taskaro is under BSD(3 Clause). 
