@@ -1,66 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/screen_margin_horizontal"
     tools:context=".fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/screen_margin_horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="39dp"
             android:fontFamily="@font/inter"
             android:text="Your task\nprioritized!"
             android:textColor="@android:color/black"
             android:textSize="34dp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="#CCFFC8"
-            app:cardCornerRadius="10dp">
+            android:fontFamily="@font/inter"
+            android:text="Do it now!"
+            android:textColor="@android:color/black"
+            android:textSize="22dp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:fontFamily="@font/inter"
-                    android:text="Do it now!"
-                    android:textColor="@android:color/black"
-                    android:textSize="22dp"
-                    android:textStyle="bold"></TextView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Home_RecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_margin="15dp"
-                    tools:listitem="@layout/home_tasks"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Home_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/home_tasks"
+            android:nestedScrollingEnabled="false"/>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
