@@ -1,6 +1,5 @@
 package com.soc.taskaro.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.soc.taskaro.CreateNotesActivity;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Note;
+import com.soc.taskaro.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
 
     Fragment fragment;
     ArrayList<Note> notesArrayList;
-
+    int temp;
     public NotesFragmentAdapter(Fragment fragment, ArrayList<Note> notesArrayList) {
         this.fragment = fragment;
         this.notesArrayList = notesArrayList;
@@ -52,14 +52,14 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         }
 
         // Removes views if clicked on delete button
-        int temp = holder.getAdapterPosition();
+        temp = holder.getAdapterPosition();
         holder.deleteNoteImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new FirestoreClass().deleteNote(fragment, note, notesArrayList);
-                    notesArrayList.remove(temp);
-                    notifyItemRemoved(temp);
-                    notifyItemRangeChanged(temp, notesArrayList.size());
+                notesArrayList.remove(temp);
+                notifyItemRemoved(temp);
+                notifyItemRangeChanged(temp, notesArrayList.size());
 
             }
         });
@@ -69,8 +69,7 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), CreateNotesActivity.class);
-                intent.putExtra("title", note.getHeading());
-                intent.putExtra("description", note.getDescription());
+                intent.putExtra(Constants.Extra_NOTE_ID, note.getNote_id());
                 v.getContext().startActivity(intent);
             }
         });

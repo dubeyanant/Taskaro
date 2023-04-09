@@ -249,7 +249,7 @@ public class SettingsFragment extends Fragment {
                 userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
                 new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
             } else {
-                new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.PRODUCT_IMAGE);
+                new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.USER_IMAGE);
             }
         }
     }
