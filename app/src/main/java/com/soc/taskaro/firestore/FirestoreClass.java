@@ -183,10 +183,10 @@ public class FirestoreClass {
     }
 
 
-    public void uploadNotesDetails(CreateNotesActivity createNotesActivity, String title, String description) {
-        DocumentReference documentReference = dbroot.collection(Constants.Notes).document();
+    public void uploadNotesDetails(CreateNotesActivity createNotesActivity, HashMap<String, Object> noteDetails) {
+        DocumentReference documentReference = dbroot.collection(Constants.NOTES).document();
 
-        Note note = new Note(getCurrentUserID(), documentReference.getId(), title, description);
+        Note note = new Note(getCurrentUserID(), documentReference.getId(), noteDetails.get(Constants.NOTE_HEADING).toString(), noteDetails.get(Constants.NOTE_DESCRIPTION).toString());
         documentReference.set(note, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -199,7 +199,7 @@ public class FirestoreClass {
     }
 
     public void getNotesList(Fragment fragment){
-        dbroot.collection(Constants.Notes).whereEqualTo(Constants.USER_ID, getCurrentUserID()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        dbroot.collection(Constants.NOTES).whereEqualTo(Constants.USER_ID, getCurrentUserID()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 ArrayList<Note> notesList = new ArrayList();
@@ -222,13 +222,12 @@ public class FirestoreClass {
         });
     }
 
-    public void deleteNote(Fragment fragment , Note note, ArrayList<Note> notesArrayList) {
-        dbroot.collection(Constants.Notes).document(note.getNote_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void deleteNote(Fragment fragment, Note note, ArrayList<Note> notesArrayList) {
+        dbroot.collection(Constants.NOTES).document(note.getNote_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
-                ((NotesFragment) fragment).onNoteDeleteSuccess();
 
 
             }
@@ -237,6 +236,40 @@ public class FirestoreClass {
             public void onFailure(@NonNull Exception e) {
                 ((NotesFragment) fragment).progressDialog.dismiss();
                 System.out.println(e);
+            }
+        });
+    }
+
+    public void getNoteDetails(Activity activity, String noteID) {
+        dbroot.collection(Constants.NOTES).document(noteID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Note note = documentSnapshot.toObject(Note.class);
+
+                if (activity instanceof CreateNotesActivity) {
+                    ((CreateNotesActivity) activity).noteGetDetailsSuccess(note);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateNotesDetails(CreateNotesActivity createNotesActivity, HashMap<String, Object> noteHashMap) {
+        DocumentReference documentReference = dbroot.collection(Constants.NOTES).document(noteHashMap.get(Constants.Extra_NOTE_ID).toString());
+        documentReference.update(noteHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                    (createNotesActivity).userDataUpdateSuccess();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(createNotesActivity, "Something went wrong. Try Again later", Toast.LENGTH_SHORT).show();
             }
         });
     }
