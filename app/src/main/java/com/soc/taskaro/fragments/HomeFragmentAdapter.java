@@ -18,10 +18,12 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
 
     Context context;
     ArrayList<TasksPojo> homeArrayList;
+    View emptyView;
 
-    public HomeFragmentAdapter(Context context, ArrayList<TasksPojo> homeArrayList) {
+    public HomeFragmentAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
         this.context = context;
         this.homeArrayList = homeArrayList;
+        this.emptyView = emptyView;
     }
 
     @NonNull
@@ -46,6 +48,24 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     @Override
     public int getItemCount() {
         return homeArrayList.size();
+    }
+
+    @Override
+    public void registerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+        updateEmptyViewVisibility();
+    }
+
+    @Override
+    public void unregisterAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
+        updateEmptyViewVisibility();
+    }
+
+    private void updateEmptyViewVisibility() {
+        if (emptyView != null) {
+            emptyView.setVisibility(getItemCount() == 0 ? View.GONE : View.VISIBLE);
+        }
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

@@ -19,8 +19,11 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     HomeFragmentAdapter homeFragmentAdapter;
-    int[] taskLevel;
-    private ArrayList<TasksPojo> HomeArrayList;
+    private ArrayList<TasksPojo> doArrayList;
+    private ArrayList<TasksPojo> scheduleArrayList;
+    private ArrayList<TasksPojo> delegateArrayList;
+    private ArrayList<TasksPojo> deleteArrayList;
+
     private String[] homeDescription;
     private String[] homeHeading;
     private RecyclerView homeRecyclerView;
@@ -38,7 +41,7 @@ public class HomeFragment extends Fragment {
         dataInitialize();
         homeRecyclerView = view.findViewById(R.id.Home_RecyclerView);
         homeRecyclerView.setHasFixedSize(true);
-        homeFragmentAdapter = new HomeFragmentAdapter(getContext(), HomeArrayList);
+        homeFragmentAdapter = new HomeFragmentAdapter(getContext(), doArrayList, homeRecyclerView);
         homeRecyclerView.setAdapter(homeFragmentAdapter);
         homeFragmentAdapter.notifyDataSetChanged();
 
@@ -47,31 +50,57 @@ public class HomeFragment extends Fragment {
     }
 
     private void dataInitialize() {
-        HomeArrayList = new ArrayList<>();
+        doArrayList = new ArrayList<>();
+        scheduleArrayList = new ArrayList<>();
+        delegateArrayList = new ArrayList<>();
+        deleteArrayList = new ArrayList<>();
+
         homeHeading = new String[]{
                 "Task 1",
                 "Task 2",
                 "Task 3",
-                "Task 4"
+                "Task 4",
+                "Task 5"
         };
 
         homeDescription = new String[]{
                 "Task 1 Description",
                 "Task 2 Description",
                 "Task 3 Description",
-                "Task 4 Description"
+                "Task 4 Description",
+                "Task 5 Description"
         };
 
-        taskLevel = new int[]{
-                Constants.DO,
+        int[] taskLevel = new int[]{
+                Constants.SCHEDULE,
                 Constants.SCHEDULE,
                 Constants.DELEGATE,
-                Constants.DELETE
+                Constants.DELETE,
+                Constants.DO
         };
 
         for (int i = 0; i < homeHeading.length; i++) {
-            TasksPojo tasksPojo = new TasksPojo(homeHeading[i], homeDescription[i], taskLevel[i]);
-            HomeArrayList.add(tasksPojo);
+            switch (taskLevel[i]) {
+                case Constants.DO:
+                    TasksPojo doTaskPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
+                    doArrayList.add(doTaskPojo);
+                    break;
+
+                case Constants.SCHEDULE:
+                    TasksPojo scheduleTaskPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
+                    scheduleArrayList.add(scheduleTaskPojo);
+                    break;
+
+                case Constants.DELEGATE:
+                    TasksPojo delegateTaskPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
+                    delegateArrayList.add(delegateTaskPojo);
+                    break;
+
+                case Constants.DELETE:
+                    TasksPojo deleteTaskPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
+                    deleteArrayList.add(deleteTaskPojo);
+                    break;
+            }
         }
     }
 }
