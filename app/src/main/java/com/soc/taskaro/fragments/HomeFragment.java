@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
@@ -37,6 +38,10 @@ public class HomeFragment extends Fragment {
         homeFragmentAdapter = new HomeFragmentAdapter(getContext(), HomeArrayList);
         homeRecyclerView.setAdapter(homeFragmentAdapter);
         homeFragmentAdapter.notifyDataSetChanged();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() , LinearLayoutManager.VERTICAL, false);
+        homeRecyclerView.setLayoutManager(linearLayoutManager);
+        //homeRecyclerView.setLayoutFrozen(false);
     }
 
     private void dataInitialize() {
@@ -49,7 +54,9 @@ public class HomeFragment extends Fragment {
                 "Task 5",
                 "Task 6",
                 "Task 7",
-                "Task 8"
+                "Task 8",
+                "Task 9",
+                "Task 10"
 
         };
 
@@ -61,11 +68,13 @@ public class HomeFragment extends Fragment {
                 "Task 5 Description",
                 "Task 6 Description",
                 "Task 7 Description",
-                "Task 8 Description"
+                "Task 8 Description",
+                "Task 9 Description",
+                "Task 10 Description"
         };
         for (int i = 0; i < homeHeading.length; i++) {
             TasksPojo tasksPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
             HomeArrayList.add(tasksPojo);
         }
-}
+    }
 }

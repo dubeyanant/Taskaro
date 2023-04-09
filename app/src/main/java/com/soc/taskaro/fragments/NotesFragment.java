@@ -43,9 +43,15 @@ public class NotesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        dataInitialize();
+        recyclerView = view.findViewById(R.id.notesRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        notesFragmentAdapter = new NotesFragmentAdapter(getContext(), notesArrayList);
+        recyclerView.setAdapter(notesFragmentAdapter);
+        notesFragmentAdapter.notifyDataSetChanged();
         searchView = view.findViewById(R.id.notesSearchBar);
         searchView.clearFocus();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
