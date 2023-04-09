@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +20,11 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     HomeFragmentAdapter homeFragmentAdapter;
+    LinearLayout doItLL;
     private ArrayList<TasksPojo> doArrayList;
     private ArrayList<TasksPojo> scheduleArrayList;
     private ArrayList<TasksPojo> delegateArrayList;
     private ArrayList<TasksPojo> deleteArrayList;
-
     private String[] homeDescription;
     private String[] homeHeading;
     private RecyclerView homeRecyclerView;
@@ -40,8 +41,9 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dataInitialize();
         homeRecyclerView = view.findViewById(R.id.Home_RecyclerView);
+        doItLL = view.findViewById(R.id.doItLL);
         homeRecyclerView.setHasFixedSize(true);
-        homeFragmentAdapter = new HomeFragmentAdapter(getContext(), doArrayList, homeRecyclerView);
+        homeFragmentAdapter = new HomeFragmentAdapter(getContext(), doArrayList, doItLL);
         homeRecyclerView.setAdapter(homeFragmentAdapter);
         homeFragmentAdapter.notifyDataSetChanged();
 
@@ -76,7 +78,7 @@ public class HomeFragment extends Fragment {
                 Constants.SCHEDULE,
                 Constants.DELEGATE,
                 Constants.DELETE,
-                Constants.DO
+                Constants.SCHEDULE
         };
 
         for (int i = 0; i < homeHeading.length; i++) {

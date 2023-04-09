@@ -21,18 +21,32 @@
             android:text="@string/your_tasks_prioritized"
             android:textSize="36sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Home_RecyclerView"
+        <LinearLayout
+            android:id="@+id/doItLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/style_task_bg_do"
+            android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
             android:paddingBottom="10dp"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/home_tasks" />
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/do_it_now"
+                android:textSize="22sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Home_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

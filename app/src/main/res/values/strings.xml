@@ -97,5 +97,6 @@
     <string name="done">Done</string>
     <string name="profile">Profile</string>
     <string name="your_tasks_prioritized">Your tasks\nPrioritized!</string>
+    <string name="do_it_now">Do it now!</string>
 
 </resources>
