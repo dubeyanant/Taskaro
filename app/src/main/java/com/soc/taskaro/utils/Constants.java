@@ -35,6 +35,12 @@ public class Constants {
     public static final String NOTE_DESCRIPTION = "description";
     public static final String USER_ID = "user_id";
 
+    // Task levels
+    public static final int DO = 1;
+    public static final int SCHEDULE = 2;
+    public static final int DELEGATE = 3;
+    public static final int DELETE = 4;
+
     public static void showImageChooser(Activity activity) {
         Intent gallaryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         activity.startActivityForResult(gallaryIntent, PICK_IMAGE_REQUEST_CODE);
