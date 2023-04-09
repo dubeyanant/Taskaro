@@ -19,15 +19,18 @@ import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
-    HomeFragmentAdapter homeFragmentAdapter;
-    LinearLayout doItLL;
+    DoAdapter doAdapter;
+    ScheduleAdapter scheduleAdapter;
+    DelegateAdapter delegateAdapter;
+    DeleteAdapter deleteAdapter;
+    LinearLayout doItLL, scheduleItLL, delegateItLL, deleteItLL;
     private ArrayList<TasksPojo> doArrayList;
     private ArrayList<TasksPojo> scheduleArrayList;
     private ArrayList<TasksPojo> delegateArrayList;
     private ArrayList<TasksPojo> deleteArrayList;
     private String[] homeDescription;
     private String[] homeHeading;
-    private RecyclerView homeRecyclerView;
+    private RecyclerView doRecyclerView, scheduleRecyclerView, delegateRecyclerView, deleteRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,16 +42,48 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dataInitialize();
-        homeRecyclerView = view.findViewById(R.id.Home_RecyclerView);
-        doItLL = view.findViewById(R.id.doItLL);
-        homeRecyclerView.setHasFixedSize(true);
-        homeFragmentAdapter = new HomeFragmentAdapter(getContext(), doArrayList, doItLL);
-        homeRecyclerView.setAdapter(homeFragmentAdapter);
-        homeFragmentAdapter.notifyDataSetChanged();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        homeRecyclerView.setLayoutManager(linearLayoutManager);
+        dataInitialize();
+
+        doRecyclerView = view.findViewById(R.id.doRecyclerView);
+        scheduleRecyclerView = view.findViewById(R.id.scheduleRecyclerView);
+        delegateRecyclerView = view.findViewById(R.id.delegateRecyclerView);
+        deleteRecyclerView = view.findViewById(R.id.deleteRecyclerView);
+
+        doItLL = view.findViewById(R.id.doItLL);
+        scheduleItLL = view.findViewById(R.id.scheduleItLL);
+        delegateItLL = view.findViewById(R.id.delegateItLL);
+        deleteItLL = view.findViewById(R.id.deleteItLL);
+
+        doRecyclerView.setHasFixedSize(true);
+        scheduleRecyclerView.setHasFixedSize(true);
+        delegateRecyclerView.setHasFixedSize(true);
+        deleteRecyclerView.setHasFixedSize(true);
+
+        doAdapter = new DoAdapter(getContext(), doArrayList, doItLL);
+        scheduleAdapter = new ScheduleAdapter(getContext(), scheduleArrayList, scheduleItLL);
+        delegateAdapter = new DelegateAdapter(getContext(), delegateArrayList, delegateItLL);
+        deleteAdapter = new DeleteAdapter(getContext(), deleteArrayList, deleteItLL);
+
+        doRecyclerView.setAdapter(doAdapter);
+        scheduleRecyclerView.setAdapter(scheduleAdapter);
+        delegateRecyclerView.setAdapter(delegateAdapter);
+        deleteRecyclerView.setAdapter(deleteAdapter);
+
+        doAdapter.notifyDataSetChanged();
+        scheduleAdapter.notifyDataSetChanged();
+        delegateAdapter.notifyDataSetChanged();
+        deleteAdapter.notifyDataSetChanged();
+
+        LinearLayoutManager doLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager scheduleLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager delegateLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager deleteLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        doRecyclerView.setLayoutManager(doLinearLayoutManager);
+        scheduleRecyclerView.setLayoutManager(scheduleLinearLayoutManager);
+        delegateRecyclerView.setLayoutManager(delegateLinearLayoutManager);
+        deleteRecyclerView.setLayoutManager(deleteLinearLayoutManager);
     }
 
     private void dataInitialize() {
@@ -61,24 +96,21 @@ public class HomeFragment extends Fragment {
                 "Task 1",
                 "Task 2",
                 "Task 3",
-                "Task 4",
-                "Task 5"
+                "Task 4"
         };
 
         homeDescription = new String[]{
                 "Task 1 Description",
                 "Task 2 Description",
                 "Task 3 Description",
-                "Task 4 Description",
-                "Task 5 Description"
+                "Task 4 Description"
         };
 
         int[] taskLevel = new int[]{
-                Constants.SCHEDULE,
+                Constants.DO,
                 Constants.SCHEDULE,
                 Constants.DELEGATE,
-                Constants.DELETE,
-                Constants.SCHEDULE
+                Constants.DELETE
         };
 
         for (int i = 0; i < homeHeading.length; i++) {

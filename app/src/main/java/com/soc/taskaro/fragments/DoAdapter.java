@@ -14,13 +14,13 @@ import com.soc.taskaro.R;
 
 import java.util.ArrayList;
 
-public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder> {
+public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
 
     Context context;
     ArrayList<TasksPojo> homeArrayList;
     View emptyView;
 
-    public HomeFragmentAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
+    public DoAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
         this.context = context;
         this.homeArrayList = homeArrayList;
         this.emptyView = emptyView;
@@ -29,7 +29,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.home_tasks, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.home_tasks_do, parent, false);
         return new HomeViewHolder(v);
     }
 

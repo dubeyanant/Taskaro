@@ -32,8 +32,7 @@
                 android:fontFamily="@font/inter"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="Burning Kitchen."
-                android:textColor="@android:color/black"
+                android:text=""
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -45,7 +44,7 @@
                 android:layout_marginBottom="20dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="Extinguish the fire which is burning in the kitchen from the last four hours."
+                android:text=""
                 android:textSize="14sp" />
 
         </LinearLayout>
