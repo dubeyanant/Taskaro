@@ -96,5 +96,6 @@
     <string name="write_notes_description">Amazing title needs amazing description!</string>
     <string name="done">Done</string>
     <string name="profile">Profile</string>
+    <string name="your_tasks_prioritized">Your tasks\nPrioritized!</string>
 
 </resources>
