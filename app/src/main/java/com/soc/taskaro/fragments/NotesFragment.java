@@ -46,9 +46,9 @@ public class NotesFragment extends Fragment {
         notesFragmentAdapter = new NotesFragmentAdapter(getContext(), notesArrayList);
         recyclerView.setAdapter(notesFragmentAdapter);
         notesFragmentAdapter.notifyDataSetChanged();
-
         searchView = view.findViewById(R.id.notesSearchBar);
         searchView.clearFocus();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
