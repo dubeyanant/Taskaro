@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+import com.soc.taskaro.utils.Constants;
 
 import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
     HomeFragmentAdapter homeFragmentAdapter;
+    int[] taskLevel;
     private ArrayList<TasksPojo> HomeArrayList;
     private String[] homeDescription;
     private String[] homeHeading;
     private RecyclerView homeRecyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment {
         homeRecyclerView.setAdapter(homeFragmentAdapter);
         homeFragmentAdapter.notifyDataSetChanged();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() , LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         homeRecyclerView.setLayoutManager(linearLayoutManager);
         //homeRecyclerView.setLayoutFrozen(true);
     }
@@ -50,30 +53,25 @@ public class HomeFragment extends Fragment {
                 "Task 1",
                 "Task 2",
                 "Task 3",
-                "Task 4",
-                "Task 5",
-                "Task 6",
-                "Task 7",
-                "Task 8",
-                "Task 9",
-                "Task 10"
-
+                "Task 4"
         };
 
         homeDescription = new String[]{
                 "Task 1 Description",
                 "Task 2 Description",
                 "Task 3 Description",
-                "Task 4 Description",
-                "Task 5 Description",
-                "Task 6 Description",
-                "Task 7 Description",
-                "Task 8 Description",
-                "Task 9 Description",
-                "Task 10 Description"
+                "Task 4 Description"
         };
+
+        taskLevel = new int[]{
+                Constants.DO,
+                Constants.SCHEDULE,
+                Constants.DELEGATE,
+                Constants.DELETE
+        };
+
         for (int i = 0; i < homeHeading.length; i++) {
-            TasksPojo tasksPojo = new TasksPojo(homeHeading[i], homeDescription[i]);
+            TasksPojo tasksPojo = new TasksPojo(homeHeading[i], homeDescription[i], taskLevel[i]);
             HomeArrayList.add(tasksPojo);
         }
     }
