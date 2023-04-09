@@ -61,4 +61,14 @@
     <color name="md_theme_dark_surfaceTint">#95CCFF</color>
     <color name="md_theme_dark_outlineVariant">#42474E</color>
     <color name="md_theme_dark_scrim">#000000</color>
+
+    <!--Tasks color-->
+    <color name="do_main">#ADFF98</color>
+    <color name="do_bg">#CCFFC8</color>
+    <color name="schedule_main">#98E6FF</color>
+    <color name="schedule_bg">#C8F5FF</color>
+    <color name="delegate_main">#FFEF98</color>
+    <color name="delegate_bg">#FEFFC8</color>
+    <color name="delete_main">#FF8F8F</color>
+    <color name="delete_bg">#FFC0C0</color>
 </resources>

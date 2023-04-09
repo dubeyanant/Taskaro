@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         homeRecyclerView.setLayoutManager(linearLayoutManager);
-        //homeRecyclerView.setLayoutFrozen(true);
     }
 
     private void dataInitialize() {
