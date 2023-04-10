@@ -94,13 +94,15 @@ public class OnboardScreen extends AppCompatActivity {
 
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.md_theme_light_inverseOnSurface));
+            dots[i].setText(Html.fromHtml("&#9679"));
+            dots[i].setTextSize(18);
+            dots[i].setTextColor(getResources().getColor(R.color.md_theme_dark_onSurfaceVariant));
             dotsLayout.addView(dots[i]);
         }
+        dots[position].setText(Html.fromHtml("&#9679"));
         dots[position].setTextColor(getResources().getColor(R.color.md_theme_dark_shadow));
     }
+
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
