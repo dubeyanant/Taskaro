@@ -1,6 +1,7 @@
 package com.soc.taskaro.fragments;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
     Context context;
     ArrayList<TasksPojo> homeArrayList;
     View emptyView;
+
 
     public DoAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
         this.context = context;
@@ -43,6 +45,24 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         } else {
             holder.taskDescription.setText(tasksPojo.taskDescription);
         }
+
+        // Removes views if clicked on delete button
+        int temp = holder.getAdapterPosition();
+        holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.taskCheckBox.isChecked()) {
+                    holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                } else {
+                    holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+
+                homeArrayList.remove(temp);
+                notifyItemRemoved(temp);
+                notifyItemRangeChanged(temp, homeArrayList.size());
+                updateEmptyViewVisibility();
+            }
+        });
     }
 
     @Override
