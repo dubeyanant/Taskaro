@@ -2,6 +2,7 @@ package com.soc.taskaro.createtask;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,9 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String Title = intent.getStringExtra("title");
         String Description = intent.getStringExtra("description");
+        if (Description.equals("")) {
+            taskDescriptionTextView.setVisibility(View.GONE);
+        }
         taskTitleTextView.setText(Title);
         taskDescriptionTextView.setText(Description);
 
