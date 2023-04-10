@@ -1,7 +1,9 @@
 package com.soc.taskaro.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+import com.soc.taskaro.createtask.ExpandedTaskActivity;
+import com.soc.taskaro.createtask.SubTask;
 
 import java.util.ArrayList;
 
@@ -20,6 +24,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
     Context context;
     ArrayList<TasksPojo> homeArrayList;
     View emptyView;
+    ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
 
     public DeleteAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
         this.context = context;
@@ -60,6 +65,20 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
                 notifyItemRemoved(temp);
                 notifyItemRangeChanged(temp, homeArrayList.size());
                 updateEmptyViewVisibility();
+            }
+        });
+
+        // Used to click on items in recyclerView
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
+                intent.putExtra("title", tasksPojo.taskHeading);
+                intent.putExtra("description", tasksPojo.taskDescription);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("list", subTaskArrayList);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
             }
         });
     }

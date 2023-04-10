@@ -1,5 +1,6 @@
 package com.soc.taskaro.createtask;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -27,6 +28,13 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         taskDescriptionTextView = findViewById(R.id.taskDescriptionTextView);
         taskNotificationTextView = findViewById(R.id.taskNotificationTextView);
         taskNotificationDescriptionTextView = findViewById(R.id.taskNotificationDescriptionTextView);
+
+        // Executed when called by Main Notes Screen
+        Intent intent = getIntent();
+        String Title = intent.getStringExtra("title");
+        String Description = intent.getStringExtra("description");
+        taskTitleTextView.setText(Title);
+        taskDescriptionTextView.setText(Description);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerSubTask.setLayoutManager(layoutManager);
