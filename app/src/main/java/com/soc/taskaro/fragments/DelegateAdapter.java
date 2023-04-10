@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskActivity;
-import com.soc.taskaro.createtask.SubTask;
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ public class DelegateAdapter extends RecyclerView.Adapter<DelegateAdapter.HomeVi
     Context context;
     ArrayList<Task> homeArrayList;
     View emptyView;
-    ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
 
     public DelegateAdapter(Context context, ArrayList<Task> homeArrayList, View emptyView) {
         this.context = context;
@@ -77,7 +75,7 @@ public class DelegateAdapter extends RecyclerView.Adapter<DelegateAdapter.HomeVi
                 intent.putExtra("title", task.getTitle());
                 intent.putExtra("description", task.getDescription());
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("list", subTaskArrayList);
+                bundle.putSerializable("list", task.getSubTasks());
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
