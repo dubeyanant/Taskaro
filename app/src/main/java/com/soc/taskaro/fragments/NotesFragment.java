@@ -110,12 +110,15 @@ public class NotesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        progressDialog = new Extras().showProgressBar(this);
-        new FirestoreClass().getNotesList(this);
+        if (Extras.networkCheck(getContext())) {
+            progressDialog = new Extras().showProgressBar(this);
+            new FirestoreClass().getNotesList(this);
+        } else {
+            Toast.makeText(getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onNoteDeleteSuccess() {
         progressDialog.dismiss();
-        state = true;
     }
 }

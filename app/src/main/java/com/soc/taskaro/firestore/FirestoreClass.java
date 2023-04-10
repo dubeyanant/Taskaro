@@ -29,6 +29,7 @@ import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
 import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
+import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.fragments.NotesFragment;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.Note;
@@ -270,6 +271,27 @@ public class FirestoreClass {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(createNotesActivity, "Something went wrong. Try Again later", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getTasksList(HomeFragment homeFragment) {
+        dbroot.collection(Constants.TASKS).whereEqualTo(Constants.USER_ID, getCurrentUserID()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<Task> tasksList = new ArrayList();
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    Task task = documentSnapshot.toObject(Task.class);
+                    task.setTask_id(documentSnapshot.getId());
+                    tasksList.add(task);
+                }
+                homeFragment.onTasksListSuccess(tasksList);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(homeFragment.getContext(), "Error! Unable to load Data. Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                homeFragment.progressDialog.dismiss();
             }
         });
     }

@@ -16,17 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
+import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
 
 public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHolder> {
 
     Context context;
-    ArrayList<TasksPojo> homeArrayList;
+    ArrayList<Task> homeArrayList;
     View emptyView;
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
 
-    public DeleteAdapter(Context context, ArrayList<TasksPojo> homeArrayList, View emptyView) {
+    public DeleteAdapter(Context context, ArrayList<Task> homeArrayList, View emptyView) {
         this.context = context;
         this.homeArrayList = homeArrayList;
         this.emptyView = emptyView;
@@ -42,12 +43,12 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
 
-        TasksPojo tasksPojo = homeArrayList.get(position);
-        holder.taskHeading.setText(tasksPojo.taskHeading);
-        if (tasksPojo.taskDescription.equals("")) {
+        Task task = homeArrayList.get(position);
+        holder.taskHeading.setText(task.getTitle());
+        if (task.getDescription().equals("")) {
             holder.taskDescription.setVisibility(View.GONE);
         } else {
-            holder.taskDescription.setText(tasksPojo.taskDescription);
+            holder.taskDescription.setText(task.getDescription());
         }
 
         // Removes views if clicked on delete button
@@ -73,8 +74,8 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
-                intent.putExtra("title", tasksPojo.taskHeading);
-                intent.putExtra("description", tasksPojo.taskDescription);
+                intent.putExtra("title", task.getTitle());
+                intent.putExtra("description", task.getDescription());
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("list", subTaskArrayList);
                 intent.putExtras(bundle);
