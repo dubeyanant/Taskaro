@@ -5,9 +5,10 @@ import android.os.Parcelable;
 
 import com.soc.taskaro.createtask.SubTask;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Task implements Parcelable {
+public class Task implements Parcelable, Serializable {
     public String user_id = "";
     public String title = "";
 

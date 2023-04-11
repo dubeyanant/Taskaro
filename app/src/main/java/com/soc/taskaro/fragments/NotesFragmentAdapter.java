@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.utils.Constants;
+import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
 
@@ -55,11 +57,12 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         holder.deleteNoteImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notesArrayList.remove(temp);
-                notifyItemRemoved(temp);
-                notifyItemRangeChanged(temp, notesArrayList.size());
-                new FirestoreClass().deleteNote(fragment, note, notesArrayList);
-
+                if (Extras.networkCheck(fragment.getContext())) {
+                    ((NotesFragment) fragment).progressDialog = new Extras().showProgressBar(fragment);
+                    new FirestoreClass().deleteNote(NotesFragmentAdapter.this, fragment, note, notesArrayList, temp);
+                } else {
+                    Toast.makeText(fragment.getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -72,8 +75,15 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
                 v.getContext().startActivity(intent);
             }
         });
-    }
 
+    }
+    public void onNoteDeleteSuccess(int temp){
+        ((NotesFragment) fragment).progressDialog.dismiss();
+        notesArrayList.remove(temp);
+        notifyItemRemoved(temp);
+        notifyItemRangeChanged(temp, notesArrayList.size());
+        Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
+    }
     @Override
     public int getItemCount() {
         return notesArrayList.size();

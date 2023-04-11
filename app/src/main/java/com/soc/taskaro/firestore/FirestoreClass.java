@@ -31,6 +31,7 @@ import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
 import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.fragments.NotesFragment;
+import com.soc.taskaro.fragments.NotesFragmentAdapter;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.models.Task;
@@ -223,24 +224,25 @@ public class FirestoreClass {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(fragment.getContext(), "Error! Unable to load Data. Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(fragment.getContext(), "Error! Unable to load Data. Check Your Internet Connection.", Toast.LENGTH_LONG).show();
                 ((NotesFragment) fragment).progressDialog.dismiss();
             }
         });
     }
 
-    public void deleteNote(Fragment fragment, Note note, ArrayList<Note> notesArrayList) {
+    public void deleteNote(NotesFragmentAdapter adapter, Fragment fragment, Note note, ArrayList<Note> notesArrayList, int temp) {
         dbroot.collection(Constants.NOTES).document(note.getNote_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
+                ((NotesFragmentAdapter) adapter).onNoteDeleteSuccess(temp);
 
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Toast.makeText(fragment.getContext(), "Error! Unable to delete Data. Check Your Internet Connection.", Toast.LENGTH_SHORT).show();
                 ((NotesFragment) fragment).progressDialog.dismiss();
                 System.out.println(e);
             }
