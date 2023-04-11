@@ -176,7 +176,13 @@ public class FirestoreClass {
         sRef.putFile(mSelectedImageFileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ((SettingsFragment) fragment).imageUploadSuccess(mSelectedImageFileUri);
+                sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        System.out.println(uri.toString()+"!!!!!!!!!!!!!!!");
+                        ((SettingsFragment) fragment).imageUploadSuccess(uri);
+                    }
+                });
             }
         }).addOnFailureListener(e -> {
             Toast.makeText(fragment.getContext(), "Error! Unable to add product.", Toast.LENGTH_LONG).show();

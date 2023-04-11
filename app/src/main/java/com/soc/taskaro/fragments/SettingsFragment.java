@@ -38,6 +38,7 @@ import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.utils.Extras;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -276,8 +277,7 @@ public class SettingsFragment extends Fragment {
         } else {
             deleteProfilePhotoBtn.setVisibility(View.VISIBLE);
             userProfileImageURL = user.getImage();
-            uri = Uri.parse(user.getImage());
-            profileImageView.setImageURI(Uri.parse(user.getImage()));
+            Picasso.get().load(user.getImage()).into(profileImageView);
             nameEditText.setText(user.getName());
             nameTextView.setText(user.getName());
             emailTextView.setText(user.getEmail());
@@ -292,7 +292,7 @@ public class SettingsFragment extends Fragment {
 
     public void imageUploadSuccess(Uri imageUri) {
         HashMap<String, Object> userHashMap = new HashMap<>();
-        userHashMap.put(Constants.IMAGE, userProfileImageURL);
+        userHashMap.put(Constants.IMAGE, imageUri);
         userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
         new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
     }
