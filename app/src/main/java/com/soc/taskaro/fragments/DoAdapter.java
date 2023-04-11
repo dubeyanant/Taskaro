@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskActivity;
+import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
     Context context;
     ArrayList<Task> homeArrayList;
     View emptyView;
+//    LayoutInflater inflater = LayoutInflater.from(emptyView.getContext());
 
     public DoAdapter(Context context, ArrayList<Task> homeArrayList, View emptyView) {
         this.context = context;
@@ -71,6 +73,7 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: Open as Intent -- Option 1
                 Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
                 intent.putExtra("title", task.getTitle());
                 intent.putExtra("description", task.getDescription());
@@ -78,6 +81,27 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
                 bundle.putSerializable("list", task.getSubTasks());
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
+
+                // TODO: Open as DialogFragment -- Option 2
+//                ExpandedTaskDialogFragment dialogFragment = new ExpandedTaskDialogFragment();
+//                dialogFragment.show(getSupportFragmentManager(), "ExpandedTaskDialogFragment");
+
+                // TODO: Open as AlertDialog -- Option 3
+                // Create an alert builder
+//                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//
+//                // set the custom layout
+//                final View customLayout = LayoutInflater.from(v.getContext()).inflate(R.layout.activity_expanded_task, null);
+//                builder.setView(customLayout);
+//
+//                // add a button
+////                builder.setPositiveButton("Done", (dialog, which) -> {
+////                });
+//
+//                // create and show
+//                // the alert dialog
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
             }
         });
     }
