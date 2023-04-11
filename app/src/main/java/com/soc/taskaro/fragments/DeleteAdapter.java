@@ -11,10 +11,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskActivity;
+import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
@@ -71,13 +74,15 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
-                intent.putExtra("title", task.getTitle());
-                intent.putExtra("description", task.getDescription());
                 Bundle bundle = new Bundle();
+                bundle.putString("title", task.getTitle());
+                bundle.putString("description", task.getDescription());
                 bundle.putSerializable("list", task.getSubTasks());
-                intent.putExtras(bundle);
-                v.getContext().startActivity(intent);
+
+                FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
+                ExpandedTaskDialogFragment expandedTaskDialogFragment = new ExpandedTaskDialogFragment();
+                expandedTaskDialogFragment.setArguments(bundle);
+                expandedTaskDialogFragment.show(fragmentManager, "ExpandedTaskDialogFragment");
             }
         });
     }
