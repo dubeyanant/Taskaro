@@ -18,6 +18,7 @@ import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.models.Task;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
@@ -84,9 +85,9 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
 //
 //                FIXME: Open as DialogFragment -- Option 2
                 Bundle bundle = new Bundle();
-                bundle.putString("title", task.getTitle());
-                bundle.putString("description", task.getDescription());
-                bundle.putSerializable("list", task.getSubTasks());
+
+                bundle.putSerializable("task",  task);
+
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
                 ExpandedTaskDialogFragment expandedTaskDialogFragment = new ExpandedTaskDialogFragment();
