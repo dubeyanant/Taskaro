@@ -23,7 +23,6 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
 
     Fragment fragment;
     ArrayList<Note> notesArrayList;
-    int temp;
     public NotesFragmentAdapter(Fragment fragment, ArrayList<Note> notesArrayList) {
         this.fragment = fragment;
         this.notesArrayList = notesArrayList;
@@ -52,14 +51,14 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         }
 
         // Removes views if clicked on delete button
-        temp = holder.getAdapterPosition();
+        int temp = holder.getAdapterPosition();
         holder.deleteNoteImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FirestoreClass().deleteNote(fragment, note, notesArrayList);
                 notesArrayList.remove(temp);
                 notifyItemRemoved(temp);
                 notifyItemRangeChanged(temp, notesArrayList.size());
+                new FirestoreClass().deleteNote(fragment, note, notesArrayList);
 
             }
         });
