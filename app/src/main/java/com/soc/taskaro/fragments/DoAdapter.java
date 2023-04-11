@@ -1,7 +1,6 @@
 package com.soc.taskaro.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +10,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
-import com.soc.taskaro.createtask.ExpandedTaskActivity;
 import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.models.Task;
 
@@ -73,35 +73,25 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Open as Intent -- Option 1
-                Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
-                intent.putExtra("title", task.getTitle());
-                intent.putExtra("description", task.getDescription());
+//                FIXME: Open as Intent -- Option 1
+//                Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
+//                intent.putExtra("title", task.getTitle());
+//                intent.putExtra("description", task.getDescription());
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("list", task.getSubTasks());
+//                intent.putExtras(bundle);
+//                v.getContext().startActivity(intent);
+//
+//                FIXME: Open as DialogFragment -- Option 2
                 Bundle bundle = new Bundle();
+                bundle.putString("title", task.getTitle());
+                bundle.putString("description", task.getDescription());
                 bundle.putSerializable("list", task.getSubTasks());
-                intent.putExtras(bundle);
-                v.getContext().startActivity(intent);
 
-                // TODO: Open as DialogFragment -- Option 2
-//                ExpandedTaskDialogFragment dialogFragment = new ExpandedTaskDialogFragment();
-//                dialogFragment.show(getSupportFragmentManager(), "ExpandedTaskDialogFragment");
-
-                // TODO: Open as AlertDialog -- Option 3
-                // Create an alert builder
-//                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//
-//                // set the custom layout
-//                final View customLayout = LayoutInflater.from(v.getContext()).inflate(R.layout.activity_expanded_task, null);
-//                builder.setView(customLayout);
-//
-//                // add a button
-////                builder.setPositiveButton("Done", (dialog, which) -> {
-////                });
-//
-//                // create and show
-//                // the alert dialog
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
+                FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
+                ExpandedTaskDialogFragment expandedTaskDialogFragment = new ExpandedTaskDialogFragment();
+                expandedTaskDialogFragment.setArguments(bundle);
+                expandedTaskDialogFragment.show(fragmentManager, "ExpandedTaskDialogFragment");
             }
         });
     }
