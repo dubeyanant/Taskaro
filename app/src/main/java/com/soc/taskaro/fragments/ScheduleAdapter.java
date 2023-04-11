@@ -75,7 +75,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+
                 bundle.putSerializable("task",  task);
+
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
                 ExpandedTaskDialogFragment expandedTaskDialogFragment = new ExpandedTaskDialogFragment();

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+
 import com.soc.taskaro.models.Task;
+
 
 import java.util.ArrayList;
 
@@ -36,10 +38,12 @@ public class ExpandedTaskDialogFragment extends DialogFragment {
         taskNotificationDescriptionTextView = view.findViewById(R.id.taskNotificationDescriptionTextView);
 
         Bundle bundle = getArguments();
+
         Task task = (Task) bundle.getSerializable("task");
         String Title = task.getTitle();
         String Description = task.getDescription();
         subTaskArrayList = (ArrayList<SubTask>) task.getSubTasks();
+
 
         if (Description.equals("")) {
             taskDescriptionTextView.setVisibility(View.GONE);

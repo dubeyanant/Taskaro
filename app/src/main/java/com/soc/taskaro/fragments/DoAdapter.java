@@ -85,7 +85,9 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
 //
 //                FIXME: Open as DialogFragment -- Option 2
                 Bundle bundle = new Bundle();
+
                 bundle.putSerializable("task",  task);
+
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
                 ExpandedTaskDialogFragment expandedTaskDialogFragment = new ExpandedTaskDialogFragment();
