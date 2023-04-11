@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,9 +31,13 @@ import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
 import com.soc.taskaro.createtask.CreateTaskActivity;
 import com.soc.taskaro.createtask.SubTask;
+import com.soc.taskaro.fragments.DelegateAdapter;
+import com.soc.taskaro.fragments.DeleteAdapter;
+import com.soc.taskaro.fragments.DoAdapter;
 import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.fragments.NotesFragment;
 import com.soc.taskaro.fragments.NotesFragmentAdapter;
+import com.soc.taskaro.fragments.ScheduleAdapter;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.models.Task;
@@ -300,6 +306,35 @@ public class FirestoreClass {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(homeFragment.getContext(), "Error! Unable to load Data. Check Your Internet Connection", Toast.LENGTH_LONG).show();
                 homeFragment.progressDialog.dismiss();
+            }
+        });
+    }
+
+    public void deleteTask(RecyclerView.Adapter adapter, HomeFragment fragment, Task task, ArrayList<Task> homeArrayList, int temp) {
+        dbroot.collection(Constants.TASKS).document(task.getTask_id()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            @Override
+            public void onSuccess(Void unused) {
+                if(adapter instanceof DoAdapter){
+                    ((DoAdapter) adapter).onNoteDeleteSuccess(temp);
+                }
+                else if(adapter instanceof ScheduleAdapter){
+                    ((ScheduleAdapter) adapter).onNoteDeleteSuccess(temp);
+                }
+                else if(adapter instanceof DelegateAdapter){
+                    ((DelegateAdapter) adapter).onNoteDeleteSuccess(temp);
+                }
+                else if(adapter instanceof DeleteAdapter){
+                    ((DeleteAdapter) adapter).onNoteDeleteSuccess(temp);
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(fragment.getContext(), "Error! Unable to delete Data. Check Your Internet Connection.", Toast.LENGTH_SHORT).show();
+                ((HomeFragment) fragment).progressDialog.dismiss();
+                System.out.println(e);
             }
         });
     }

@@ -1,6 +1,5 @@
 package com.soc.taskaro.fragments;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -16,20 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
 import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
+import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Task;
+import com.soc.taskaro.utils.Extras;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
 
-    Context context;
+    HomeViewHolder holder;
+    HomeFragment fragment;
     ArrayList<Task> homeArrayList;
     View emptyView;
 //    LayoutInflater inflater = LayoutInflater.from(emptyView.getContext());
 
-    public DoAdapter(Context context, ArrayList<Task> homeArrayList, View emptyView) {
-        this.context = context;
+    public DoAdapter(HomeFragment fragment, ArrayList<Task> homeArrayList, View emptyView) {
+        this.fragment = fragment;
         this.homeArrayList = homeArrayList;
         this.emptyView = emptyView;
     }
@@ -37,13 +39,13 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.home_tasks_do, parent, false);
+        View v = LayoutInflater.from(fragment.getContext()).inflate(R.layout.home_tasks_do, parent, false);
         return new HomeViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
-
+        this.holder = holder;
         Task task = homeArrayList.get(position);
         holder.taskHeading.setText(task.getTitle());
         if (task.getDescription().equals("")) {
@@ -58,15 +60,15 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
             @Override
             public void onClick(View v) {
                 if (holder.taskCheckBox.isChecked()) {
-                    holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    if (Extras.networkCheck(fragment.getContext())) {
+                        fragment.progressDialog = new Extras().showProgressBar(fragment);
+                        new FirestoreClass().deleteTask(DoAdapter.this, fragment, task, homeArrayList, temp);
+                    } else {
+                        Toast.makeText(fragment.getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
                 }
-
-                homeArrayList.remove(temp);
-                notifyItemRemoved(temp);
-                notifyItemRangeChanged(temp, homeArrayList.size());
-                updateEmptyViewVisibility();
             }
         });
 
@@ -118,6 +120,16 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         if (emptyView != null) {
             emptyView.setVisibility(getItemCount() == 0 ? View.GONE : View.VISIBLE);
         }
+    }
+
+    public void onNoteDeleteSuccess(int temp) {
+        ((HomeFragment) fragment).progressDialog.dismiss();
+        homeArrayList.remove(temp);
+        notifyItemRemoved(temp);
+        notifyItemRangeChanged(temp, homeArrayList.size());
+        updateEmptyViewVisibility();
+        holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

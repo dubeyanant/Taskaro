@@ -113,10 +113,10 @@ public class HomeFragment extends Fragment {
         delegateRecyclerView.setHasFixedSize(true);
         deleteRecyclerView.setHasFixedSize(true);
 
-        doAdapter = new DoAdapter(getContext(), doArrayList, doItLL);
-        scheduleAdapter = new ScheduleAdapter(getContext(), scheduleArrayList, scheduleItLL);
-        delegateAdapter = new DelegateAdapter(getContext(), delegateArrayList, delegateItLL);
-        deleteAdapter = new DeleteAdapter(getContext(), deleteArrayList, deleteItLL);
+        doAdapter = new DoAdapter(HomeFragment.this, doArrayList, doItLL);
+        scheduleAdapter = new ScheduleAdapter(HomeFragment.this, scheduleArrayList, scheduleItLL);
+        delegateAdapter = new DelegateAdapter(HomeFragment.this, delegateArrayList, delegateItLL);
+        deleteAdapter = new DeleteAdapter(HomeFragment.this, deleteArrayList, deleteItLL);
 
         doRecyclerView.setAdapter(doAdapter);
         scheduleRecyclerView.setAdapter(scheduleAdapter);
