@@ -1,15 +1,12 @@
 <resources>
-
     <string name="app_name">Taskaro</string>
     <string name="welcome">Welcome</string>
     <string name="welcomeScreenTagLine">Taskaro - Your Time Management Tool</string>
     <string name="welcomeScreenDescription">Discover how to manage your time effectively and increase productivity with this powerful app. Prioritize, schedule, delegate, and streamline your workload by eliminating unnecessary distractions. Take control of your time and achieve your goals!</string>
     <string name="welcomeScreenButton">Let\'s get started!</string>
-
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="prev">Prev</string>
-
     <string name="do_it">Do First - Prioritize Urgent Tasks</string>
     <string name="schedule_it">Schedule - Plan Important Tasks</string>
     <string name="delegate_it">Delegate - Share Urgent Tasks</string>
@@ -20,7 +17,6 @@
     <string name="delete_it_description">Streamline your workload and focus on what really matters by identifying and eliminating unnecessary tasks and distractions with the "Don't Do" section of this app.</string>
     <string name="under_construction">This is Under Construction!</string>
     <string name="explore">Till then <b>explore</b>.</string>
-
     <string name="forgot_password">Forgot password?</string>
     <string name="forgot_password_reset_instructions">Enter your registered email to receive\npassword reset link</string>
     <string name="forgot_password_done_instructions">We have sent you an email\nwith the reset link</string>
@@ -39,27 +35,21 @@
     <string name="register_now">New User? Register Now</string>
     <string name="back_to_login">Back to Login</string>
     <string name="back_to_login_underline"><u>Back to Login</u></string>
-
     <string name="home">Home</string>
     <string name="analytics">Analytics</string>
     <string name="notes">Notes</string>
     <string name="settings">Settings</string>
-
     <string name="create_task">Create task!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_home_fragment">Home blank fragment</string>
     <string name="hello_blank_notes_fragment">Notes blank fragment</string>
     <string name="hello_blank_analytics_fragment">Analytics blank fragment</string>
     <string name="hello_blank_settings_fragment">Settings blank fragment</string>
-
     <string name="title">Title</string>
     <string name="description">Description...</string>
     <string name="add_sub_task">Add sub-task</string>
     <string name="important">Important</string>
     <string name="urgent">Urgent</string>
     <string name="notification">Notification</string>
-
     <string name="sun">S</string>
     <string name="mon">M</string>
     <string name="tue">T</string>
@@ -67,8 +57,6 @@
     <string name="thu">T</string>
     <string name="fri">F</string>
     <string name="sat">S</string>
-
-    <!-- Signup activity strings -->
     <string name="email_error">Empty Field</string>
     <string name="password_error">Empty Field</string>
     <string name="error_invalid_email">Invalid Email</string>
@@ -86,8 +74,6 @@
     <string name="logout">Logout</string>
     <string name="delete_account">Delete account</string>
     <string name="save_sub_tasks">Save sub-tasks</string>
-
-    <!-- Create Task Activity strings -->
     <string name="empty_field_error">Empty Field</string>
     <string name="check_your_email">Check Your Email!</string>
     <string name="task_symbols">🌊🎯🚀</string>
@@ -97,10 +83,10 @@
     <string name="done">Done</string>
     <string name="profile">Profile</string>
     <string name="your_tasks_prioritized">Your tasks\nPrioritized!</string>
-
     <string name="do_it_heading">Do it now!</string>
     <string name="schedule_it_heading">Schedule it!</string>
     <string name="delegate_it_heading">Delegate it!</string>
     <string name="delete_it_heading">Delete it!</string>
-
+    <string name="notification_set_at"><b>Notification</b> set at</string>
+    <string name="on_date">on</string>
 </resources>

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/inter_semibold"
         android:text="@string/task_symbols"
         android:textSize="36sp" />
@@ -21,7 +21,7 @@
         android:id="@+id/taskTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="@string/title"
         android:textSize="30sp" />
 
@@ -43,21 +43,11 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
-        android:id="@+id/taskNotificationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/add_notification"
-        android:textSize="18sp" />
-
-    <TextView
         android:id="@+id/taskNotificationDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/inter"
         android:text="@string/description"
         android:textSize="18sp" />
-
 </LinearLayout>

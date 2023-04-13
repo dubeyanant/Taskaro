@@ -27,7 +27,6 @@ public class ExpandedTaskActivity extends AppCompatActivity {
         recyclerSubTask = findViewById(R.id.recycler_subtask);
         taskTitleTextView = findViewById(R.id.taskTitleTextView);
         taskDescriptionTextView = findViewById(R.id.taskDescriptionTextView);
-        taskNotificationTextView = findViewById(R.id.taskNotificationTextView);
         taskNotificationDescriptionTextView = findViewById(R.id.taskNotificationDescriptionTextView);
 
         // Executed when called by Main Notes Screen
