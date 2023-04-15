@@ -15,7 +15,6 @@ import com.soc.taskaro.R;
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ExpandedTaskDialogFragment extends DialogFragment {
 
@@ -54,51 +53,51 @@ public class ExpandedTaskDialogFragment extends DialogFragment {
 
         recyclerSubTask.setAdapter(new SubTaskAdapter(subTaskArrayList));
 
-        String[] dateDivided = task.date.split("/", 0);
-
-        switch (dateDivided[1]) {
-            case "01":
-                dateDivided[1] = "January";
-                break;
-            case "02":
-                dateDivided[1] = "February";
-                break;
-            case "03":
-                dateDivided[1] = "March";
-                break;
-            case "04":
-                dateDivided[1] = "April";
-                break;
-            case "05":
-                dateDivided[1] = "May";
-                break;
-            case "06":
-                dateDivided[1] = "June";
-                break;
-            case "07":
-                dateDivided[1] = "July";
-                break;
-            case "08":
-                dateDivided[1] = "August";
-                break;
-            case "09":
-                dateDivided[1] = "September";
-                break;
-            case "10":
-                dateDivided[1] = "October";
-                break;
-            case "11":
-                dateDivided[1] = "November";
-                break;
-            case "12":
-                dateDivided[1] = "December";
-                break;
-        }
-
         if (task.time == null) {
             taskNotificationDescriptionTextView.setVisibility(View.GONE);
         } else {
             if (!(task.daysArrayList == null)) {
+
+                String[] dateDivided = task.date.split("/", 0);
+
+                switch (dateDivided[1]) {
+                    case "01":
+                        dateDivided[1] = "January";
+                        break;
+                    case "02":
+                        dateDivided[1] = "February";
+                        break;
+                    case "03":
+                        dateDivided[1] = "March";
+                        break;
+                    case "04":
+                        dateDivided[1] = "April";
+                        break;
+                    case "05":
+                        dateDivided[1] = "May";
+                        break;
+                    case "06":
+                        dateDivided[1] = "June";
+                        break;
+                    case "07":
+                        dateDivided[1] = "July";
+                        break;
+                    case "08":
+                        dateDivided[1] = "August";
+                        break;
+                    case "09":
+                        dateDivided[1] = "September";
+                        break;
+                    case "10":
+                        dateDivided[1] = "October";
+                        break;
+                    case "11":
+                        dateDivided[1] = "November";
+                        break;
+                    case "12":
+                        dateDivided[1] = "December";
+                        break;
+                }
                 taskNotificationDescriptionTextView.setText(String.format("%s %s %s %s %s %s", getString(R.string.notification_set_at), task.time, getString(R.string.on_date), dateDivided[0], dateDivided[1], dateDivided[2]));
             }
         }
