@@ -2,6 +2,7 @@ package com.soc.taskaro.createtask;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+
+import com.soc.taskaro.models.SubTask;
+
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ public class ExpandedTaskDialogFragment extends DialogFragment {
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
     TextView taskTitleTextView, taskDescriptionTextView, taskNotificationDescriptionTextView;
 
+    public ProgressDialog progressDialog;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -51,7 +56,7 @@ public class ExpandedTaskDialogFragment extends DialogFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerSubTask.setLayoutManager(layoutManager);
 
-        recyclerSubTask.setAdapter(new SubTaskAdapter(subTaskArrayList));
+        recyclerSubTask.setAdapter(new SubTaskAdapter(this, subTaskArrayList, task));
 
         if (task.time == null) {
             taskNotificationDescriptionTextView.setVisibility(View.GONE);

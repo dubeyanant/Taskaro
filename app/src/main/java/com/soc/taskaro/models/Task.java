@@ -3,8 +3,6 @@ package com.soc.taskaro.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.soc.taskaro.createtask.SubTask;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -19,7 +17,40 @@ public class Task implements Parcelable, Serializable {
 
     public ArrayList<SubTask> subTasks;
 
+    public ArrayList<Integer> subTaskStateList;
     public String date="", time="";
+
+    public ArrayList<Boolean> daysArrayList;
+
+    public Task(String user_id, String title, String description, String task_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, ArrayList<Integer> subTaskStateList, String date, String time, ArrayList<Boolean> daysArrayList) {
+        this.user_id = user_id;
+        this.title = title;
+        this.description = description;
+        this.task_id = task_id;
+        this.isImportant = isImportant;
+        this.isUrgent = isUrgent;
+        this.isNotificationSelected = isNotificationSelected;
+        this.subTasks = subTasks;
+        this.subTaskStateList = subTaskStateList;
+        this.date = date;
+        this.time = time;
+        this.daysArrayList = daysArrayList;
+    }
+
+    public Task(String user_id, String title, String description, String task_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, ArrayList<Integer> subTaskStateList) {
+        this.user_id = user_id;
+        this.title = title;
+        this.description = description;
+        this.task_id = task_id;
+        this.isImportant = isImportant;
+        this.isUrgent = isUrgent;
+        this.isNotificationSelected = isNotificationSelected;
+        this.subTasks = subTasks;
+        this.subTaskStateList = subTaskStateList;
+    }
+
+    public Task() {
+    }
 
     public String getUser_id() {
         return user_id;
@@ -85,6 +116,14 @@ public class Task implements Parcelable, Serializable {
         this.subTasks = subTasks;
     }
 
+    public ArrayList<Integer> getSubTaskStateList() {
+        return subTaskStateList;
+    }
+
+    public void setSubTaskStateList(ArrayList<Integer> subTaskStateList) {
+        this.subTaskStateList = subTaskStateList;
+    }
+
     public String getDate() {
         return date;
     }
@@ -107,36 +146,6 @@ public class Task implements Parcelable, Serializable {
 
     public void setDaysArrayList(ArrayList<Boolean> daysArrayList) {
         this.daysArrayList = daysArrayList;
-    }
-
-    public ArrayList<Boolean> daysArrayList;
-
-    public Task(String user_id, String title, String description, String task_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, String date, String time, ArrayList<Boolean> daysArrayList) {
-        this.user_id = user_id;
-        this.title = title;
-        this.description = description;
-        this.task_id = task_id;
-        this.isImportant = isImportant;
-        this.isUrgent = isUrgent;
-        this.isNotificationSelected = isNotificationSelected;
-        this.subTasks = subTasks;
-        this.date = date;
-        this.time = time;
-        this.daysArrayList = daysArrayList;
-    }
-
-    public Task(String user_id, String title, String description, String product_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks) {
-        this.user_id = user_id;
-        this.title = title;
-        this.description = description;
-        this.task_id = product_id;
-        this.isImportant = isImportant;
-        this.isUrgent = isUrgent;
-        this.isNotificationSelected = isNotificationSelected;
-        this.subTasks = subTasks;
-    }
-
-    public Task() {
     }
 
     protected Task(Parcel in) {

@@ -1,16 +1,13 @@
-package com.soc.taskaro.createtask;
+package com.soc.taskaro.models;
 
 import java.io.Serializable;
 
 public class SubTask implements Serializable {
     public String subTask;
 
+    public Integer subTaskState;
     public SubTask() {
 
-    }
-
-    public SubTask(String subTask) {
-        this.subTask = subTask;
     }
 
     public String getSubTask() {
@@ -19,5 +16,13 @@ public class SubTask implements Serializable {
 
     public void setSubTask(String subTask) {
         this.subTask = subTask;
+    }
+
+    public Integer getSubTaskState() {
+        return subTaskState;
+    }
+
+    public void setSubTaskState(Integer subTaskState) {
+        this.subTaskState = subTaskState;
     }
 }
