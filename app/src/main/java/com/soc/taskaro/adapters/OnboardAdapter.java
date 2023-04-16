@@ -1,4 +1,4 @@
-package com.soc.taskaro.activities;
+package com.soc.taskaro.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

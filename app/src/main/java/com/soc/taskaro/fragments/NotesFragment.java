@@ -1,5 +1,6 @@
 package com.soc.taskaro.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,42 +14,36 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+import com.soc.taskaro.adapters.NotesFragmentAdapter;
+import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.models.Note;
+import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
 
 public class NotesFragment extends Fragment {
+    public ProgressDialog progressDialog;
     SearchView searchView;
     NotesFragmentAdapter notesFragmentAdapter;
-    private ArrayList<Notes> notesArrayList;
-    private String[] notesDescription;
-    private String[] notesHeading;
+    boolean state;
+    private ArrayList<Note> notesArrayList;
     private RecyclerView recyclerView;
 
-    public NotesFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes, container, false);
-
+        View root = inflater.inflate(R.layout.fragment_notes, container, false);
+        recyclerView = root.findViewById(R.id.notesRecyclerView);
+        return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dataInitialize();
-        recyclerView = view.findViewById(R.id.notesRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        notesFragmentAdapter = new NotesFragmentAdapter(getContext(), notesArrayList);
-        recyclerView.setAdapter(notesFragmentAdapter);
-        notesFragmentAdapter.notifyDataSetChanged();
-
         searchView = view.findViewById(R.id.notesSearchBar);
         searchView.clearFocus();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -64,10 +59,10 @@ public class NotesFragment extends Fragment {
     }
 
     private void filterList(String text) {
-        ArrayList<Notes> filteredList = new ArrayList<>();
-        for (Notes notes : notesArrayList) {
-            if (notes.heading.toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(notes);
+        ArrayList<Note> filteredList = new ArrayList<>();
+        for (Note note : notesArrayList) {
+            if (note.getHeading().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(note);
             }
         }
 
@@ -78,8 +73,10 @@ public class NotesFragment extends Fragment {
         }
     }
 
-    private void dataInitialize() {
-        notesArrayList = new ArrayList<>();
+    /*public void dataInitialize() {
+        System.out.println("Yes2"+"///////////");
+        notesArrayList = new ArrayList<Notes>();
+
         notesHeading = new String[]{
                 "Hello World",
                 "Anant Dubey",
@@ -94,8 +91,32 @@ public class NotesFragment extends Fragment {
                 getString(R.string.delete_it_description)
         };
         for (int i = 0; i < notesHeading.length; i++) {
-            Notes notes = new Notes(notesHeading[i], notesDescription[i]);
-            notesArrayList.add(notes);
+            Notes note = new Notes(notesHeading[i], notesDescription[i]);
+            notesArrayList.add(note);
         }
+    }*/
+
+    public void onNotesListSuccess(ArrayList<Note> notesList) {
+        progressDialog.dismiss();
+        notesArrayList = notesList;
+        recyclerView.setHasFixedSize(true);
+        notesFragmentAdapter = new NotesFragmentAdapter(this, notesArrayList);
+        recyclerView.setAdapter(notesFragmentAdapter);
+        notesFragmentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Extras.networkCheck(getContext())) {
+            progressDialog = new Extras().showProgressBar(this);
+            new FirestoreClass().getNotesList(this);
+        } else {
+            Toast.makeText(getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onNoteDeleteSuccess() {
+        progressDialog.dismiss();
     }
 }

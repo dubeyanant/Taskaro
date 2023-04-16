@@ -13,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.soc.taskaro.R;
+import com.soc.taskaro.adapters.OnboardAdapter;
 
-public class OnboardScreen extends AppCompatActivity {
+public class OnboardScreenActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     LinearLayout dotsLayout;
@@ -66,7 +67,7 @@ public class OnboardScreen extends AppCompatActivity {
             if (getItem(0) < onboardAdapter.getCount() - 1) {
                 viewPager.setCurrentItem(getItem(1), true);
             } else {
-                Intent i = new Intent(OnboardScreen.this, LoginScreen.class);
+                Intent i = new Intent(OnboardScreenActivity.this, LoginScreenActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -74,7 +75,7 @@ public class OnboardScreen extends AppCompatActivity {
         });
 
         skip.setOnClickListener(view -> {
-            Intent i = new Intent(OnboardScreen.this, LoginScreen.class);
+            Intent i = new Intent(OnboardScreenActivity.this, LoginScreenActivity.class);
             startActivity(i);
             finish();
         });

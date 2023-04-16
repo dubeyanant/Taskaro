@@ -11,7 +11,9 @@ public class Constants {
     public static final String TASKARO_PREFERENCES = "TaskaroPrefs";
     public static final String LOGGED_IN_USERNAME = "logged_in_username";
     public static final String Extra_User_Details = "extra_user_details";
-    public static final String Extra_Product_ID = "extra_product_details";
+    public static final String Extra_NOTE_ID = "extra_note_id";
+    public static final String Extra_TASK_ID = "task_id";
+    public static final String Extra_SUBTASK_STATE = "subTaskStateList";
     public static final int READ_STORAGE_PERMISSION_CODE = 2;
     public static final int PICK_IMAGE_REQUEST_CODE = 1;
 
@@ -26,10 +28,12 @@ public class Constants {
     public static final String USER_PROFILE_IMAGE = "User_Profile_Image";
     public static final String COMPLETE_PROFILE = "profileCompleted";
 
-    //Productsx
     public static final String TASKS = "tasks";
-    public static final String Notes = "notes";
-    public static final String PRODUCT_IMAGE = "Product_Image";
+    public static final String NOTES = "notes";
+    public static final String USER_IMAGE = "User_Image";
+
+    public static final String NOTE_HEADING = "heading";
+    public static final String NOTE_DESCRIPTION = "description";
     public static final String USER_ID = "user_id";
 
     public static void showImageChooser(Activity activity) {

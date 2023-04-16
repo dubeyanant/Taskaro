@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".createtask.CreateTaskActivity">
+    tools:context=".activities.CreateTaskActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +68,6 @@
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/importantSwitch"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/important"
@@ -77,8 +76,8 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="20dp"
-                android:background="#000" />
+                android:layout_weight="1"
+                android:background="#00000000" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/urgentSwitch"
@@ -136,21 +135,11 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/saveSubTaskButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:paddingVertical="5dp"
-            android:text="@string/save_sub_tasks"
-            android:textSize="20sp"
-            android:visibility="gone" />
-
         <LinearLayout
             android:id="@+id/addNotificationButtonLL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -210,7 +199,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="15dp">
 
@@ -244,9 +232,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                android:paddingHorizontal="15dp">
+                android:paddingHorizontal="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/sun"
@@ -317,7 +307,6 @@
                     android:background="@drawable/style_create_task_circle"
                     android:gravity="center"
                     android:text="@string/sat" />
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

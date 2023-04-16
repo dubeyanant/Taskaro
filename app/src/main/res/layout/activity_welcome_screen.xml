@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/screen_margin_horizontal"
-    tools:context=".activities.WelcomeScreen">
+    tools:context=".activities.WelcomeScreenActivity">
 
     <ImageView
         android:layout_width="wrap_content"

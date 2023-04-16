@@ -1,7 +1,6 @@
-package com.soc.taskaro.createtask;
+package com.soc.taskaro.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -24,22 +23,22 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.models.SubTask;
 import com.soc.taskaro.utils.Extras;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
+    public Button btn_saveCreateTask;
     Boolean[] dayClickCountArray = {false, false, false, false, false, false, false};
     TextView dateTextView, timeTextView;
     TextView[] days;
     LinearLayout addTaskButtonLL, subTaskLL, addNotificationButtonLL, notificationLL;
-    public Button btn_saveCreateTask, saveSubTaskButton;
     EditText titleEditText, descriptionEditText;
     ImageButton closeNotification;
     boolean isNotificationEnabled = false;
@@ -49,6 +48,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
 
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
+    ArrayList<Integer> subTaskArrayStateList = new ArrayList<>();
     ViewGroup.MarginLayoutParams addTaskButtonLLParams; // Helps in changing margin of the particular layout viewGroup
 
     @Override
@@ -77,7 +77,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         closeNotification = findViewById(R.id.closeNotification);
         importantSwitch = findViewById(R.id.importantSwitch);
         urgentSwitch = findViewById(R.id.urgentSwitch);
-        saveSubTaskButton = findViewById(R.id.saveSubTaskButton);
         addTaskButtonLLParams = (ViewGroup.MarginLayoutParams) addTaskButtonLL.getLayoutParams();
 
 
@@ -145,12 +144,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         addTaskButtonLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (saveSubTaskButton.getVisibility() == View.GONE) {
-                    saveSubTaskButton.setVisibility(View.VISIBLE);
-                }
-
-                saveSubTaskButton.setEnabled(true);
-
                 View subTaskView = getLayoutInflater().inflate(R.layout.sub_task, null, false);
                 ImageView imageView = subTaskView.findViewById(R.id.imageViewRemove);
 
@@ -161,40 +154,12 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 addTaskButtonLLParams.setMargins(0, inDP(12), 0, inDP(7));
 
-//                // This get the data of the sub-task text views
-//                checkIfValidAndRead();
-//                if (subTaskArrayList.size() > 0)
-//                    for (int i = 0; i < subTaskArrayList.size(); i++)
-//                        System.out.println(subTaskArrayList.get(i).getSubTask());
-
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         subTaskLL.removeView(subTaskView);
-
-                        if (subTaskLL.getChildCount() == 0) {
-                            saveSubTaskButton.setVisibility(View.GONE);
-                            addTaskButtonLLParams.setMargins(0, inDP(24), 0, 0);
-                        }
                     }
                 });
-            }
-        });
-
-        // Save sub-task
-        saveSubTaskButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (checkIfValidAndRead()) {
-                    Intent intent = new Intent(CreateTaskActivity.this, ExpandedTaskActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("list", subTaskArrayList);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-
-//                saveSubTaskButton.setEnabled(false);
             }
         });
 
@@ -258,6 +223,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
 
             subTaskArrayList.add(subTask);
+            subTaskArrayStateList.add(0);
         }
 
         if (subTaskArrayList.size() == 0) {
@@ -269,20 +235,19 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
 
     private void setValidation() {
-        if(titleEditText.getText().toString().trim().isEmpty()){
+        if (titleEditText.getText().toString().trim().isEmpty()) {
             progressDialog.dismiss();
             titleEditText.setError(getResources().getString(R.string.empty_field_error));
-        }else{
+        } else {
             isTitleValid = true;
         }
 
-        if (isTitleValid){
-            if(isNotificationEnabled == false){
-                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled);
-            }
-            else{
+        if (isTitleValid) {
+            if (isNotificationEnabled == false) {
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, subTaskArrayStateList, isNotificationEnabled);
+            } else {
 
-                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, subTaskArrayStateList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
             }
         }
     }

@@ -33,11 +33,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.soc.taskaro.R;
-import com.soc.taskaro.activities.LoginScreen;
+import com.soc.taskaro.activities.LoginScreenActivity;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.utils.Extras;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -118,7 +119,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getContext(), "Logout Successfully...", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreenActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
@@ -141,7 +142,7 @@ public class SettingsFragment extends Fragment {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(getContext(), "Account Deleted Successfully...", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                                        Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreenActivity.class);
                                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(i);
@@ -249,7 +250,7 @@ public class SettingsFragment extends Fragment {
                 userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
                 new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
             } else {
-                new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.PRODUCT_IMAGE);
+                new FirestoreClass().uploadImageToCloudStorage(SettingsFragment.this, uri, Constants.USER_IMAGE);
             }
         }
     }
@@ -276,8 +277,7 @@ public class SettingsFragment extends Fragment {
         } else {
             deleteProfilePhotoBtn.setVisibility(View.VISIBLE);
             userProfileImageURL = user.getImage();
-            uri = Uri.parse(user.getImage());
-            profileImageView.setImageURI(Uri.parse(user.getImage()));
+            Picasso.get().load(user.getImage()).into(profileImageView);
             nameEditText.setText(user.getName());
             nameTextView.setText(user.getName());
             emailTextView.setText(user.getEmail());
@@ -292,7 +292,7 @@ public class SettingsFragment extends Fragment {
 
     public void imageUploadSuccess(Uri imageUri) {
         HashMap<String, Object> userHashMap = new HashMap<>();
-        userHashMap.put(Constants.IMAGE, userProfileImageURL);
+        userHashMap.put(Constants.IMAGE, imageUri);
         userHashMap.put(Constants.NAME, nameEditText.getText().toString().trim());
         new FirestoreClass().updateUserDetails(userHashMap, SettingsFragment.this);
     }

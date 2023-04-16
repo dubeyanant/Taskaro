@@ -1,8 +1,5 @@
 package com.soc.taskaro.activities;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.soc.taskaro.R;
 import com.soc.taskaro.utils.Extras;
 
-public class ForgetPassword extends AppCompatActivity {
+public class ForgetPasswordActivity extends AppCompatActivity {
 
     Button btn_send;
     TextView goToLoginTextView, forgotPasswordTagline;
@@ -77,7 +73,7 @@ public class ForgetPassword extends AppCompatActivity {
                             have_MobileData = true;
                 }
                 if (have_MobileData || have_WIFI) {
-                    progressDialog = new Extras().showProgressBar(ForgetPassword.this);
+                    progressDialog = new Extras().showProgressBar(ForgetPasswordActivity.this);
                     SetValidation();
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
@@ -88,7 +84,7 @@ public class ForgetPassword extends AppCompatActivity {
         goToLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ForgetPassword.this, LoginScreen.class);
+                Intent i = new Intent(ForgetPasswordActivity.this, LoginScreenActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -115,7 +111,7 @@ public class ForgetPassword extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         TextView txt_goToLogin;
                         progressDialog.dismiss();
-                        Dialog dialog = new Dialog(ForgetPassword.this);
+                        Dialog dialog = new Dialog(ForgetPasswordActivity.this);
                         dialog.setContentView(R.layout.check_email_pop);
                         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         dialog.setCancelable(false);
@@ -135,7 +131,7 @@ public class ForgetPassword extends AppCompatActivity {
                         txt_goToLogin.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent i = new Intent(ForgetPassword.this, LoginScreen.class);
+                                Intent i = new Intent(ForgetPasswordActivity.this, LoginScreenActivity.class);
                                 startActivity(i);
                                 dialog.dismiss();
                                 finish();
