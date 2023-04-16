@@ -1,6 +1,5 @@
-package com.soc.taskaro.fragments;
+package com.soc.taskaro.adapters;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,20 +15,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
-import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.fragments.ExpandedTaskDialogFragment;
+import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.models.Task;
 import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeViewHolder> {
+public class DelegateAdapter extends RecyclerView.Adapter<DelegateAdapter.HomeViewHolder> {
 
+    HomeViewHolder holder;
     HomeFragment fragment;
     ArrayList<Task> homeArrayList;
     View emptyView;
-    HomeViewHolder holder;
-    public ScheduleAdapter(HomeFragment fragment, ArrayList<Task> homeArrayList, View emptyView) {
+
+    public DelegateAdapter(HomeFragment fragment, ArrayList<Task> homeArrayList, View emptyView) {
         this.fragment = fragment;
         this.homeArrayList = homeArrayList;
         this.emptyView = emptyView;
@@ -38,7 +39,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(fragment.getContext()).inflate(R.layout.home_tasks_schedule, parent, false);
+        View v = LayoutInflater.from(fragment.getContext()).inflate(R.layout.home_tasks_delegate, parent, false);
         return new HomeViewHolder(v);
     }
 
@@ -61,7 +62,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
                 if (holder.taskCheckBox.isChecked()) {
                     if (Extras.networkCheck(fragment.getContext())) {
                         fragment.progressDialog = new Extras().showProgressBar(fragment);
-                        new FirestoreClass().deleteTask(ScheduleAdapter.this, fragment, task, homeArrayList, temp);
+                        new FirestoreClass().deleteTask(DelegateAdapter.this, fragment, task, homeArrayList, temp);
                     } else {
                         Toast.makeText(fragment.getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                     }
@@ -77,7 +78,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
 
-                bundle.putSerializable("task",  task);
+                bundle.putSerializable("task", task);
 
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
@@ -87,6 +88,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
             }
         });
     }
+
     public void onNoteDeleteSuccess(int temp) {
         ((HomeFragment) fragment).progressDialog.dismiss();
         homeArrayList.remove(temp);
@@ -96,6 +98,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeVi
         holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public int getItemCount() {
         return homeArrayList.size();

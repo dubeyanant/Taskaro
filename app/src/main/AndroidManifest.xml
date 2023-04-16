@@ -25,28 +25,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateNotesActivity"
+            android:name=".activities.CreateNotesActivity"
             android:exported="false" />
         <activity
-            android:name=".createtask.CreateTaskActivity"
+            android:name=".activities.CreateTaskActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.OnboardScreen"
+            android:name=".activities.OnboardScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ForgetPassword"
+            android:name=".activities.ForgetPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginScreen"
+            android:name=".activities.LoginScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.WelcomeScreen"
+            android:name=".activities.WelcomeScreenActivity"
             android:exported="false" />
     </application>
 

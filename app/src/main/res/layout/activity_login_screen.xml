@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/screen_margin_horizontal"
-    tools:context=".activities.LoginScreen">
+    tools:context=".activities.LoginScreenActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -55,10 +55,10 @@
         android:drawableEnd="@drawable/ic_visibility_off_outline"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter"
-        android:longClickable="false"
         android:hint="@string/password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:longClickable="false"
         android:padding="15dp"
         android:textSize="18sp" />
 
@@ -93,9 +93,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:padding="3dp"
         android:layout_marginBottom="55dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="3dp">
 
         <TextView
             android:layout_width="wrap_content"

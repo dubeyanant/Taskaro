@@ -15,15 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
+import com.soc.taskaro.adapters.DelegateAdapter;
+import com.soc.taskaro.adapters.DeleteAdapter;
+import com.soc.taskaro.adapters.DoAdapter;
+import com.soc.taskaro.adapters.ScheduleAdapter;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Task;
-import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
+    public ProgressDialog progressDialog;
     DoAdapter doAdapter;
     ScheduleAdapter scheduleAdapter;
     DelegateAdapter delegateAdapter;
@@ -36,8 +40,6 @@ public class HomeFragment extends Fragment {
     private String[] homeDescription;
     private String[] homeHeading;
     private RecyclerView doRecyclerView, scheduleRecyclerView, delegateRecyclerView, deleteRecyclerView;
-
-    public ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,15 +79,15 @@ public class HomeFragment extends Fragment {
         scheduleArrayList = new ArrayList<>();
         delegateArrayList = new ArrayList<>();
         deleteArrayList = new ArrayList<>();
-        for (int i = 0; i < tasksList.size(); i++){
-            System.out.println(tasksList.get(i).getTitle()+"??????????????????");
-            if(tasksList.get(i).isImportant() == true && tasksList.get(i).isUrgent() == true){
+        for (int i = 0; i < tasksList.size(); i++) {
+            System.out.println(tasksList.get(i).getTitle() + "??????????????????");
+            if (tasksList.get(i).isImportant() == true && tasksList.get(i).isUrgent() == true) {
                 doArrayList.add(tasksList.get(i));
-            }else if (tasksList.get(i).isImportant() == true && tasksList.get(i).isUrgent() == false) {
+            } else if (tasksList.get(i).isImportant() == true && tasksList.get(i).isUrgent() == false) {
                 scheduleArrayList.add(tasksList.get(i));
-            }else if (tasksList.get(i).isImportant() == false && tasksList.get(i).isUrgent() == true) {
+            } else if (tasksList.get(i).isImportant() == false && tasksList.get(i).isUrgent() == true) {
                 delegateArrayList.add(tasksList.get(i));
-            }else if (tasksList.get(i).isImportant() == false && tasksList.get(i).isUrgent() == false) {
+            } else if (tasksList.get(i).isImportant() == false && tasksList.get(i).isUrgent() == false) {
                 deleteArrayList.add(tasksList.get(i));
             }
 

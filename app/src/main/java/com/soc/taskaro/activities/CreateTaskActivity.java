@@ -1,4 +1,4 @@
-package com.soc.taskaro.createtask;
+package com.soc.taskaro.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

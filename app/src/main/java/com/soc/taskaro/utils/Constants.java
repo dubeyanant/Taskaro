@@ -28,7 +28,6 @@ public class Constants {
     public static final String USER_PROFILE_IMAGE = "User_Profile_Image";
     public static final String COMPLETE_PROFILE = "profileCompleted";
 
-    //Productsx
     public static final String TASKS = "tasks";
     public static final String NOTES = "notes";
     public static final String USER_IMAGE = "User_Image";
@@ -36,12 +35,6 @@ public class Constants {
     public static final String NOTE_HEADING = "heading";
     public static final String NOTE_DESCRIPTION = "description";
     public static final String USER_ID = "user_id";
-
-    // Task levels
-    public static final int DO = 1;
-    public static final int SCHEDULE = 2;
-    public static final int DELEGATE = 3;
-    public static final int DELETE = 4;
 
     public static void showImageChooser(Activity activity) {
         Intent gallaryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

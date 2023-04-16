@@ -297,7 +297,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             firebaseAuth.signOut();
-                                            Intent signinActivity = new Intent(SignUpActivity.this, LoginScreen.class);
+                                            Intent signinActivity = new Intent(SignUpActivity.this, LoginScreenActivity.class);
                                             SignUpActivity.this.startActivity(signinActivity);
                                             finish();
                                             //for (int i=0; i < 3; i++)

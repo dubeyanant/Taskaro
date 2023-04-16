@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,25 +24,25 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.soc.taskaro.CreateNotesActivity;
-import com.soc.taskaro.activities.LoginScreen;
+import com.soc.taskaro.activities.CreateNotesActivity;
+import com.soc.taskaro.activities.CreateTaskActivity;
+import com.soc.taskaro.activities.LoginScreenActivity;
 import com.soc.taskaro.activities.SignUpActivity;
-import com.soc.taskaro.createtask.CreateTaskActivity;
-import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
-import com.soc.taskaro.createtask.SubTaskAdapter;
-import com.soc.taskaro.models.SubTask;
-import com.soc.taskaro.fragments.DelegateAdapter;
-import com.soc.taskaro.fragments.DeleteAdapter;
-import com.soc.taskaro.fragments.DoAdapter;
+import com.soc.taskaro.adapters.DelegateAdapter;
+import com.soc.taskaro.adapters.DeleteAdapter;
+import com.soc.taskaro.adapters.DoAdapter;
+import com.soc.taskaro.adapters.NotesFragmentAdapter;
+import com.soc.taskaro.adapters.ScheduleAdapter;
+import com.soc.taskaro.adapters.SubTaskAdapter;
+import com.soc.taskaro.fragments.ExpandedTaskDialogFragment;
 import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.fragments.NotesFragment;
-import com.soc.taskaro.fragments.NotesFragmentAdapter;
-import com.soc.taskaro.fragments.ScheduleAdapter;
 import com.soc.taskaro.fragments.SettingsFragment;
 import com.soc.taskaro.models.Note;
+import com.soc.taskaro.models.SubTask;
 import com.soc.taskaro.models.Task;
-import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.models.User;
+import com.soc.taskaro.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +51,7 @@ import java.util.HashMap;
 public class FirestoreClass {
     FirebaseFirestore dbroot = FirebaseFirestore.getInstance();
     boolean state;
+
     public void registerUser(SignUpActivity activity, User UsersInfo) {
         System.out.println(UsersInfo.id + UsersInfo.name + UsersInfo.email + UsersInfo.mobile);
         dbroot.collection(Constants.USERS).document(UsersInfo.id).set(UsersInfo, SetOptions.merge())
@@ -87,8 +87,8 @@ public class FirestoreClass {
                 editor.putString(Constants.NAME, user.name);
                 editor.apply();
 
-                if (activity instanceof LoginScreen) {
-                    ((LoginScreen) activity).userLoggedInSuccess(user);
+                if (activity instanceof LoginScreenActivity) {
+                    ((LoginScreenActivity) activity).userLoggedInSuccess(user);
                 }
 
             }
@@ -187,7 +187,7 @@ public class FirestoreClass {
                 sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        System.out.println(uri.toString()+"!!!!!!!!!!!!!!!");
+                        System.out.println(uri.toString() + "!!!!!!!!!!!!!!!");
                         ((SettingsFragment) fragment).imageUploadSuccess(uri);
                     }
                 });
@@ -213,17 +213,17 @@ public class FirestoreClass {
         });
     }
 
-    public void getNotesList(Fragment fragment){
+    public void getNotesList(Fragment fragment) {
         dbroot.collection(Constants.NOTES).whereEqualTo(Constants.USER_ID, getCurrentUserID()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 ArrayList<Note> notesList = new ArrayList();
-                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     Note note = documentSnapshot.toObject(Note.class);
                     note.setNote_id(documentSnapshot.getId());
                     notesList.add(note);
                 }
-                if(fragment instanceof NotesFragment){
+                if (fragment instanceof NotesFragment) {
                     ((NotesFragment) fragment).onNotesListSuccess(notesList);
 
                 }
@@ -280,7 +280,7 @@ public class FirestoreClass {
         documentReference.update(noteHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                    (createNotesActivity).userDataUpdateSuccess();
+                (createNotesActivity).userDataUpdateSuccess();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -295,7 +295,7 @@ public class FirestoreClass {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 ArrayList<Task> tasksList = new ArrayList();
-                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     Task task = documentSnapshot.toObject(Task.class);
                     task.setTask_id(documentSnapshot.getId());
                     tasksList.add(task);
@@ -316,16 +316,13 @@ public class FirestoreClass {
 
             @Override
             public void onSuccess(Void unused) {
-                if(adapter instanceof DoAdapter){
+                if (adapter instanceof DoAdapter) {
                     ((DoAdapter) adapter).onNoteDeleteSuccess(temp);
-                }
-                else if(adapter instanceof ScheduleAdapter){
+                } else if (adapter instanceof ScheduleAdapter) {
                     ((ScheduleAdapter) adapter).onNoteDeleteSuccess(temp);
-                }
-                else if(adapter instanceof DelegateAdapter){
+                } else if (adapter instanceof DelegateAdapter) {
                     ((DelegateAdapter) adapter).onNoteDeleteSuccess(temp);
-                }
-                else if(adapter instanceof DeleteAdapter){
+                } else if (adapter instanceof DeleteAdapter) {
                     ((DeleteAdapter) adapter).onNoteDeleteSuccess(temp);
                 }
 
@@ -339,6 +336,7 @@ public class FirestoreClass {
             }
         });
     }
+
     public void updateTaskDetails(SubTaskAdapter adapter, Fragment fragment, HashMap<String, Object> taskHashMap, SubTaskAdapter.SubTaskView holder) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document(taskHashMap.get(Constants.Extra_TASK_ID).toString());
         documentReference.update(taskHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {

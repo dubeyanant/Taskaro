@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/screen_margin_horizontal"
-    tools:context=".activities.OnboardScreen">
+    tools:context=".activities.OnboardScreenActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/onBoarding_viewPager"

@@ -1,4 +1,4 @@
-package com.soc.taskaro;
+package com.soc.taskaro.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.utils.Constants;
@@ -27,7 +28,6 @@ public class CreateNotesActivity extends AppCompatActivity {
     String noteID;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class CreateNotesActivity extends AppCompatActivity {
 
         // Executed when called by Main Notes Screen
         Intent intent = getIntent();
-        if(intent.hasExtra(Constants.Extra_NOTE_ID)){
+        if (intent.hasExtra(Constants.Extra_NOTE_ID)) {
             noteID = intent.getStringExtra(Constants.Extra_NOTE_ID);
             getNoteDetails(noteID);
         }
@@ -49,10 +49,10 @@ public class CreateNotesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Extras.networkCheck(getApplicationContext())) {
-                    if(noteID == null){
+                    if (noteID == null) {
                         progressDialog = new Extras().showProgressBar(CreateNotesActivity.this);
                         setValidation();
-                    }else{
+                    } else {
                         doneSaveNotesTextView.setEnabled(false);
                         progressDialog = new Extras().showProgressBar(CreateNotesActivity.this);
                         setValidation();
@@ -88,8 +88,7 @@ public class CreateNotesActivity extends AppCompatActivity {
             noteHashMap.put(Constants.NOTE_HEADING, writeNotesTitleEditText.getText().toString().trim());
             noteHashMap.put(Constants.NOTE_DESCRIPTION, writeNotesDescriptionEditText.getText().toString().trim());
             new FirestoreClass().uploadNotesDetails(CreateNotesActivity.this, noteHashMap);
-        }
-        else if(isTitleValid && noteID != null){
+        } else if (isTitleValid && noteID != null) {
             HashMap<String, Object> noteHashMap = new HashMap<>();
             noteHashMap.put(Constants.Extra_NOTE_ID, noteID);
             noteHashMap.put(Constants.NOTE_HEADING, writeNotesTitleEditText.getText().toString().trim());

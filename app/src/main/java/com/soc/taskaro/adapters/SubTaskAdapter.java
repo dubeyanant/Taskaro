@@ -1,4 +1,4 @@
-package com.soc.taskaro.createtask;
+package com.soc.taskaro.adapters;
 
 import android.annotation.SuppressLint;
 import android.graphics.Paint;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
-import com.soc.taskaro.fragments.DelegateAdapter;
-import com.soc.taskaro.fragments.HomeFragment;
+import com.soc.taskaro.fragments.ExpandedTaskDialogFragment;
 import com.soc.taskaro.models.SubTask;
 import com.soc.taskaro.models.Task;
 import com.soc.taskaro.utils.Constants;
@@ -50,13 +48,13 @@ public class SubTaskAdapter extends RecyclerView.Adapter<SubTaskAdapter.SubTaskV
         SubTask subTask = subTasksArrayList.get(position);
 
         if (task.getSubTaskStateList().get(position) == 1) {
-            System.out.println(task.getSubTaskStateList().get(position)+"!!!!!!!");
+            System.out.println(task.getSubTaskStateList().get(position) + "!!!!!!!");
             holder.subTaskTestTextView.setText(subTask.getSubTask());
             holder.subTaskTestTextView.setPaintFlags(holder.subTaskTestTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.subTaskCheckBox.setImageResource(R.drawable.ic_check_circle);
             isCheckedCircleCheckBox = true;
         } else {
-            System.out.println(task.getSubTaskStateList().get(position)+"@@@@@@@");
+            System.out.println(task.getSubTaskStateList().get(position) + "@@@@@@@");
             holder.subTaskTestTextView.setText(subTask.getSubTask());
             holder.subTaskTestTextView.setPaintFlags(holder.subTaskTestTextView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
             holder.subTaskCheckBox.setImageResource(R.drawable.ic_check_circle_outline);
@@ -86,6 +84,7 @@ public class SubTaskAdapter extends RecyclerView.Adapter<SubTaskAdapter.SubTaskV
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return subTasksArrayList.size();
@@ -104,6 +103,7 @@ public class SubTaskAdapter extends RecyclerView.Adapter<SubTaskAdapter.SubTaskV
             holder.subTaskCheckBox.setImageResource(R.drawable.ic_check_circle_outline);
         }
     }
+
     public static class SubTaskView extends RecyclerView.ViewHolder {
         TextView subTaskTestTextView;
         ImageButton subTaskCheckBox;

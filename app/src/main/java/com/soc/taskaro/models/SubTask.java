@@ -6,6 +6,7 @@ public class SubTask implements Serializable {
     public String subTask;
 
     public Integer subTaskState;
+
     public SubTask() {
 
     }

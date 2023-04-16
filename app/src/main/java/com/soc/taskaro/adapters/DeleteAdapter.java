@@ -1,6 +1,5 @@
-package com.soc.taskaro.fragments;
+package com.soc.taskaro.adapters;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,8 +15,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
-import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.fragments.ExpandedTaskDialogFragment;
+import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.models.Task;
 import com.soc.taskaro.utils.Extras;
 
@@ -79,7 +79,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
 
-                bundle.putSerializable("task",  task);
+                bundle.putSerializable("task", task);
 
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
@@ -89,6 +89,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
             }
         });
     }
+
     public void onNoteDeleteSuccess(int temp) {
         ((HomeFragment) fragment).progressDialog.dismiss();
         homeArrayList.remove(temp);
@@ -98,6 +99,7 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.HomeViewHo
         holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public int getItemCount() {
         return homeArrayList.size();

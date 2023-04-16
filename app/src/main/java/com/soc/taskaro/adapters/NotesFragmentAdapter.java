@@ -1,4 +1,4 @@
-package com.soc.taskaro.fragments;
+package com.soc.taskaro.adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.soc.taskaro.CreateNotesActivity;
 import com.soc.taskaro.R;
+import com.soc.taskaro.activities.CreateNotesActivity;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.fragments.NotesFragment;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.utils.Constants;
 import com.soc.taskaro.utils.Extras;
@@ -25,6 +26,7 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
 
     Fragment fragment;
     ArrayList<Note> notesArrayList;
+
     public NotesFragmentAdapter(Fragment fragment, ArrayList<Note> notesArrayList) {
         this.fragment = fragment;
         this.notesArrayList = notesArrayList;
@@ -77,13 +79,15 @@ public class NotesFragmentAdapter extends RecyclerView.Adapter<NotesFragmentAdap
         });
 
     }
-    public void onNoteDeleteSuccess(int temp){
+
+    public void onNoteDeleteSuccess(int temp) {
         ((NotesFragment) fragment).progressDialog.dismiss();
         notesArrayList.remove(temp);
         notifyItemRemoved(temp);
         notifyItemRangeChanged(temp, notesArrayList.size());
         Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public int getItemCount() {
         return notesArrayList.size();

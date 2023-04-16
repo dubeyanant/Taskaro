@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.soc.taskaro.R;
 
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreenActivity extends AppCompatActivity {
 
     Button welcomeScreenButton;
 
@@ -20,7 +20,7 @@ public class WelcomeScreen extends AppCompatActivity {
         welcomeScreenButton = findViewById(R.id.welcomeScreenButton);
 
         welcomeScreenButton.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), OnboardScreen.class);
+            Intent intent = new Intent(view.getContext(), OnboardScreenActivity.class);
             startActivity(intent);
         });
     }

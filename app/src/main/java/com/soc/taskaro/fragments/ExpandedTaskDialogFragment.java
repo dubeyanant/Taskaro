@@ -1,4 +1,4 @@
-package com.soc.taskaro.createtask;
+package com.soc.taskaro.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,20 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
-
+import com.soc.taskaro.adapters.SubTaskAdapter;
 import com.soc.taskaro.models.SubTask;
-
 import com.soc.taskaro.models.Task;
 
 import java.util.ArrayList;
 
 public class ExpandedTaskDialogFragment extends DialogFragment {
 
+    public ProgressDialog progressDialog;
     RecyclerView recyclerSubTask;
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
     TextView taskTitleTextView, taskDescriptionTextView, taskNotificationDescriptionTextView;
 
-    public ProgressDialog progressDialog;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

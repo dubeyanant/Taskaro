@@ -7,19 +7,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Task implements Parcelable, Serializable {
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
+        @Override
+        public Task createFromParcel(Parcel in) {
+            return new Task(in);
+        }
+
+        @Override
+        public Task[] newArray(int size) {
+            return new Task[size];
+        }
+    };
     public String user_id = "";
     public String title = "";
-
     public String description = "";
     public String task_id = "";
-
     public boolean isImportant, isUrgent, isNotificationSelected;
-
     public ArrayList<SubTask> subTasks;
-
     public ArrayList<Integer> subTaskStateList;
-    public String date="", time="";
-
+    public String date = "", time = "";
     public ArrayList<Boolean> daysArrayList;
 
     public Task(String user_id, String title, String description, String task_id, boolean isImportant, boolean isUrgent, boolean isNotificationSelected, ArrayList<SubTask> subTasks, ArrayList<Integer> subTaskStateList, String date, String time, ArrayList<Boolean> daysArrayList) {
@@ -50,6 +56,18 @@ public class Task implements Parcelable, Serializable {
     }
 
     public Task() {
+    }
+
+    protected Task(Parcel in) {
+        user_id = in.readString();
+        title = in.readString();
+        description = in.readString();
+        task_id = in.readString();
+        isImportant = in.readByte() != 0;
+        isUrgent = in.readByte() != 0;
+        isNotificationSelected = in.readByte() != 0;
+        date = in.readString();
+        time = in.readString();
     }
 
     public String getUser_id() {
@@ -148,18 +166,6 @@ public class Task implements Parcelable, Serializable {
         this.daysArrayList = daysArrayList;
     }
 
-    protected Task(Parcel in) {
-        user_id = in.readString();
-        title = in.readString();
-        description = in.readString();
-        task_id = in.readString();
-        isImportant = in.readByte() != 0;
-        isUrgent = in.readByte() != 0;
-        isNotificationSelected = in.readByte() != 0;
-        date = in.readString();
-        time = in.readString();
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(user_id);
@@ -177,16 +183,4 @@ public class Task implements Parcelable, Serializable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<Task> CREATOR = new Creator<Task>() {
-        @Override
-        public Task createFromParcel(Parcel in) {
-            return new Task(in);
-        }
-
-        @Override
-        public Task[] newArray(int size) {
-            return new Task[size];
-        }
-    };
 }

@@ -33,7 +33,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.soc.taskaro.R;
-import com.soc.taskaro.activities.LoginScreen;
+import com.soc.taskaro.activities.LoginScreenActivity;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 import com.soc.taskaro.utils.Constants;
@@ -119,7 +119,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getContext(), "Logout Successfully...", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreenActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
@@ -142,7 +142,7 @@ public class SettingsFragment extends Fragment {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(getContext(), "Account Deleted Successfully...", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                                        Intent i = new Intent(SettingsFragment.this.getActivity(), LoginScreenActivity.class);
                                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(i);

@@ -34,7 +34,7 @@ import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.User;
 import com.soc.taskaro.utils.Extras;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginScreenActivity extends AppCompatActivity {
 
     TextView goToForgotTextView, loginTagLine;
     EditText emailEditText, passwordEditText;
@@ -118,7 +118,7 @@ public class LoginScreen extends AppCompatActivity {
                             have_MobileData = true;
                 }
                 if (have_MobileData || have_WIFI) {
-                    progressDialog = new Extras().showProgressBar(LoginScreen.this);
+                    progressDialog = new Extras().showProgressBar(LoginScreenActivity.this);
                     SetValidation();
                 } else {
                     Toast.makeText(getApplicationContext(), "Login Failed! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
@@ -129,7 +129,7 @@ public class LoginScreen extends AppCompatActivity {
         goToSignupLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginScreen.this, SignUpActivity.class);
+                Intent i = new Intent(LoginScreenActivity.this, SignUpActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -138,7 +138,7 @@ public class LoginScreen extends AppCompatActivity {
         goToForgotTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginScreen.this, ForgetPassword.class);
+                Intent i = new Intent(LoginScreenActivity.this, ForgetPasswordActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -182,7 +182,7 @@ public class LoginScreen extends AppCompatActivity {
                             } catch (Exception e) {
                                 System.out.println(e);
                             }
-                            new FirestoreClass().getUsersDetails(LoginScreen.this);
+                            new FirestoreClass().getUsersDetails(LoginScreenActivity.this);
 
                         } else {
                             progressDialog.dismiss();
@@ -207,8 +207,8 @@ public class LoginScreen extends AppCompatActivity {
     public void userLoggedInSuccess(User user) {
         progressDialog.dismiss();
         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
-        Intent doneActivity = new Intent(LoginScreen.this, MainActivity.class);
-        LoginScreen.this.startActivity(doneActivity);
+        Intent doneActivity = new Intent(LoginScreenActivity.this, MainActivity.class);
+        LoginScreenActivity.this.startActivity(doneActivity);
         finish();
 
     }

@@ -13,23 +13,21 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.common.util.ArrayUtils;
 import com.soc.taskaro.R;
+import com.soc.taskaro.adapters.NotesFragmentAdapter;
 import com.soc.taskaro.firestore.FirestoreClass;
 import com.soc.taskaro.models.Note;
 import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NotesFragment extends Fragment {
+    public ProgressDialog progressDialog;
     SearchView searchView;
     NotesFragmentAdapter notesFragmentAdapter;
-    private ArrayList<Note> notesArrayList;
-    public ProgressDialog progressDialog;
-    private RecyclerView recyclerView;
-
     boolean state;
+    private ArrayList<Note> notesArrayList;
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

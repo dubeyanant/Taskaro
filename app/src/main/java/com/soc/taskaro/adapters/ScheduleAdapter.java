@@ -1,4 +1,4 @@
-package com.soc.taskaro.fragments;
+package com.soc.taskaro.adapters;
 
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -15,22 +15,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soc.taskaro.R;
-import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.fragments.ExpandedTaskDialogFragment;
+import com.soc.taskaro.fragments.HomeFragment;
 import com.soc.taskaro.models.Task;
 import com.soc.taskaro.utils.Extras;
 
 import java.util.ArrayList;
 
-public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.HomeViewHolder> {
 
-    HomeViewHolder holder;
     HomeFragment fragment;
     ArrayList<Task> homeArrayList;
     View emptyView;
-//    LayoutInflater inflater = LayoutInflater.from(emptyView.getContext());
+    HomeViewHolder holder;
 
-    public DoAdapter(HomeFragment fragment, ArrayList<Task> homeArrayList, View emptyView) {
+    public ScheduleAdapter(HomeFragment fragment, ArrayList<Task> homeArrayList, View emptyView) {
         this.fragment = fragment;
         this.homeArrayList = homeArrayList;
         this.emptyView = emptyView;
@@ -39,7 +39,7 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(fragment.getContext()).inflate(R.layout.home_tasks_do, parent, false);
+        View v = LayoutInflater.from(fragment.getContext()).inflate(R.layout.home_tasks_schedule, parent, false);
         return new HomeViewHolder(v);
     }
 
@@ -62,7 +62,7 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
                 if (holder.taskCheckBox.isChecked()) {
                     if (Extras.networkCheck(fragment.getContext())) {
                         fragment.progressDialog = new Extras().showProgressBar(fragment);
-                        new FirestoreClass().deleteTask(DoAdapter.this, fragment, task, homeArrayList, temp);
+                        new FirestoreClass().deleteTask(ScheduleAdapter.this, fragment, task, homeArrayList, temp);
                     } else {
                         Toast.makeText(fragment.getContext(), "Error! Check your Internet Connection.", Toast.LENGTH_SHORT).show();
                     }
@@ -76,19 +76,9 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FIXME: Open as Intent -- Option 1
-//                Intent intent = new Intent(v.getContext(), ExpandedTaskActivity.class);
-//                intent.putExtra("title", task.getTitle());
-//                intent.putExtra("description", task.getDescription());
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("list", task.getSubTasks());
-//                intent.putExtras(bundle);
-//                v.getContext().startActivity(intent);
-//
-//                FIXME: Open as DialogFragment -- Option 2
                 Bundle bundle = new Bundle();
 
-                bundle.putSerializable("task",  task);
+                bundle.putSerializable("task", task);
 
 
                 FragmentManager fragmentManager = ((FragmentActivity) v.getContext()).getSupportFragmentManager();
@@ -97,6 +87,16 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
                 expandedTaskDialogFragment.show(fragmentManager, "ExpandedTaskDialogFragment");
             }
         });
+    }
+
+    public void onNoteDeleteSuccess(int temp) {
+        ((HomeFragment) fragment).progressDialog.dismiss();
+        homeArrayList.remove(temp);
+        notifyItemRemoved(temp);
+        notifyItemRangeChanged(temp, homeArrayList.size());
+        updateEmptyViewVisibility();
+        holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -120,16 +120,6 @@ public class DoAdapter extends RecyclerView.Adapter<DoAdapter.HomeViewHolder> {
         if (emptyView != null) {
             emptyView.setVisibility(getItemCount() == 0 ? View.GONE : View.VISIBLE);
         }
-    }
-
-    public void onNoteDeleteSuccess(int temp) {
-        ((HomeFragment) fragment).progressDialog.dismiss();
-        homeArrayList.remove(temp);
-        notifyItemRemoved(temp);
-        notifyItemRangeChanged(temp, homeArrayList.size());
-        updateEmptyViewVisibility();
-        holder.taskHeading.setPaintFlags(holder.taskHeading.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        Toast.makeText(fragment.getContext(), "Note deleted successfully...", Toast.LENGTH_SHORT).show();
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
