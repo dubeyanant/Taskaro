@@ -166,7 +166,7 @@
             android:background="@drawable/style_create_task"
             android:orientation="vertical"
             android:paddingVertical="20dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
