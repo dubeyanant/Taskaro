@@ -23,6 +23,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.soc.taskaro.R;
 import com.soc.taskaro.firestore.FirestoreClass;
+import com.soc.taskaro.models.SubTask;
 import com.soc.taskaro.utils.Extras;
 
 import java.text.MessageFormat;
@@ -47,6 +48,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     com.google.android.material.materialswitch.MaterialSwitch importantSwitch, urgentSwitch;
 
     ArrayList<SubTask> subTaskArrayList = new ArrayList<>();
+    ArrayList<Integer> subTaskArrayStateList = new ArrayList<>();
     ViewGroup.MarginLayoutParams addTaskButtonLLParams; // Helps in changing margin of the particular layout viewGroup
 
     @Override
@@ -221,6 +223,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
 
             subTaskArrayList.add(subTask);
+            subTaskArrayStateList.add(0);
         }
 
         if (subTaskArrayList.size() == 0) {
@@ -241,10 +244,10 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         if (isTitleValid) {
             if (isNotificationEnabled == false) {
-                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled);
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, subTaskArrayStateList, isNotificationEnabled);
             } else {
 
-                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
+                new FirestoreClass().uploadTaskDetails(this, titleEditText.getText().toString().trim(), descriptionEditText.getText().toString().trim(), importantSwitch.isChecked(), urgentSwitch.isChecked(), subTaskArrayList, subTaskArrayStateList, isNotificationEnabled, timeTextView.getText().toString().trim(), dateTextView.getText().toString().trim(), dayClickCountArray);
             }
         }
     }

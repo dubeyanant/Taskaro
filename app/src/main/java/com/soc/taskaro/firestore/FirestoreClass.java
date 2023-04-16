@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.widget.Adapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,9 @@ import com.soc.taskaro.CreateNotesActivity;
 import com.soc.taskaro.activities.LoginScreen;
 import com.soc.taskaro.activities.SignUpActivity;
 import com.soc.taskaro.createtask.CreateTaskActivity;
-import com.soc.taskaro.createtask.SubTask;
+import com.soc.taskaro.createtask.ExpandedTaskDialogFragment;
+import com.soc.taskaro.createtask.SubTaskAdapter;
+import com.soc.taskaro.models.SubTask;
 import com.soc.taskaro.fragments.DelegateAdapter;
 import com.soc.taskaro.fragments.DeleteAdapter;
 import com.soc.taskaro.fragments.DoAdapter;
@@ -119,10 +120,10 @@ public class FirestoreClass {
 
     }
 
-    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected) {
+    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, ArrayList<Integer> subTaskStateList, boolean isNotificationSelected) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
-        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask);
+        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, subTaskStateList);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -134,12 +135,12 @@ public class FirestoreClass {
         });
     }
 
-    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, boolean isNotificationSelected, String time, String date, Boolean[] daysArray) {
+    public void uploadTaskDetails(CreateTaskActivity createTaskActivity, String title, String description, boolean isImportant, boolean isUrgent, ArrayList<SubTask> subTask, ArrayList<Integer> subTaskStateList, boolean isNotificationSelected, String time, String date, Boolean[] daysArray) {
         DocumentReference documentReference = dbroot.collection(Constants.TASKS).document();
 
         ArrayList<Boolean> daysArrayList = new ArrayList<Boolean>();
         Collections.addAll(daysArrayList, daysArray);
-        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, date, time, daysArrayList);
+        Task task = new Task(getCurrentUserID(), title, description, documentReference.getId(), isImportant, isUrgent, isNotificationSelected, subTask, subTaskStateList, date, time, daysArrayList);
         documentReference.set(task, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -335,6 +336,21 @@ public class FirestoreClass {
                 Toast.makeText(fragment.getContext(), "Error! Unable to delete Data. Check Your Internet Connection.", Toast.LENGTH_SHORT).show();
                 ((HomeFragment) fragment).progressDialog.dismiss();
                 System.out.println(e);
+            }
+        });
+    }
+    public void updateTaskDetails(SubTaskAdapter adapter, Fragment fragment, HashMap<String, Object> taskHashMap, SubTaskAdapter.SubTaskView holder) {
+        DocumentReference documentReference = dbroot.collection(Constants.TASKS).document(taskHashMap.get(Constants.Extra_TASK_ID).toString());
+        documentReference.update(taskHashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                (adapter).onTaskUpdateSuccess(holder);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                ((ExpandedTaskDialogFragment) fragment).progressDialog.dismiss();
+                Toast.makeText(fragment.getContext(), "Something went wrong. Try Again later", Toast.LENGTH_SHORT).show();
             }
         });
     }

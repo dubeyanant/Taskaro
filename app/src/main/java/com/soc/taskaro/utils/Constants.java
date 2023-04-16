@@ -11,7 +11,9 @@ public class Constants {
     public static final String TASKARO_PREFERENCES = "TaskaroPrefs";
     public static final String LOGGED_IN_USERNAME = "logged_in_username";
     public static final String Extra_User_Details = "extra_user_details";
-    public static final String Extra_NOTE_ID = "extra_product_details";
+    public static final String Extra_NOTE_ID = "extra_note_id";
+    public static final String Extra_TASK_ID = "task_id";
+    public static final String Extra_SUBTASK_STATE = "subTaskStateList";
     public static final int READ_STORAGE_PERMISSION_CODE = 2;
     public static final int PICK_IMAGE_REQUEST_CODE = 1;
 
