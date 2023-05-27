@@ -228,7 +228,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         if (subTaskArrayList.size() == 0) {
             result = false;
-            Toast.makeText(this, "Enter sub-task", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Enter sub-task", Toast.LENGTH_SHORT).show();
         }
 
         return result;
